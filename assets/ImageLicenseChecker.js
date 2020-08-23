@@ -1,4 +1,4 @@
-//run this script via node to get the license status of images contained in the letterAssets JSON file
+//run this script via node to get the license status of images contained in the letterAssets JSON file. Will not provide info on other files
 var letterAssets = require("../assets/letterAssets.json");
 var list = letterAssets.letters;
 var i = 0;
