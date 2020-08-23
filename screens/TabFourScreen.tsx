@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { StyleSheet, Alert, Image } from 'react-native';
-import { FetchLetterAsset } from '../components/FetchHebrewLetterAsset';
+import { ImageFetch } from '../components/LetterLookup';
 import { Text, View, Button} from '../components/Themed';
 
 export default function TabFourScreen() {
-var ImagePath = FetchLetterAsset("aleph", "image");
-var testImage = require('../assets/images/nullImage.png');
+
   return (
 	<View style={styles.container}>
-	<Image source={ImagePath}/>
+	<View style={styles.image}>
+    <Image source={ImageFetch("aleph")}/>
+  </View>
       <Text style={styles.title}>Progress</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Expo done gone broke? Check version here: V2</Text>
@@ -35,5 +36,10 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  image: {
+    flex: 0.5,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
   },
 });
