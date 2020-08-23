@@ -7,9 +7,7 @@ export default function TabFourScreen() {
 
   return (
 	<View style={styles.container}>
-	<View style={styles.image}>
     <Image source={ImageFetch("aleph")}/>
-  </View>
       <Text style={styles.title}>Progress</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Expo done gone broke? Check version here: V2</Text>
