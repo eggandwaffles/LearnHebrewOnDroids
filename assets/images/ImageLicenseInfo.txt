@@ -1,0 +1,4 @@
+Aleph and Aleph image derivation: PNGFuel, non-commercial.
+nullImage: custom generated, no license.
+newSplash: custom generated, contact Grossman Labs for more information.
+icon: designed by Grossman Labs.
