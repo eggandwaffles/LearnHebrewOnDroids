@@ -1,29 +1,29 @@
 import * as React from 'react';
 import { StyleSheet, Alert } from 'react-native';
-import { Text, View, Button } from '../components/Themed';
 
-export default function TabTwoScreen() {
+import { Text, View, Button} from '../components/Themed';
+
+
+export default function TabThreeScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Fun with Letters & Vowels</Text>
+      <Text style={styles.title}>Fun with words</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Tap any button to continue</Text>
 	  <View style={styles.buttonRow}>
 		<Button
-			title = "Start Game"
+			title = "Practice All Words"
 			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
 			color = "#FF9900"
 		/>
 		<Button
-			title = "Show Letters"
-			onPress={() => Alert.alert('Apologies...'," Or maybe they haven't spent enough time on it yet.")}
-		/>
-		<Button
-			title = "Show Vowels"
-			onPress={() => Alert.alert('Apologies...',"Yeah, that's it.")}
+			title = "Choose Categories"
+			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
 		/>
 		</View>
-    </View>
+	</View>
+
+
   );
 }
 
@@ -34,8 +34,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
+  },
+  body: {
+	  fontSize: 20
   },
   separator: {
     marginVertical: 30,
@@ -49,8 +52,5 @@ const styles = StyleSheet.create({
 	width: "50%",
 	marginTop: 50,
 	position: "relative",
-  },
-  body: {
-	  fontSize: 20,
   },
 });

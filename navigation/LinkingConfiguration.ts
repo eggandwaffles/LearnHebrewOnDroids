@@ -16,6 +16,22 @@ export default {
               TabTwoScreen: 'two',
             },
           },
+		  TabThree: {
+            screens: {
+              TabThreeScreen: 'three',
+            },
+          },
+		  TabFour: {
+            screens: {
+              TabFourScreen: 'four',
+            },
+          },
+		  LetterGame: {
+            screens: {
+              LetterGame: 'LetterGame',
+            },
+          },
+		  
         },
       },
       NotFound: '*',

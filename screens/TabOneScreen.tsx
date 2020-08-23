@@ -1,18 +1,35 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
+import { Text, View, Button } from '../components/Themed';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-
-export default function TabOneScreen() {
+export default function TabOneScreen( { navigation } ) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
+      <Text style={styles.title}>Fun with letters</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+	  <Text style={styles.body}>Tap any button to continue</Text>
+	  <View style={styles.buttonRow}>
+		<Button
+			title = "Start Game"
+			onPress={() => {{
+				navigation.navigate('LetterGame')
+			}}}
+			color = "#FF9900"
+		/>
+		<Button
+			title = "Letter Names"
+			onPress={() => Alert.alert('FATAL ERROR ', "INCINERATE PHONE TO FIX")}
+		/>
+		<Button
+			title = "Letter Sounds"
+			onPress={() => Alert.alert('FATAL ERROR',"Cause: head trauma")}
+		/>
+		</View>
     </View>
   );
+
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -21,12 +38,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   separator: {
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  buttonRow: {
+	flex: 0.5,
+	flexDirection: 'column',
+	justifyContent: "space-between",
+	width: "50%",
+	marginTop: 50,
+	position: "relative",
+  },
+  body: {
+	  fontSize: 20,
   },
 });

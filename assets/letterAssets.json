@@ -1,0 +1,12 @@
+{
+	"letters" : [
+		{
+			"name" : "aleph",
+			"sound" : null,
+			"image" : "../assets/images/aleph.png",
+			"attribution" : "https://www.pngfuel.com/free-png/gquui",
+			"license" : "non-commercial"
+		}
+	]
+
+}
