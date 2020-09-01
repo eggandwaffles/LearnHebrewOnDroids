@@ -1,0 +1,370 @@
+[
+    {
+        "id": 0,
+        "letters" : ["Aleph", "Tav","He"],
+        "vowels"  : ["ah","aw"," "],
+        "transliteration" : "ah-tah",
+        "close_transliterations" : ["ah-va","goo-goo","bah-voo","voo-doo","ee-vil"],
+        "translation" :  "you",
+        "close_translations" : ["he","she","it","they","them"],
+        "categories" : ["wine","bread","pronouns","hanukah"],
+        "hint" : "Not me, but..."
+    },
+    {
+       "id": 1,
+       "letters" : ["He", "Nun","He"],
+       "vowels"  : ["ee","ay"," "],
+       "transliteration" : "he-nay",
+       "close_transliterations" : ["he-nee","he-noo","she-vet","yum-yum","beach-ball"],
+       "translation" :  "behold",
+       "close_translations" : ["beseige", "belay", "belly", "look", "see"],
+       "categories" : ["intro"],
+       "hint" : "Look at THAT!!"
+    },
+    {
+       "id": 2,
+       "letters" : ["Bet", "Resh", "Vav-Dagesh", "F-Kaf" ],
+       "vowels"  : ["aw", " ", " ", " ", " "],
+       "transliteration" : "baw-ruch",
+       "close_transliterations" : ["ball", "bah-luck","bar", "rook", "bar-bar"],
+       "translation" :  "blessed",
+       "close_translations" : ["hello", "start here", "begin", "look", "traffic"],
+       "categories" : ["wine","bread","candles","hanukah"],
+       "hint" : "Praise"
+    },
+    {
+        "id" : 3,
+        "letters" : ["Gimel", "Dalet", "Vav", "Lamed"],
+        "vowels"  : ["aw","", "oh", " "],
+        "transliteration" : "gaw-dol",
+        "close_transliterations" : ["ga-mal", "gad-lech","gar", "doh-log", "zim-zim"],
+        "translation" : "large",
+        "close_translations" : ["whale","giraffe","tiny","small", "feast"],
+        "categories" : ["intro","adjectives"],
+        "hint" : "not small"
+    },
+    {
+        "id" : 4,
+        "letters" : ["Mem", "Lamed", "F-Kaf"],
+        "vowels"  : ["eh","eh", " "],
+        "transliteration" : "meh-lech",
+        "close_transliterations" : ["me-looch", "mai-tai","mem-bean", "lechem", "lama"],
+        "translation" : "king",
+        "close_translations" : ["queen", "car", "rocket ship", "prince", "jelly"],
+        "categories" : ["wine","bread","candles","hanukah"],
+        "hint" : "person who wears a crown"
+    },
+    {
+        "id" : 5,
+        "letters" : ["Dalet", "Vav", "Dalet"],
+        "vowels"  : ["aw","ee", " "],
+        "transliteration" : "dah-veed",
+        "close_transliterations" : ["la-looch", "mai-tai","duh-duh", "lechem", "lama"],
+        "translation" : "David",
+        "close_translations" : ["John", "Mike", "Bob", "Michael", "Edward"],
+        "categories" : ["names"],
+        "hint" : "The guy who beat Goliath"
+    },
+    {
+        "id": 6,
+        "letters" : ["Mem", "He"],
+        "vowels"  : ["ah"," "],
+        "transliteration" : "Mah",
+        "close_transliterations" : ["Mee", "Mom","Lem", "Mum", "Mer"],
+        "translation" : "Why/How",
+        "close_translations" : ["Who", "What", "When", "Where", "Is"],
+        "categories" : ["four questions"],
+        "hint" : "First word of a question."
+    },
+    {
+        "id" : 7,
+        "letters" : ["Het","Yud"],
+        "vowels"  : ["ah", " "],
+        "transliteration" : "Chai",
+        "close_transliterations" : ["ah-hi", "ho", "hee", "hem", "tie"],
+        "translation" : "life",
+        "close_translations" : ["death", "birth", "drink", "pear", "apple"],
+        "categories" : ["intro"],
+        "hint" : "not death"
+    },
+    {
+        "id" : 8,
+        "letters" : ["Mem", "F-Nun"],
+        "vowels"  : ["ee", " "],
+        "transliteration" : "Meen",
+        "close_transliterations" : ["min", "max", "mon", "honey", "bear"],
+        "translation" : "from",
+        "close_translations" : ["to", "over", "above", "nearby", "far"],
+        "categories" : ["bread", "pronouns"],
+        "hint"  : "where you got it"
+    },
+    {
+        "id" : 9,
+        "letters" : ["Sin", "Resh", "He"],
+        "vowels"  : ["aw", "aw" , " "],
+        "transliteration" : "Sorah",
+        "close_transliterations" : ["Shara","Meyara", "Lara", "Vara", "Harah"],
+        "translation" : "Sarah",
+        "close_translations" : ["Bob", "Rayna", "Ari", "Elyse", "Jim"],
+        "categories" : ["names"],
+        "hint"  : "Abraham's wife"
+    },
+    {
+        "id" : 10,
+        "letters" : ["Kof", "Dalet","Vav", "Shin"],
+        "vowels"  : ["aw", " ", "oh", " " ],
+        "transliteration" : "Kah-Dosh",
+        "close_transliterations" : ["Kaddish", "Kolish", "Dolly", "Shabbat", "Tiger"],
+        "translation" : "holy",
+        "close_translations" : ["happy", "sad", "clean", "water", "Purim"],
+        "categories" : ["intro","adjectives"],
+        "hint" : "Special."
+    },
+    {
+        "id" : 11,
+        "letters" : ["Lamed", "Het", "F-Mem"],
+        "vowels"  : ["eh", "eh", " "],
+        "transliteration" : "Leh-chem",
+        "close_transliterations" : ["Lamosh", "Mekraw","La-chere","Bon-Bon","Shabbat"],
+        "translation" : "bread",
+        "close_translations" : ["coffee", "tea", "milk", "biscuits", "hay"],
+        "categories" : ["bread"],
+        "hint" : "somethiing you eat with butter"
+    },
+    {
+       "id" : 12,
+       "letters" : ["Het", "Nun", "Kaf", "He"],
+       "vowels" :  ["ah", "oo", "aw", " "],
+        "transliteration" : "hanukah",
+        "close_transliterations" : ["Han","Train","Hamburger","Hag-dosh","Hakkah"],
+        "translation" : "hanukah",
+        "close_translations" : ["passover", "purim", "shabbat", "lag b'omer", "tish-b'av"],
+        "categories" : ["hanukah"],
+        "hint" : "light eight candles"
+    },
+    {
+       "id" : 13,
+        "letters" : ["Bet", "Yud", "Tav"],
+        "vowels"  : ["ah", "ee", " "],
+        "transliteration" : "Buy-yeet",
+        "close_transliterations" : ["Bought","Bate","Bute","Vate","Vight"],
+        "translation" : "house",
+        "close_translations" : ["farm", "land", "store", "table", "chair"],
+        "categories" : ["intro"],
+        "hint" : "where you live"
+    },
+    {
+         "id" : 14,
+          "letters" : ["Shin", "Mem", "Resh"],
+          "vowels"  : ["aw", "ah", " "],
+          "transliteration" : "Shaw-mar",
+          "close_transliterations" : ["Sha-met","Sha-meet","Shom-roo","Sum","So-high"],
+          "translation" : "guarded, kept",
+          "close_translations" : ["taken", "watched", "listened", "jumped", "fell"],
+          "categories" : ["verbs"],
+          "hint" : "make sure something is safe"
+      },
+    {
+       "id" : 15,
+        "letters" : ["He", "Aleph", "Resh","Tsadi"],
+        "vowels"  : ["aw", "aw", "eh", " "],
+        "transliteration" : "ha-aretz",
+        "close_transliterations" : ["ha-maretz","haw-met","stom-ach","la-mort","ch-eretz"],
+        "translation" : "the world",
+        "close_translations" : ["the moon", "city", "town", "country", "long time"],
+        "categories" : ["places"],
+        "hint" : "the whole wide...in your hands"
+    },
+    {
+        "id" : 16,
+        "letters" : ["He","Mem","Vav","Tsadi","Yud","Aleph"],
+        "vowels"  : ["ah", " " , "oh", "ee", " ", " "],
+        "transliteration" : "ha-motzi",
+        "close_transliterations" : ["ha-maretz","haw-met","zim-ach","tzim-tom","rain-man"],
+        "translation" : "bring forth",
+        "close_translations" : ["take", "give", "form", "jump", "eat"],
+        "categories" : ["bread"],
+        "hint" : "how to get something"
+        
+    },
+    {
+        "id" : 17,
+        "letters" : ["Bet","Vav", "Resh","Aleph"],
+        "vowels"  : [" ", "oh" , "ay", " "],
+        "transliteration" : "borei",
+        "close_transliterations" : ["b-retz","bah-room","bar-uch","ball-loon","boomerang"],
+        "translation" : "creator",
+        "close_translations" : ["carpenter", "wizard", "cook", "wine taster", "chef"],
+        "categories" : ["wine"],
+        "hint" : "who makes something"
+        
+    },
+    {
+        "id" : 18,
+        "letters" : ["Pay","Resh","Yud"],
+        "vowels"  : ["uh", "ee"," " ],
+        "transliteration" : "p'ri",
+        "close_transliterations" : ["pour-idge","pulled","par-take","par-mesan","drink"],
+        "translation" : "of the fruit",
+        "close_translations" : ["of the sand", "boots", "stamp", "grapes", "peaches"],
+        "categories" : ["wine"],
+        "hint" : "not a vegetable"
+        
+    },
+    {
+        "id" : 19,
+        "letters" : ["He","Gimel","Phe","F-Nun"],
+        "vowels"  : ["ah", "aw","eh"," " ],
+        "transliteration" : "hagafen",
+        "close_transliterations" : ["hagen-dazs","haman","hummous","huge","water"],
+        "translation" : "the vine",
+        "close_translations" : ["the sand", "the turtle", "a sun", "drink", "liquid"],
+        "categories" : ["wine"],
+        "hint" : "where you get wine"
+    },
+    {
+        "id" : 20,
+        "letters" : ["Aleph","Shin","Resh"],
+        "vowels"  : ["ah", "eh"," " ],
+        "transliteration" : "asher",
+        "close_transliterations" : ["oh-sher","ee-sher","bee-sher","boat","wine"],
+        "translation" : "that, who, which, where",
+        "close_translations" : ["of", "the", "festival", "candle", "night"],
+        "categories" : ["candles","hanukah"],
+        "hint" : "which person?"
+    },
+    {
+        "id" : 21,
+        "letters" : ["Nun","Resh"],
+        "vowels"  : ["ay"," " ],
+        "transliteration" : "ner",
+        "close_transliterations" : ["bear","lair","tear","rare","nervous"],
+        "translation" : "candle",
+        "close_translations" : ["fire", "log", "wax", "ashes", "cloth"],
+        "categories" : ["candles"],
+        "hint" : "thing we are lighting"
+    },
+    {
+           "id" : 22,
+           "letters" : ["Shin","Lamed"],
+           "vowels"  : ["eh"," " ],
+           "transliteration" : "shel",
+           "close_transliterations" : ["shall","sole","rock","bell","frill"],
+           "translation" : "of",
+           "close_translations" : ["to", "from", "before", "tomorow", "after"],
+           "categories" : ["candles","hanukah"],
+           "hint" : "key linking word"
+    },
+    {
+           "id" : 23,
+           "letters" : ["Shin","Bet","Tav"],
+           "vowels"  : ["ah","aw"," " ],
+           "transliteration" : "Shabbat",
+           "close_transliterations" : ["saber","salt","bath","saturday","sunday"],
+           "translation" : "Sabbath",
+           "close_translations" : ["Hanukah", "Passover", "Sedar", "Havdalah", "Purim"],
+           "categories" : ["candles"],
+           "hint" : "day of rests"
+    },
+    {
+        "id" : 24,
+        "letters" : ["Kof","Dalet","Shin","Nun","Vav-Dagesh"],
+        "vowels"  : ["ee","uh","aw","oo"," "],
+        "transliteration" : "kid'shanu",
+        "close_transliterations" : ["kiddush","lanu","shim-shim","reshawno","b'ano"],
+        "translation" : "hallows",
+        "close_translations" : ["likes", "believes", "wishes", "wants", "hopes"],
+        "categories" : ["candles","hanukah"],
+        "hint" : "very special"
+    },
+    {
+           "id" : 25,
+           "letters" : ["Bet","Mem","Tsadi","Vav","Tav","Yud","Vav"],
+           "vowels"  : ["uh", "ee", "uh", "oh", "aw", " "," " ],
+           "transliteration" : "b'mitzvotav",
+           "close_transliterations" : ["bim-tov","tov-bim","lim-tov","stove","r-tav"],
+           "translation" : "with mitzvot",
+           "close_translations" : ["from", "bad things", "sweet", "bitter", "stove"],
+           "categories" : ["candles","hanukah"],
+           "hint" : "good deeds"
+       },
+       {
+              "id" : 26,
+              "letters" :["Shin", "Mem", "Ayin"],
+              "vowels" : ["uh", "ah", " "],
+              "transliteration" : "sh'ma",
+              "close_transliterations" : ["shela", "tela", "lela", "lia", "shaka "],
+              "translation" : "hear",
+              "close_translations" : ["say", "talk", "behold", "land", "begin"],
+              "categories" : ["shema"],
+              "hint" : "Start of the prayer"
+          },
+         {
+             "id" : 27,
+             "letters" :["Yud", "Sin", "Resh", "Aleph", "Lamed"],
+             "vowels" : ["ee", "uh", "aw", "ay", " "],
+             "transliteration" : "Yisrael",
+             "close_translations" : ["Jamaica", "Iran", "Guam", "San Diego", "Washington"],
+             "translation" : "Israel",
+              "close_transliterations" :
+                    ["Yes-royal", "Yes-rayah", "Yes-Tomak", "Vin-Jamaic", "Lin-Lie"],
+             "categories" : ["shema"],
+             "hint" : "Land of milk and honey"
+         },
+         {
+             "id" : 28,
+             "letters" : ["Aleph", "Lamed", "He", "Yud", "Nun", "Vav-Dagesh"],
+             "vowels" :  ["eh", "oh", "ay", " ", " ", " "],
+             "transliteration" : "Eloheinu",
+             "close_translations" : ["Man", "Boy", "Girl", "Son", "Daughter"],
+             "translation" : "our G-d",
+             "close_transliterations" : ["Elotainu", "Elohvainu", "Eloshaynu", "Mitzroyim", "Tovim"],
+             "categories" : ["shema","wine","bread","candles"],
+             "hint" : "our creator"
+         },
+         {
+             "id" : 29,
+             "letters" :["Aleph", "Het", "Dalet"],
+             "vowels" : ["eh", "aw", " "],
+             "transliteration" : "echad",
+             "translation" : "one",
+             "close_translations" : ["two", "three", "four", "ten", "twenty-eight"],
+             "close_transliterations" : ["elod", "elomayim", "nemar", "vick-ro-ash", "ha-melech"],
+             "categories" : ["shema"],
+             "hint" : "Between 0 and 2"
+         },
+         {
+            "id" : 30,
+            "letters"                 : ["Yud", "Vav", "F-Mem"],
+            "vowels"                  : [" ", "oh", " "],
+            "transliteration"         : "yom",
+            "close_translations"      : ["Night", "Weekend", "Hour", "Month", "Saturday"],
+            "translation"             : "day",
+            "close_transliterations"  : ["yam", "jam", "dome", "rome", "some"],
+            "categories"              : ["birthday"],
+            "hint"                    : "24 hours in this"
+         },
+         {
+            "id" : 31,
+            "letters"                     : ["He", "Lamed", "Dalet", "Tav"],
+            "vowels"                      : ["oo", "eh", "eh", " "],
+            "transliteration"             : "huledet",
+            "close_translations"          : ["death", "nap", "sleep", "life", "bedtime"],
+            "translation"                 : "birth",
+            "close_transliterations"      : ["hiledot", "hilldot", "hoodat", "who-dey", "hoo-hoo"],
+            "categories"                  : ["birthday"],
+            "hint"                        : "when you are born"
+         },
+         {
+            "id" : 32,
+            "letters"                     : ["Sin", "Mem", "Het"],
+            "vowels"                      : ["aw", "ay", "ah"],
+            "transliteration"             : "sameach",
+            "close_translations"          : ["sad", "exhilerated", "ferocious", "tickled", "miserable"],
+            "translation"                 : "happy",
+            "close_transliterations"      : ["sumet", "sahmaytion", "sah-chin", "sad-happy", "someday"],
+            "categories"                  : ["birthday"],
+            "hint"                        : "very pleased"
+         }
+         
+]

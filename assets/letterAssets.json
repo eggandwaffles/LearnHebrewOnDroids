@@ -1,12 +1,29 @@
 {
 	"letters" : [
 		{
-			"name" : "aleph",
+			"name" : "Aleph",
 			"sound" : null,
 			"image" : "../assets/images/aleph.png",
 			"attribution" : "https://www.pngfuel.com/free-png/gquui",
-			"license" : "non-commercial"
-		}
+			"license" : "non-commercial",
+			"character" : "\u{05D0}"
+		},
+		{
+			"name" : "Bet",
+			"sound" : "B",
+			"image" : null,
+			"attribution" : null,
+			"license" : null,
+			"character" : "\u{FB31}"
+		},
+		{
+			"name" : "Vet",
+			"sound" : "V",
+			"image" : null,
+			"attribution" : null,
+			"license" : null,
+			"character" : "\u{05D1}"
+		},
 	]
 
 }
