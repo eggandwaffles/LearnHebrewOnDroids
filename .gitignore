@@ -8,7 +8,9 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+assets/images/*.svg
+components/HebrewLettersConverter.js
 
 # macOS
 .DS_Store
-assets/images/*.svg
+
