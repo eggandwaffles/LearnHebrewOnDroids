@@ -1,0 +1,114 @@
+[
+    {
+    "name" : "Aleph",
+    "char" : " "
+    },
+    {
+    "name" : "Bet",
+    "char" : "B"
+    },
+    {
+    "name" : "Vet",
+    "char" : "V"
+    },
+    {
+    "name" : "Gimel",
+    "char" : "G"
+    },
+    {
+    "name" : "Dalet",
+    "char" : "D"
+    },
+    {
+    "name" : "He",
+    "char" : "H"
+    },
+    {
+    "name" : "Vav",
+    "char" : "V"
+    },
+    {
+    "name" : "Zayin",
+    "char" : "Z"
+    },
+    {
+    "name" : "Het",
+    "char" : "hC"
+    },
+    {
+    "name" : "Tet",
+    "char" : "T"
+    },
+    {
+    "name" : "Yud",
+    "char" : "Y"
+    },
+    {
+    "name" : "Kaf",
+    "char" : "K"
+    },
+    {
+    "name" : "Lamed",
+    "char" : "L"
+    },
+    {
+    "name" : "Mem",
+    "char" : "M"
+    },
+    {
+    "name" : "Nun",
+    "char" : "N"
+    },
+    {
+    "name" : "Samech",
+    "char" : "S"
+    },
+    {
+    "name" : "Ayin",
+    "char" : " "
+    },
+    {
+    "name" : "Phe",
+    "char" : "hP"
+    },
+    {
+    "name" : "Pay",
+    "char" : "P"
+    },
+    {
+    "name" : "Tsadi",
+    "char" : "zT"
+    },
+    {
+    "name" : "Kof",
+    "char" : "K"
+    },
+    {
+    "name" : "Resh",
+    "char" : "R"
+    },
+    {
+    "name" : "Shin",
+    "char" : "hS"
+    },
+    {
+    "name" : "Sin",
+    "char" : "S"
+    },
+    {
+    "name" : "Tav",
+    "char" : "T"
+    },
+    {
+    "name" : "F-Mem",
+    "char" : "M"
+    },
+    {
+    "name" : "F-Nun",
+    "char" : "N"
+    },
+    {
+    "name" : "F-Kaf",
+    "char" : "K"
+    }
+]

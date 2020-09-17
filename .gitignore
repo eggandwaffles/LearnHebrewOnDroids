@@ -11,6 +11,7 @@ web-build/
 assets/images/*.svg
 components/HebrewLettersConverter.js
 components/__tests__
+components/toConvert.txt
 # macOS
 .DS_Store
 

@@ -4,13 +4,9 @@ var abort = false
 var pulses = 0
 var input = []
 var formattedOutput = []
-/*var raw = ( 
-'hebrewLetters[\"Aleph\"]   = \"\u{05D0}\"' +
-'hebrewLetters[\"Bet\"]     = \"\u{FB31}\"' +
-'hebrewLetters[\"Vet\"]     = \"\u{05D1}\"' +
-'hebrewLetters[\"Gimel\"]   = \"\u{05D2}\"'
-)*/
-var raw =  ('hebrewLetters["Aleph"]   = "\u{05D0}"' +
+
+var fs = require('fs')
+/* var raw =  ('hebrewLetters["Aleph"]   = "\u{05D0}"' +
 'hebrewLetters["Bet"]     = "\u{FB31}"' +
 'hebrewLetters["Vet"]     = "\u{05D1}"' +
 'hebrewLetters["Gimel"]   = "\u{05D2}"' +
@@ -41,10 +37,7 @@ var raw =  ('hebrewLetters["Aleph"]   = "\u{05D0}"' +
 'hebrewLetters[""]        = ""' +
 'hebrewLetters[" "]       = ""' +
 'hebrewLetters["Vav-Dagesh"] = "\u{FB35}"')
-var input = (raw.split(''))
-var archiveInput = (raw.split(''))
-var output = [] 
-
+*/
 function Delay (milliseconds) {
     var timeEnd = Date.now() + milliseconds
     while (Date.now() < timeEnd) {
@@ -52,6 +45,20 @@ function Delay (milliseconds) {
     }
 }
 
+console.log("Launching")
+
+var raw = fs.readFileSync('./toConvert.txt', 'utf8', (err, data) => {
+    if (err) throw err;
+    console.log('Read Complete')
+    return data
+})
+
+
+
+
+var input = (raw.split(''))
+var archiveInput = (raw.split(''))
+var output = [] 
 function Scanner (scanning, trigger, debug, catchTrig) {
     console.log('Scan Begun')
     var i = 1
