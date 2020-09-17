@@ -12,6 +12,7 @@ assets/images/*.svg
 components/HebrewLettersConverter.js
 components/__tests__
 components/toConvert.txt
+components/ConverterOutput.json
 # macOS
 .DS_Store
 
