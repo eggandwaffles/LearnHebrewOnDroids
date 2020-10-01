@@ -38,7 +38,7 @@ function compileLetterArray () {
     var chosen = false
     logs.push("Beginning cycle.\n")
     for (let i = 0; i < 5; i++) {
-        if (RandInt(1, 5) === 3 && !fakedOut && i != 4) {
+        if (RandInt(1, 3) === 2 && !fakedOut && i != 4) {
             //Generate a fake answer
             logs.push("Creating a fake answer.\n")
             fakedOut = true
@@ -70,4 +70,15 @@ function compileLetterArray () {
 return { output, logs }
 }
 
-module.exports = {compileLetterArray}
+function RockPolisher () {
+    var raw = compileLetterArray().output
+    var polish = {"prompt" : "", "answer" : "", "buttons" : []}
+    for  (let i = 0; i < 5; i++) {
+        polish.buttons.push(raw[i].sound)
+    }
+    var correctAnswer = raw.find(item => item.isRight)
+    polish.prompt = correctAnswer.unicode
+    polish.answer = correctAnswer.sound
+    return polish
+}
+module.exports = { RockPolisher }

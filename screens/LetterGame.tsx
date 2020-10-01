@@ -2,10 +2,12 @@ import * as React from 'react';
 import { StyleSheet, Alert } from 'react-native';
 
 import { Text, View, Button} from '../components/Themed';
-
+var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
 
 
 export default function LetterGame( { navigation } ) {
+	const currentQuestionSet = RockPolisher()
+	const [ answerState, setAnswerState] = React.useState("00000")
 	return (
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -18,33 +20,33 @@ export default function LetterGame( { navigation } ) {
 
       <Text style={styles.title}>Transliterate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	  <Text style={styles.title}>This</Text>
+	<Text style={styles.title}>{currentQuestionSet.prompt}</Text>
 
 	  <View style={styles.buttonRow}>
 		<Button
-			title = "A"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
-			color = "#FF0000"
+			title = {currentQuestionSet.buttons[0]}
+			onPress={() => setAnswerState("1" + answerState.substring(1))}
+			color = {parseFloat(answerState[0]) ? "#FF0000" : "#2196F3"}
 		/>
 		<Button
-			title = "B"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
-			color = "#FF9900"
+			title = {currentQuestionSet.buttons[1]}
+			onPress={() => setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))}
+			color = {parseFloat(answerState[1]) ? "#FF0000" : "#2196F3"}
 		/>
 		<Button
-			title = "C"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
-			color = "#00FF00"
+			title = {currentQuestionSet.buttons[2]}
+			onPress={() => setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))}
+			color = {parseFloat(answerState[2]) ? "#FF0000" : "#2196F3"}
 		/>
 		<Button
-			title = "D"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
-			color = "#0000FF"
+			title = {currentQuestionSet.buttons[3]}
+			onPress={() => setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))}
+			color = {parseFloat(answerState[3]) ? "#FF0000" : "#2196F3"}
 		/>
 		<Button
-			title = "E"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
-			color = "#FF00FF"
+			title = {currentQuestionSet.buttons[4]}
+			onPress={() => setAnswerState(answerState.substring(0,4) + "1")}
+			color = {parseFloat(answerState[4]) ? "#FF0000" : "#2196F3"}
 		/>
 		</View>
 	</View>
@@ -54,6 +56,7 @@ export default function LetterGame( { navigation } ) {
 
 const styles = StyleSheet.create({
   largeContainer: {
+	color: "#FFFFFF",
 	flex: 2,
 	justifyContent: 'center',
   },
