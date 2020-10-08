@@ -8,17 +8,66 @@ var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
 export default function LetterGame( { navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(RockPolisher())
 	const [ answerState, setAnswerState] = React.useState("000000")
+	const [ timer, setTimer] = React.useState(0)
+	const [ abort, setAbort ] = React.useState(false)
+
+	if (timer === 0) {
+		setTimer(7)
+		setTimeout( () => {
+			if (!parseFloat(answerState[5]) && !abort) {
+				setTimer(6)
+				setTimeout( () => {
+					if (!parseFloat(answerState[5]) && !abort) {
+						setTimer(5)
+						setTimeout( () => {
+							if (!parseFloat(answerState[5]) && !abort) {
+								setTimer(4)
+								setTimeout( () => {
+									if (!parseFloat(answerState[5]) && !abort) {
+										setTimer(3)
+										setTimeout( () => {
+											if (!parseFloat(answerState[5]) && !abort) {
+												setTimer(2)
+												setTimeout( () => {
+													if (!parseFloat(answerState[5]) && !abort) {
+														setTimer(1)
+														setTimeout( () => {
+															if (!parseFloat(answerState[5])) {
+																nextQuestion()
+															}
+														}, 1000)
+													}
+												}, 1000)
+											}
+										}, 1000)
+									}
+								}, 1000)
+							}
+						}, 1000)
+					}
+				}, 1000)
+			}
+		}, 1000)
+	}
+
+
+	
 	function nextQuestion () {
 		setAnswerState("111111")
-		
+		setAbort(true)
+		setTimer(7)
 		setTimeout( () => {
 			setQuestionState(RockPolisher())
 			setAnswerState("000000")
+			setAbort(false)
+			setTimer(0)
+		
 		}, 3000)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
-
+	
 	return (
+		
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	<Button style={styles.backButton}
@@ -81,6 +130,7 @@ export default function LetterGame( { navigation } ) {
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
 		/>
 		</View>
+	<Text>{"\n" + timer}</Text>
 	</View>
 	</View>
 	)
