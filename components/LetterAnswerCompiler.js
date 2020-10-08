@@ -53,7 +53,11 @@ function compileLetterArray () {
                 chosen = true
                 var correctAnswer = fetchRandom(readLetters)
                 readLetters.push(correctAnswer.name)
-                output.push({ "name" : correctAnswer.name, "unicode" : correctAnswer.unicode, "sound" : correctAnswer.char, "isRight" : true })
+                if (output.some(item => item.sound === correctAnswer.char)) {
+                i--
+                } else {
+                    output.push({ "name" : correctAnswer.name, "unicode" : correctAnswer.unicode, "sound" : correctAnswer.char, "isRight" : true })
+                }
             } else {
                     //Generate an incorrect answer
                     logs.push("Creating an incorrect answer.\n")
