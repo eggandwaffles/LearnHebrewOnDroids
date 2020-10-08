@@ -12,69 +12,7 @@ export default function LetterGame( { navigation } ) {
 	const [ init, setInit ] = React.useState(true)
 	const [stopTimer, setStop] = React.useState(false)
 	const [ timerIDs, setIDs] = React.useState([])
-/*function nicetimer() {
-		setStop(false)
-		setInit(false)
-		setTimer(7)
-		setTimeout( () => {
-			if (!parseFloat(answerState[5])) {
-				if (stopTimer) {
-					return 
-				}
-				setTimer(6)
-				setTimeout( () => {
-					if (!parseFloat(answerState[5])) {
-						if (stopTimer) {
-							
-							return 
-						}
-						setTimer(5)
-						setTimeout( () => {
-							if (!parseFloat(answerState[5])) {
-								if (stopTimer) {
-									return 
-								}
-								setTimer(4)
-								setTimeout( () => {
-									if (!parseFloat(answerState[5])) {
-										if (stopTimer) {
-											return 
-										}
-										setTimer(3)
-										setTimeout( () => {
-											if (!parseFloat(answerState[5])) {
-												if (stopTimer) {
-													return 
-												}
-												setTimer(2)
-												setTimeout( () => {
-													if (!parseFloat(answerState[5])) {
-														if (stopTimer) {
-															return 
-														}
-														setTimer(1)
-														setTimeout( () => {
-															if (!parseFloat(answerState[5])) {
-																if (stopTimer) {
-																	return 
-																}
-																nextQuestion()
-															}
-														}, 1000)
-													}
-												}, 1000)
-											}
-										}, 1000)
-									}
-								}, 1000)
-							}
-						}, 1000)
-					}
-				}, 1000)
-			}
-		}, 1000)
-	
-} */
+
 function stoptime () {
 	for(let i = 0; i < timerIDs.length; i++) {
 		var current = timerIDs.pop()
@@ -118,6 +56,7 @@ function nicetimer() {
 	}, 6000))
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
+			stoptime()
 			setTimer(0)
 			nextQuestion()
 		}
@@ -250,7 +189,7 @@ const styles = StyleSheet.create({
 	position: "relative",
   },
   backButton: {
-	  	alignContent: "flex-start",
-		width: "1",
+	  	alignContent: "center",
+		width: "50%",
   },
 });

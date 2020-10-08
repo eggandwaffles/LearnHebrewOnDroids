@@ -54,10 +54,11 @@ function compileLetterArray () {
                 var correctAnswer = fetchRandom(readLetters)
                 readLetters.push(correctAnswer.name)
                 if (output.some(item => item.sound === correctAnswer.char)) {
-                i--
-                } else {
-                    output.push({ "name" : correctAnswer.name, "unicode" : correctAnswer.unicode, "sound" : correctAnswer.char, "isRight" : true })
+                    var correctAnswer = fetchRandom(readLetters)
+                    readLetters.push(correctAnswer.name)
                 }
+                
+                output.push({ "name" : correctAnswer.name, "unicode" : correctAnswer.unicode, "sound" : correctAnswer.char, "isRight" : true })
             } else {
                     //Generate an incorrect answer
                     logs.push("Creating an incorrect answer.\n")
@@ -99,9 +100,9 @@ function RockPolisher () {
             polish.buttons[i].sound = niceArr.join('')
         }
     }
-    var correctAnswer = raw.find(item => item.isRight)
-    polish.prompt = correctAnswer.unicode
-    polish.answer = correctAnswer.sound
+    var correctAnswerTwo = raw.find(item => item.isRight)
+    polish.prompt = correctAnswerTwo.unicode
+    polish.answer = correctAnswerTwo.sound
     return polish
 }
 module.exports = { RockPolisher }
