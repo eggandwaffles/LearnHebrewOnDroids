@@ -8,26 +8,19 @@ var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
 export default function LetterGame( { navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(RockPolisher())
 	const [ answerState, setAnswerState] = React.useState("000000")
-	async function Timer(time) {
-		var initTime = Date.now()
-		var endtime = initTime + time
-		while (Date.now() <= endtime) {
-			if (Date.now() > endtime) {
-				return
-			}
-		}
-	}
-	async function nextQuestion () {
+	function nextQuestion () {
 		setAnswerState("111111")
-		await Timer(3000)
-		setQuestionState(RockPolisher())
-		setAnswerState("000000")
+		
+		setTimeout( () => {
+			setQuestionState(RockPolisher())
+			setAnswerState("000000")
+		}, 3000)
+		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
 
 	return (
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-   	
 	<Button style={styles.backButton}
 		title = "Back"
 		onPress={() => navigation.navigate("TabOneScreen")}
