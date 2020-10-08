@@ -9,30 +9,55 @@ export default function LetterGame( { navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(RockPolisher())
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
-	const [ abort, setAbort ] = React.useState(false)
-
-	if (timer === 0) {
+	const [ init, setInit ] = React.useState(true)
+	const [stopTimer, setStop] = React.useState(false)
+	const [ timerIDs, setIDs] = React.useState([])
+/*function nicetimer() {
+		setStop(false)
+		setInit(false)
 		setTimer(7)
 		setTimeout( () => {
-			if (!parseFloat(answerState[5]) && !abort) {
+			if (!parseFloat(answerState[5])) {
+				if (stopTimer) {
+					return 
+				}
 				setTimer(6)
 				setTimeout( () => {
-					if (!parseFloat(answerState[5]) && !abort) {
+					if (!parseFloat(answerState[5])) {
+						if (stopTimer) {
+							
+							return 
+						}
 						setTimer(5)
 						setTimeout( () => {
-							if (!parseFloat(answerState[5]) && !abort) {
+							if (!parseFloat(answerState[5])) {
+								if (stopTimer) {
+									return 
+								}
 								setTimer(4)
 								setTimeout( () => {
-									if (!parseFloat(answerState[5]) && !abort) {
+									if (!parseFloat(answerState[5])) {
+										if (stopTimer) {
+											return 
+										}
 										setTimer(3)
 										setTimeout( () => {
-											if (!parseFloat(answerState[5]) && !abort) {
+											if (!parseFloat(answerState[5])) {
+												if (stopTimer) {
+													return 
+												}
 												setTimer(2)
 												setTimeout( () => {
-													if (!parseFloat(answerState[5]) && !abort) {
+													if (!parseFloat(answerState[5])) {
+														if (stopTimer) {
+															return 
+														}
 														setTimer(1)
 														setTimeout( () => {
 															if (!parseFloat(answerState[5])) {
+																if (stopTimer) {
+																	return 
+																}
 																nextQuestion()
 															}
 														}, 1000)
@@ -48,20 +73,72 @@ export default function LetterGame( { navigation } ) {
 				}, 1000)
 			}
 		}, 1000)
+	
+} */
+function stoptime () {
+	for(let i = 0; i < timerIDs.length; i++) {
+		var current = timerIDs.pop()
+		clearTimeout(current)
 	}
-
+}
+function nicetimer() {
+	setIDs([])
+	setInit(false)
+	setTimer(7)
+	var cache = []
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(6)
+		}
+	}, 1000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(5)
+		}
+	}, 2000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(4)
+		}
+	}, 3000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(3)
+		}
+	}, 4000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(2)
+		}
+	}, 5000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(1)
+		}
+	}, 6000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(0)
+			nextQuestion()
+		}
+	}, 7000))
+	setIDs(cache)
+}
+if (init) {
+	nicetimer()
+}
 
 	
 	function nextQuestion () {
+		
 		setAnswerState("111111")
-		setAbort(true)
-		setTimer(7)
+		setStop(true)
+		stoptime()
 		setTimeout( () => {
 			setQuestionState(RockPolisher())
 			setAnswerState("000000")
-			setAbort(false)
-			setTimer(0)
-		
+			nicetimer()
+			setStop(false)
 		}, 3000)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
@@ -85,6 +162,7 @@ export default function LetterGame( { navigation } ) {
 			title = {currentQuestionSet.buttons[0].sound}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
 			if (currentQuestionSet.buttons[0].isRight) {
+				setTimer(0)
 				nextQuestion()
 			}
 		}}
@@ -95,6 +173,7 @@ export default function LetterGame( { navigation } ) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
 				if (currentQuestionSet.buttons[1].isRight) {
+					setTimer(0)
 					nextQuestion()
 				}
 			}}
@@ -105,6 +184,7 @@ export default function LetterGame( { navigation } ) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
 				if (currentQuestionSet.buttons[2].isRight) {
+					setTimer(0)
 					nextQuestion()
 				}
 			}}
@@ -115,6 +195,7 @@ export default function LetterGame( { navigation } ) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
 				if (currentQuestionSet.buttons[3].isRight) {
+					setTimer(0)
 					nextQuestion()
 				}
 			}}
@@ -124,13 +205,14 @@ export default function LetterGame( { navigation } ) {
 			title = {currentQuestionSet.buttons[4].sound}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
 			if (currentQuestionSet.buttons[4].isRight) {
+				setTimer(0)
 				nextQuestion()
 			}
 		}}
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
 		/>
 		</View>
-	<Text>{"\n" + timer}</Text>
+	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>
 	</View>
 	</View>
 	)
