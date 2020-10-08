@@ -11,18 +11,18 @@ export default function TabOneScreen( { navigation } ) {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Start Game"
-			onPress={() => {{
+			onPress={() => {
 				navigation.navigate('LetterGame')
-			}}}
+			}}
 			color = "#FF9900"
 		/>
 		<Button
 			title = "Letter Names"
-			onPress={() => Alert.alert('FATAL ERROR ', "INCINERATE PHONE TO FIX")}
+			onPress={() => Alert.alert('I am so sorry.', "My sincerest apologies")}
 		/>
 		<Button
 			title = "Letter Sounds"
-			onPress={() => Alert.alert('FATAL ERROR',"Cause: head trauma")}
+			onPress={() => Alert.alert('I am so sorry.',"My sincerest apologies")}
 		/>
 		</View>
     </View>

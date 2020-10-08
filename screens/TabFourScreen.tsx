@@ -10,7 +10,10 @@ export default function TabFourScreen() {
     <Image source={ImageFetch("aleph")}/>
       <Text style={styles.title}>Progress</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	  <Text style={styles.body}>Expo done gone broke? Check version here: V2</Text>
+	  <Text style={styles.body}>Like everything else in this app</Text>
+    <Text style={styles.body}>this will not work for the forseeable</Text>
+    <Text style={styles.body}>future. But here, there isn't even</Text>
+    <Text style={styles.body}>a placeholder to fill the space. Sorry.</Text>
 	</View>
 
 

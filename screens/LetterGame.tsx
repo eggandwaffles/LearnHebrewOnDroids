@@ -6,15 +6,31 @@ var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
 
 
 export default function LetterGame( { navigation } ) {
-	const currentQuestionSet = RockPolisher()
-	const [ answerState, setAnswerState] = React.useState("00000")
+	const [currentQuestionSet, setQuestionState ] = React.useState(RockPolisher())
+	const [ answerState, setAnswerState] = React.useState("000000")
+	async function Timer(time) {
+		var initTime = Date.now()
+		var endtime = initTime + time
+		while (Date.now() <= endtime) {
+			if (Date.now() > endtime) {
+				return
+			}
+		}
+	}
+	async function nextQuestion () {
+		setAnswerState("111111")
+		await Timer(3000)
+		setQuestionState(RockPolisher())
+		setAnswerState("000000")
+	}
+
 	return (
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
    	
 	<Button style={styles.backButton}
 		title = "Back"
-		onPress={() => navigation.goBack()}
+		onPress={() => navigation.navigate("TabOneScreen")}
 		/>
    <View style={styles.container}>
 
@@ -24,29 +40,52 @@ export default function LetterGame( { navigation } ) {
 
 	  <View style={styles.buttonRow}>
 		<Button
-			title = {currentQuestionSet.buttons[0]}
-			onPress={() => setAnswerState("1" + answerState.substring(1))}
-			color = {parseFloat(answerState[0]) ? "#FF0000" : "#2196F3"}
+			title = {currentQuestionSet.buttons[0].sound}
+			onPress={() => { setAnswerState("1" + answerState.substring(1))
+			if (currentQuestionSet.buttons[0].isRight) {
+				nextQuestion()
+			}
+		}}
+			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.buttons[0].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[1]}
-			onPress={() => setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))}
-			color = {parseFloat(answerState[1]) ? "#FF0000" : "#2196F3"}
+			title = {currentQuestionSet.buttons[1].sound}
+			onPress={() => {
+				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
+				if (currentQuestionSet.buttons[1].isRight) {
+					nextQuestion()
+				}
+			}}
+			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.buttons[1].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[2]}
-			onPress={() => setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))}
-			color = {parseFloat(answerState[2]) ? "#FF0000" : "#2196F3"}
+			title = {currentQuestionSet.buttons[2].sound}
+			onPress={() => {
+				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
+				if (currentQuestionSet.buttons[2].isRight) {
+					nextQuestion()
+				}
+			}}
+			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.buttons[2].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[3]}
-			onPress={() => setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))}
-			color = {parseFloat(answerState[3]) ? "#FF0000" : "#2196F3"}
+			title = {currentQuestionSet.buttons[3].sound}
+			onPress={() => {
+				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
+				if (currentQuestionSet.buttons[3].isRight) {
+					nextQuestion()
+				}
+			}}
+			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.buttons[3].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[4]}
-			onPress={() => setAnswerState(answerState.substring(0,4) + "1")}
-			color = {parseFloat(answerState[4]) ? "#FF0000" : "#2196F3"}
+			title = {currentQuestionSet.buttons[4].sound}
+			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
+			if (currentQuestionSet.buttons[4].isRight) {
+				nextQuestion()
+			}
+		}}
+			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
 		/>
 		</View>
 	</View>
@@ -87,6 +126,6 @@ const styles = StyleSheet.create({
   },
   backButton: {
 	  	alignContent: "flex-start",
-		width: "50%",
+		width: "1",
   },
 });

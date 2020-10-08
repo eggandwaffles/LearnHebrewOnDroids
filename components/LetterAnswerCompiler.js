@@ -6,12 +6,14 @@ var letters = require('../assets/hebrewLetters.json');
 
 function getFullLetterData(letter) {
     var unicode = unicodes.find(unicode => unicode.name === letter).char
-    var rawChar = letters.find(item => item.name === letter).char.split('')
-    var polishChar = []
+    var rawChar = letters.find(item => item.name === letter).char//add a .split('')
+    var polishChar = rawChar //make array
+    /*
     for (let i = 0; i < rawChar.length; i++) {
         polishChar.push(rawChar.pop())
     }
-    return {"name" : letter, "unicode" : unicode, "char" : polishChar.join('')}
+    */ //uncomment
+    return {"name" : letter, "unicode" : unicode, "char" : polishChar} //add a .join('')
 }
 
 function fetchRandom (blacklist) {
@@ -57,7 +59,12 @@ function compileLetterArray () {
                     logs.push("Creating an incorrect answer.\n")
                     var wrongAnswer = fetchRandom(readLetters)
                     readLetters.push(wrongAnswer.name)
-                    output.push({ "name" : wrongAnswer.name, "unicode" : wrongAnswer.unicode, "sound" : wrongAnswer.char, "isRight" : false })
+                    if (output.some(item => item.sound === wrongAnswer.char)) {
+                        i--
+                    } else {
+                        output.push({ "name" : wrongAnswer.name, "unicode" : wrongAnswer.unicode, "sound" : wrongAnswer.char, "isRight" : false })
+                    }
+
             }
         }
         if (i===0) {
@@ -74,7 +81,19 @@ function RockPolisher () {
     var raw = compileLetterArray().output
     var polish = {"prompt" : "", "answer" : "", "buttons" : []}
     for  (let i = 0; i < 5; i++) {
-        polish.buttons.push(raw[i].sound)
+        polish.buttons.push(raw[i])
+    }
+    for  (let i = 0; i < 5; i++) {
+        if (polish.buttons[i].unicode !== null) {
+            var flipped = polish.buttons[i].sound
+            var flippedArr = flipped.split('')
+            var niceArr = []
+            while (flippedArr.length !== 0) {
+                var current = flippedArr.pop()
+                niceArr.push(current)
+            }
+            polish.buttons[i].sound = niceArr.join('')
+        }
     }
     var correctAnswer = raw.find(item => item.isRight)
     polish.prompt = correctAnswer.unicode
