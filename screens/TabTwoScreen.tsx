@@ -3,6 +3,7 @@ import { StyleSheet, Alert } from 'react-native';
 import { Text, View, Button } from '../components/Themed';
 
 export default function TabTwoScreen() {
+  Alert.alert("Warning!","This content is not functional!")
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fun with Letters & Vowels</Text>
@@ -11,16 +12,16 @@ export default function TabTwoScreen() {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Start Game"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
+			onPress={() => Alert.alert('COMING SOON',"")}
 			color = "#FF9900"
 		/>
 		<Button
 			title = "Show Letters"
-			onPress={() => Alert.alert('Apologies...'," Or maybe they haven't spent enough time on it yet.")}
+			onPress={() => Alert.alert('COMING SOON',"")}
 		/>
 		<Button
 			title = "Show Vowels"
-			onPress={() => Alert.alert('Apologies...',"Yeah, that's it.")}
+			onPress={() => Alert.alert('COMING SOON',"")}
 		/>
 		</View>
     </View>

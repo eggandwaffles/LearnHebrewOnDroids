@@ -1,10 +1,21 @@
+import { FontAwesome } from '@expo/vector-icons';
 import * as React from 'react';
 import { StyleSheet, Alert } from 'react-native';
-
+import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
+import * as Font from 'expo-font';
+import { loadAsync } from 'expo-font';
+//https://docs.expo.io/versions/latest/sdk/font/
 var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
-
-
+async function loadfonts () {
+	await loadAsync({
+		'TaameyAshkenaz': {
+			uri: require('../assets/fonts/TaameyAshkenaz-Bold.ttf')
+		  },
+		});
+		
+}
+loadfonts()
 export default function LetterGame( { navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(RockPolisher())
 	const [ answerState, setAnswerState] = React.useState("000000")
@@ -86,15 +97,18 @@ if (init) {
 		
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	<Button style={styles.backButton}
+
+	<Button
+		
 		title = "Back"
 		onPress={() => navigation.navigate("TabOneScreen")}
 		/>
+
    <View style={styles.container}>
 
       <Text style={styles.title}>Transliterate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	<Text style={styles.title}>{currentQuestionSet.prompt}</Text>
+	<HebrewText>{currentQuestionSet.prompt}</HebrewText>
 
 	  <View style={styles.buttonRow}>
 		<Button
@@ -169,6 +183,7 @@ const styles = StyleSheet.create({
 
   },
   title: {
+	fontFamily: 'TaameyAshkenaz',
     fontSize: 30,
     fontWeight: 'bold',
   },
@@ -189,7 +204,6 @@ const styles = StyleSheet.create({
 	position: "relative",
   },
   backButton: {
-	  	alignContent: "center",
 		width: "50%",
   },
 });

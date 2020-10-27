@@ -5,6 +5,7 @@ import { Text, View, Button} from '../components/Themed';
 
 
 export default function TabThreeScreen() {
+  Alert.alert("Warning!","This content is not functional!")
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fun with words</Text>
@@ -13,12 +14,12 @@ export default function TabThreeScreen() {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Practice All Words"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
+			onPress={() => Alert.alert('COMING SOON',"Late 2020/Early 2021")}
 			color = "#FF9900"
 		/>
 		<Button
 			title = "Choose Categories"
-			onPress={() => Alert.alert('Apologies...',"Whoever coded this is incredibly lazy/unskilled.")}
+			onPress={() => Alert.alert('COMING SOON',"")}
 		/>
 		</View>
 	</View>

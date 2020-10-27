@@ -18,11 +18,11 @@ export default function TabOneScreen( { navigation } ) {
 		/>
 		<Button
 			title = "Letter Names"
-			onPress={() => Alert.alert('I am so sorry.', "My sincerest apologies")}
+			onPress={() => Alert.alert('COMING SOON', "To a theater near you.")}
 		/>
 		<Button
 			title = "Letter Sounds"
-			onPress={() => Alert.alert('I am so sorry.',"My sincerest apologies")}
+			onPress={() => Alert.alert('COMING SOON',"Wherever books are sold.")}
 		/>
 		</View>
     </View>

@@ -23,6 +23,8 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "An app for learning Hebrew.",
+    "githubUrl": "https://github.com/eggandwaffles/LearnHebrewOnDroids"
   }
 }

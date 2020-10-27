@@ -1,8 +1,9 @@
 var { RandInt } = require("./RandInt.js")
 var unicodes = require('../assets/hebrewUnicode.json');
 var fakeAnswers = require('../assets/assortedNames.json');
+var vowels = require('../assets/HebrewVowels.json')
 var letters = require('../assets/hebrewLetters.json');
-
+var fakeVowels = ["ii","og","eek","ama","reck","eft","oops"]
 
 function getFullLetterData(letter) {
     var unicode = unicodes.find(unicode => unicode.name === letter).char
@@ -31,7 +32,16 @@ function fetchRandom (blacklist) {
     }
     return getFullLetterData(fetched.name)
 }
+function getSomeVowels (real) {
+    var toReturn = {"name" : null, "unicode" : null}
+    if (real) {
+        var pickerIndex = RandInt(0, vowels.length - 1)
+        toReturn.name = vowels[pickerIndex].name
+        toReturn.unicode = vowels[pickerIndex].char
+    } else {
 
+    }
+}
 function compileLetterArray () {
     var logs = []
     var readLetters = []
@@ -82,7 +92,7 @@ function compileLetterArray () {
 return { output, logs }
 }
 
-function RockPolisher () {
+function VowelPolisher () {
     var raw = compileLetterArray().output
     var polish = {"prompt" : "", "answer" : "", "buttons" : []}
     for  (let i = 0; i < 5; i++) {
@@ -105,4 +115,5 @@ function RockPolisher () {
     polish.answer = correctAnswerTwo.sound
     return polish
 }
-module.exports = { RockPolisher }
+module.exports = { VowelPolisher }
+console.log(VowelPolisher())

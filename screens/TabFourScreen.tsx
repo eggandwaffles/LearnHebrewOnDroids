@@ -4,16 +4,14 @@ import { ImageFetch } from '../components/LetterLookup';
 import { Text, View, Button} from '../components/Themed';
 
 export default function TabFourScreen() {
-
+  Alert.alert("Warning!","This content is not functional!")
   return (
 	<View style={styles.container}>
     <Image source={ImageFetch("aleph")}/>
       <Text style={styles.title}>Progress</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	  <Text style={styles.body}>Like everything else in this app</Text>
-    <Text style={styles.body}>this will not work for the forseeable</Text>
-    <Text style={styles.body}>future. But here, there isn't even</Text>
-    <Text style={styles.body}>a placeholder to fill the space. Sorry.</Text>
+	  <Text style={styles.body}>COMING SOON</Text>
+
 	</View>
 
 

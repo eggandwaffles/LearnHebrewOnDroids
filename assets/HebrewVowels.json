@@ -1,0 +1,42 @@
+[
+{
+"name" : "aw",
+"char" : "\u{05B8}"
+},
+{
+"name" : "ah",
+"char" : "\u{05B7}"
+},
+{
+"name" : "eh",
+"char" : "\u{05B6}"
+},
+{
+"name" : "oo",
+"char" : "\u{05BB}"
+},
+{
+"name" : "ay",
+"char" : "\u{05B5}"
+},
+{
+"name" : "ee",
+"char" : "\u{05B4}"
+},
+{
+"name" : "oh",
+"char" : "\u{05B9}"
+},
+{
+"name" : "uh",
+"char" : "\u{05B0}"
+},
+{
+"name" : "",
+"char" : ""
+},
+{
+"name" : " ",
+"char" : ""
+}
+]
