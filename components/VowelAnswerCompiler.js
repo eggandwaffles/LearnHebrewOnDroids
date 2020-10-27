@@ -39,8 +39,11 @@ function getSomeVowels (real) {
         toReturn.name = vowels[pickerIndex].name
         toReturn.unicode = vowels[pickerIndex].char
     } else {
-
+        var pickerIndex = RandInt(0, fakeVowels.length - 1)
+        toReturn.name = fakeVowels[pickerIndex]
+        toReturn.unicode = "\u{0000}"
     }
+    return toReturn
 }
 function compileLetterArray () {
     var logs = []
@@ -67,7 +70,9 @@ function compileLetterArray () {
                     var correctAnswer = fetchRandom(readLetters)
                     readLetters.push(correctAnswer.name)
                 }
-                
+                var disvowel = getSomeVowels(true)
+                correctAnswer.sound = correctAnswer.sound + disvowel.name
+                correctAnswer.unicode = correctAnswer.unicode + disvowel.unicode
                 output.push({ "name" : correctAnswer.name, "unicode" : correctAnswer.unicode, "sound" : correctAnswer.char, "isRight" : true })
             } else {
                     //Generate an incorrect answer
@@ -77,6 +82,9 @@ function compileLetterArray () {
                     if (output.some(item => item.sound === wrongAnswer.char)) {
                         i--
                     } else {
+                        var novowel = getSomeVowels(false)
+                        wrongAnswer.sound = wrongAnswer.sound + novowel.name
+                        wrongAnswer.unicode = wrongAnswer.unicode + novowel.unicode
                         output.push({ "name" : wrongAnswer.name, "unicode" : wrongAnswer.unicode, "sound" : wrongAnswer.char, "isRight" : false })
                     }
 

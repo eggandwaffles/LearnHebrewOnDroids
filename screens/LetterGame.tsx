@@ -108,7 +108,7 @@ if (init) {
 
       <Text style={styles.title}>Transliterate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	<HebrewText>{currentQuestionSet.prompt}</HebrewText>
+	<HebrewText style={{fontSize: 50}}>{currentQuestionSet.prompt}</HebrewText>
 
 	  <View style={styles.buttonRow}>
 		<Button
