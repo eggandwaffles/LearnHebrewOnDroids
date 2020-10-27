@@ -32,15 +32,23 @@ function fetchRandom (blacklist) {
     }
     return getFullLetterData(fetched.name)
 }
+function flipString (string) {
+    var arrString = string.split('')
+    var flipped = []
+    for (let a = 0; a < string.length; a++) {
+        flipped.push(arrString.pop())
+    }
+    return flipped.join('')
+}
 function getSomeVowels (real) {
     var toReturn = {"name" : null, "unicode" : null}
     if (real) {
         var pickerIndex = RandInt(0, vowels.length - 1)
-        toReturn.name = vowels[pickerIndex].name
+        toReturn.name = flipString(vowels[pickerIndex].name)
         toReturn.unicode = vowels[pickerIndex].char
     } else {
         var pickerIndex = RandInt(0, fakeVowels.length - 1)
-        toReturn.name = fakeVowels[pickerIndex]
+        toReturn.name = flipString(fakeVowels[pickerIndex])
         toReturn.unicode = "\u{0000}"
     }
     return toReturn
@@ -71,7 +79,7 @@ function compileLetterArray () {
                     readLetters.push(correctAnswer.name)
                 }
                 var disvowel = getSomeVowels(true)
-                correctAnswer.sound = correctAnswer.sound + disvowel.name
+                correctAnswer.char = disvowel.name + correctAnswer.char 
                 correctAnswer.unicode = correctAnswer.unicode + disvowel.unicode
                 output.push({ "name" : correctAnswer.name, "unicode" : correctAnswer.unicode, "sound" : correctAnswer.char, "isRight" : true })
             } else {
@@ -83,7 +91,7 @@ function compileLetterArray () {
                         i--
                     } else {
                         var novowel = getSomeVowels(false)
-                        wrongAnswer.sound = wrongAnswer.sound + novowel.name
+                        wrongAnswer.char = novowel.name + wrongAnswer.char 
                         wrongAnswer.unicode = wrongAnswer.unicode + novowel.unicode
                         output.push({ "name" : wrongAnswer.name, "unicode" : wrongAnswer.unicode, "sound" : wrongAnswer.char, "isRight" : false })
                     }

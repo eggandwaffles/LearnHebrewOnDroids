@@ -31,7 +31,11 @@ export default {
               LetterGame: 'LetterGame',
             },
           },
-		  
+      VowelGame: {
+        screens: {
+          VowelGame: 'VowelGame',
+        },
+      },
         },
       },
       NotFound: '*',

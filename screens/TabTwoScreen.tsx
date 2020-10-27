@@ -2,8 +2,8 @@ import * as React from 'react';
 import { StyleSheet, Alert } from 'react-native';
 import { Text, View, Button } from '../components/Themed';
 
-export default function TabTwoScreen() {
-  Alert.alert("Warning!","This content is not functional!")
+export default function TabTwoScreen( { navigation } ) {
+  Alert.alert("Warning!","Some content here is not fully tested. Proceed with caution.")
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fun with Letters & Vowels</Text>
@@ -12,7 +12,7 @@ export default function TabTwoScreen() {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Start Game"
-			onPress={() => Alert.alert('COMING SOON',"")}
+			onPress={() => navigation.navigate('VowelGame')}
 			color = "#FF9900"
 		/>
 		<Button
