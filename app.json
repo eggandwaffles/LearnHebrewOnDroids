@@ -24,7 +24,7 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": "An app for learning Hebrew.",
+    "description": "An app for learning Hebrew - now updated to include a vowel game.",
     "githubUrl": "https://github.com/eggandwaffles/LearnHebrewOnDroids"
   }
 }
