@@ -36,6 +36,11 @@ export default {
           VowelGame: 'VowelGame',
         },
       },
+      WordGameLit: {
+        screens: {
+          VowelGame: 'WordGameLit',
+        },
+      },
         },
       },
       NotFound: '*',

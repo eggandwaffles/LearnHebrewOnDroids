@@ -5,6 +5,7 @@ import { ColorSchemeName } from 'react-native';
 import LetterGame from '../screens/LetterGame';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import VowelGame from '../screens/VowelGame';
+import WordGameLit from '../screens/WordGameLit';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -31,6 +32,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} />
 	  <Stack.Screen name="LetterGame" component={LetterGame} />
     <Stack.Screen name="VowelGame" component={VowelGame} />
+    <Stack.Screen name="WordGameLit" component={WordGameLit} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

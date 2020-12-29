@@ -4,8 +4,8 @@ import { StyleSheet, Alert } from 'react-native';
 import { Text, View, Button} from '../components/Themed';
 
 
-export default function TabThreeScreen() {
-  Alert.alert("Warning!","This content is not functional!")
+export default function TabThreeScreen( { navigation } ) {
+  Alert.alert("Warning!","This content may appear functional but most certainly is not!")
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Fun with words</Text>
@@ -14,7 +14,7 @@ export default function TabThreeScreen() {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Practice All Words"
-			onPress={() => Alert.alert('COMING SOON',"Late 2020/Early 2021")}
+			onPress={() => navigation.navigate('WordGameLit', {"cats" : "all"} )}
 			color = "#FF9900"
 		/>
 		<Button

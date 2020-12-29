@@ -52,7 +52,8 @@ const AnswerContainer = {
     "TranslitOptions" : [],
     "CorrectTranslit" : "",
     "TranslateOptions" : [],
-    "CorrectTranslate" : ""
+    "CorrectTranslate" : "",
+    "hint" : ""
 }
 
 //Interlude 2: Testing function
@@ -111,6 +112,9 @@ function finalAnswer (categories) {
     exportableAnswer.CorrectTranslate = selection.translation
     exportableAnswer.TranslateOptions = shuffleArr(selection.close_translations, 5)
     exportableAnswer.TranslateOptions[RandInt(0,5)] = exportableAnswer.CorrectTranslate
+    //select hint
+    exportableAnswer.hint = selection.hint    
+    //return!!!!
     return exportableAnswer
 }
 module.exports = { finalAnswer }
