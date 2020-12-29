@@ -1,7 +1,7 @@
 var { RandInt } = require("./RandInt.js")
 var unicodes = require('../assets/hebrewUnicode.json');
 var fakeAnswers = require('../assets/assortedNames.json');
-var vowels = require('../assets/HebrewVowels.json')
+var vowels = require('../assets/hebrewVowels.json')
 var letters = require('../assets/hebrewLetters.json');
 var fakeVowels = ["ii","og","eek","ama","reck","eft","oops"]
 

@@ -2,6 +2,7 @@
 const { resolveTypeReferenceDirective } = require("typescript");
 var wordData = require("../assets/wordData.json");
 var { RandInt } = require("./RandInt.js")
+var {convArr} = require("./wordArrayToUnicode.tsx")
 //Function 1: produce list of words in selected category
 function catWords (categories) {
     if (categories === "all") {
@@ -39,7 +40,7 @@ function shuffleArr (unshuffledArr, length) {
     }
     var shuffled = []
     for (let i2 = 0; i2 < length; i2++) {
-        var choice = pool.splice(RandInt(0, pool.length - 1), 1)
+        var choice = pool.splice(RandInt(0, pool.length), 1)
         shuffled.push(choice.join(""))
         //console.log("Pool is now " + pool + ". Shuffled is now " + shuffled + ".")
     }
@@ -81,20 +82,35 @@ function testFuncs (reps) {
         "Place4" : 0,
         "Place5" : 0
     }
+    function percentaverage(datasum, trials) {
+        return (((datasum/trials)*100) + "%")
+    }
     for (let tI = 0; tI < results.length; tI++) {
+        
         if(results[tI].input[0] === results[tI].output[0]) {matches.Place1++}
         if(results[tI].input[1] === results[tI].output[1]) {matches.Place2++}
         if(results[tI].input[2] === results[tI].output[2]) {matches.Place3++}
         if(results[tI].input[3] === results[tI].output[3]) {matches.Place4++}
         if(results[tI].input[4] === results[tI].output[4]) {matches.Place5++}
     }
-    function percentaverage(datasum, trials) {
-        return (((datasum/trials)*100) + "%")
-    }
-    console.log("Frequencies are:/=\nPlace 1: " + percentaverage(matches.Place1, arcReps) + "\nPlace 2: " + percentaverage(matches.Place2, arcReps) + "\nPlace 3: " + percentaverage(matches.Place3, arcReps) + "\nPlace 4: " + percentaverage(matches.Place4, arcReps) + "\nPlace 5: " + percentaverage(matches.Place5, arcReps) + "\nAnalysis Complete!")
+
+    console.clear()
+    console.log("Frequencies are:\nPlace 1: " + percentaverage(matches.Place1, arcReps) + "\nPlace 2: " + percentaverage(matches.Place2, arcReps) + "\nPlace 3: " + percentaverage(matches.Place3, arcReps) + "\nPlace 4: " + percentaverage(matches.Place4, arcReps) + "\nPlace 5: " + percentaverage(matches.Place5, arcReps) + "\nAnalysis Complete!")
 }
 //Function 4: inject a correct answer and format an AnswerContainer
-function FinalAnswer (categories) { 
-
+function finalAnswer (categories) { 
+    var exportableAnswer = Object.create(AnswerContainer)
+    //Select spelling
+    const selection = wheelOfMisfortune(categories)
+    exportableAnswer.letters = convArr(selection.letters, selection.vowels)
+    //Select transliterations
+    exportableAnswer.CorrectTranslit = selection.transliteration
+    exportableAnswer.TranslitOptions = shuffleArr(selection.close_transliterations, 5)
+    exportableAnswer.TranslitOptions[RandInt(0,5)] = exportableAnswer.CorrectTranslit
+    //Select translations
+    exportableAnswer.CorrectTranslate = selection.translation
+    exportableAnswer.TranslateOptions = shuffleArr(selection.close_translations, 5)
+    exportableAnswer.TranslateOptions[RandInt(0,5)] = exportableAnswer.CorrectTranslate
+    return exportableAnswer
 }
-testFuncs(1000000)
+module.exports = { finalAnswer }
