@@ -129,7 +129,11 @@ if (init) {
 	<Button
 		
 		title = "Back"
-		onPress={() => navigation.navigate("TabThreeScreen")}
+		onPress={() => {
+			navigation.navigate("TabThreeScreen")
+			setStop(true)
+			stoptime()
+		}}
 		color = {palette.attention}
 		/>
 

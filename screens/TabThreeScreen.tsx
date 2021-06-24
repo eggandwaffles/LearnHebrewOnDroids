@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet, Alert, Image } from 'react-native';
 
 import { Text, View, Button} from '../components/Themed';
 var palette = require("../assets/globalColorScheme.json")
 
 
 export default function TabThreeScreen( { navigation } ) {
-  Alert.alert("Warning!","This content may appear functional but most certainly is not!")
+  Alert.alert("! WARNING !","DO NOT PROCEED. APP FAILURE MAY RESULT.")
   return (
     <View style={styles.container}>
+      <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
       <Text style={styles.title}>Fun with words</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Tap any button to continue</Text>
@@ -16,7 +17,7 @@ export default function TabThreeScreen( { navigation } ) {
 		<Button
 			title = "Practice All Words"
 			onPress={() => navigation.navigate('WordGameLit', {"cats" : "all", "init" : true} )}
-			color = {palette.attention}
+			color = {palette.failed}
 		/>
 		<Button
 			title = "Choose Categories"

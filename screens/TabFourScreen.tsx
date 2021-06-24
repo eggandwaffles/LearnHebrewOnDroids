@@ -8,6 +8,8 @@ export default function TabFourScreen() {
   Alert.alert("Warning!","This content is not functional!")
   return (
 	<View style={styles.container}>
+    <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
+
     <HebrewText style={{fontSize: 50}}>{finalAnswer("all").letters}</HebrewText>
       <Text style={styles.title}>Progress</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />

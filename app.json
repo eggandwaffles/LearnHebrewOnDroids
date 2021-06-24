@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "LearnHebrewNow - Semi-Public Test Build",
-    "slug": "LearnHebrewNow",
+    "slug": "Smart Hebrew Flashcards",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -24,7 +24,7 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": "An app for learning Hebrew - now updated to include a vowel game.",
+    "description": "An app for learning Hebrew - under construction.",
     "githubUrl": "https://github.com/eggandwaffles/LearnHebrewOnDroids"
   }
 }
