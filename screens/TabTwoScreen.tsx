@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Alert } from 'react-native';
 import { Text, View, Button } from '../components/Themed';
+var palette = require("../assets/globalColorScheme.json")
+
 
 export default function TabTwoScreen( { navigation } ) {
   Alert.alert("Warning!","Some content here is not fully tested. Proceed with caution.")
@@ -13,15 +15,17 @@ export default function TabTwoScreen( { navigation } ) {
 		<Button
 			title = "Start Game"
 			onPress={() => navigation.navigate('VowelGame')}
-			color = "#FF9900"
+			color = {palette.attention}
 		/>
 		<Button
 			title = "Show Letters"
 			onPress={() => Alert.alert('COMING SOON',"")}
+      color = {palette.interactable}
 		/>
 		<Button
 			title = "Show Vowels"
 			onPress={() => Alert.alert('COMING SOON',"")}
+      color = {palette.interactable}
 		/>
 		</View>
     </View>

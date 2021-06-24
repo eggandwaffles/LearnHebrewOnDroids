@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Alert } from 'react-native';
 
 import { Text, View, Button} from '../components/Themed';
+var palette = require("../assets/globalColorScheme.json")
 
 
 export default function TabThreeScreen( { navigation } ) {
@@ -14,12 +15,13 @@ export default function TabThreeScreen( { navigation } ) {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Practice All Words"
-			onPress={() => navigation.navigate('WordGameLit', {"cats" : "all"} )}
-			color = "#FF9900"
+			onPress={() => navigation.navigate('WordGameLit', {"cats" : "all", "init" : true} )}
+			color = {palette.attention}
 		/>
 		<Button
 			title = "Choose Categories"
 			onPress={() => Alert.alert('COMING SOON',"")}
+      color = {palette.interactable}
 		/>
 		</View>
 	</View>

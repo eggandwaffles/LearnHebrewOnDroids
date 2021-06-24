@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Alert } from 'react-native';
 import { Text, View, Button } from '../components/Themed';
+var palette = require("../assets/globalColorScheme.json")
 
 export default function TabOneScreen( { navigation } ) {
   return (
@@ -14,15 +15,17 @@ export default function TabOneScreen( { navigation } ) {
 			onPress={() => {
 				navigation.navigate('LetterGame')
 			}}
-			color = "#FF9900"
+			color = {palette.attention}
 		/>
 		<Button
 			title = "Letter Names"
 			onPress={() => Alert.alert('COMING SOON', "To a theater near you.")}
+			color = {palette.interactable}
 		/>
 		<Button
 			title = "Letter Sounds"
 			onPress={() => Alert.alert('COMING SOON',"Wherever books are sold.")}
+			color = {palette.interactable}
 		/>
 		</View>
     </View>

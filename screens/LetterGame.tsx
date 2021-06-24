@@ -6,6 +6,7 @@ import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
 import { loadAsync } from 'expo-font';
 //https://docs.expo.io/versions/latest/sdk/font/
+var palette = require("../assets/globalColorScheme.json") 
 var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
 async function loadfonts () {
 	await loadAsync({
@@ -102,6 +103,7 @@ if (init) {
 		
 		title = "Back"
 		onPress={() => navigation.navigate("TabOneScreen")}
+		color={palette.attention}
 		/>
 
    <View style={styles.container}>
@@ -119,7 +121,7 @@ if (init) {
 				nextQuestion()
 			}
 		}}
-			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.buttons[0].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.buttons[0].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[1].sound}
@@ -130,7 +132,7 @@ if (init) {
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.buttons[1].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.buttons[1].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[2].sound}
@@ -141,7 +143,7 @@ if (init) {
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.buttons[2].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.buttons[2].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[3].sound}
@@ -152,7 +154,7 @@ if (init) {
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.buttons[3].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.buttons[3].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[4].sound}
@@ -162,7 +164,7 @@ if (init) {
 				nextQuestion()
 			}
 		}}
-			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>

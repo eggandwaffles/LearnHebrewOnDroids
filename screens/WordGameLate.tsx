@@ -1,13 +1,13 @@
 import { FontAwesome } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import { StyleSheet, Alert, Modal } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
+var palette = require("../assets/globalColorScheme.json")
+var { finalAnswer } = require("../components/wordAnswerGen.js")
 import { loadAsync } from 'expo-font';
 //https://docs.expo.io/versions/latest/sdk/font/
-var palette = require("../assets/globalColorScheme.json")
-var { VowelPolisher } = require("../components/VowelAnswerCompiler.js")
 async function loadfonts () {
 	await loadAsync({
 		'TaameyAshkenaz': {
@@ -17,13 +17,14 @@ async function loadfonts () {
 		
 }
 loadfonts()
-export default function VowelGame( { navigation } ) {
-	const [currentQuestionSet, setQuestionState ] = React.useState(VowelPolisher())
+export default function WordGameLate( { route, navigation } ) {
+	const [currentQuestionSet, setQuestionState ] = React.useState(route.params.qData)
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
 	const [ init, setInit ] = React.useState(true)
-	const [stopTimer, setStop] = React.useState(false)
+	const [stoptimer, setStop] = React.useState(false)
 	const [ timerIDs, setIDs] = React.useState([])
+	const [hinted, setHint] = React.useState(false)
 
 function stoptime () {
 	for(let i = 0; i < timerIDs.length; i++) {
@@ -34,45 +35,70 @@ function stoptime () {
 function nicetimer() {
 	setIDs([])
 	setInit(false)
-	setTimer(7)
+	setTimer(12)
 	var cache = []
 	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(6)
+		if (!stoptimer) {
+			setTimer(11)
 		}
 	}, 1000))
 	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(5)
+		if (!stoptimer) {
+			setTimer(10)
 		}
 	}, 2000))
 	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(4)
+		if (!stoptimer) {
+			setTimer(9)
 		}
 	}, 3000))
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
-			setTimer(3)
+			setTimer(8)
 		}
 	}, 4000))
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
-			setTimer(2)
+			setTimer(7)
 		}
 	}, 5000))
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
-			setTimer(1)
+			setTimer(6)
 		}
 	}, 6000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(5)
+		}
+	}, 7000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(4)
+		}
+	}, 8000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(3)
+		}
+	}, 9000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(2)
+		}
+	}, 10000))
+	cache.push(setTimeout(() => {
+		if (!stopTimer) {
+			setTimer(1)
+		}
+	}, 11000))
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
 			stoptime()
 			setTimer(0)
 			nextQuestion()
 		}
-	}, 7000))
+	}, 12000))
 	setIDs(cache)
 }
 if (init) {
@@ -86,10 +112,11 @@ if (init) {
 		setStop(true)
 		stoptime()
 		setTimeout( () => {
-			setQuestionState(VowelPolisher())
+			navigation.navigate('WordGameLit', { 'cats': route.params.cats, "init": true})
 			setAnswerState("000000")
 			nicetimer()
 			setStop(false)
+			//setQuestionState(finalAnswer(route.params.cats))
 		}, 3000)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
@@ -102,69 +129,75 @@ if (init) {
 	<Button
 		
 		title = "Back"
-		onPress={() => navigation.navigate("TabTwoScreen")}
+		onPress={() => navigation.navigate("TabThreeScreen")}
 		color = {palette.attention}
 		/>
 
    <View style={styles.container}>
 
-      <Text style={styles.title}>Transliterate</Text>
+      <Text style={styles.title}>Translate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	<HebrewText style={{fontSize: 50}}>{currentQuestionSet.prompt}</HebrewText>
+	<HebrewText style={{fontSize: 50}}>{currentQuestionSet.letters}</HebrewText>
 
 	  <View style={styles.buttonRow}>
 		<Button
-			title = {currentQuestionSet.buttons[0].sound}
+			title = {currentQuestionSet.TranslateOptions[0]}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
-			if (currentQuestionSet.buttons[0].isRight) {
+			if (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate) {
 				setTimer(0)
+				stoptime()
 				nextQuestion()
 			}
+			
 		}}
-			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.buttons[0].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[1].sound}
-			onPress={() => {
+			title = {currentQuestionSet.TranslateOptions[1]}
+			onPress = {() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
-				if (currentQuestionSet.buttons[1].isRight) {
+				if (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate) {
 					setTimer(0)
+					stoptime()
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.buttons[1].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[2].sound}
+			title = {currentQuestionSet.TranslateOptions[2]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
-				if (currentQuestionSet.buttons[2].isRight) {
+				if (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate) {
 					setTimer(0)
+					stoptime()
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.buttons[2].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[3].sound}
+			title = {currentQuestionSet.TranslateOptions[3]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
-				if (currentQuestionSet.buttons[3].isRight) {
+				if (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate) {
 					setTimer(0)
+					stoptime()
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.buttons[3].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.buttons[4].sound}
+			title = {currentQuestionSet.TranslateOptions[4]}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
-			if (currentQuestionSet.buttons[4].isRight) {
+			if (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate) {
 				setTimer(0)
+				stoptime()
 				nextQuestion()
 			}
 		}}
-			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>

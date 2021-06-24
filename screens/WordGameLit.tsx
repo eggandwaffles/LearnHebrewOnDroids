@@ -4,6 +4,7 @@ import { StyleSheet, Alert, Modal } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
+var palette = require("../assets/globalColorScheme.json")
 var { finalAnswer } = require("../components/wordAnswerGen.js")
 import { loadAsync } from 'expo-font';
 //https://docs.expo.io/versions/latest/sdk/font/
@@ -16,7 +17,7 @@ async function loadfonts () {
 		
 }
 loadfonts()
-export default function LetterGame( { route, navigation } ) {
+export default function WordGameLit( { route, navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
@@ -25,9 +26,9 @@ export default function LetterGame( { route, navigation } ) {
 	const [ timerIDs, setIDs] = React.useState([])
 	const [hinted, setHint] = React.useState(false)
 
-function stoptime () {
+function stoptime() {
 	for(let i = 0; i < timerIDs.length; i++) {
-		var current = timerIDs.pop()
+		var current = timerIDs[i]
 		clearTimeout(current)
 	}
 }
@@ -35,6 +36,7 @@ function nicetimer() {
 	setIDs([])
 	setInit(false)
 	setTimer(12)
+	setStop(false)
 	var cache = []
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
@@ -101,6 +103,7 @@ function nicetimer() {
 	setIDs(cache)
 }
 if (init) {
+	setStop(false)
 	nicetimer()
 }
 
@@ -109,12 +112,16 @@ if (init) {
 		
 		setAnswerState("111111")
 		setStop(true)
+		setTimer(12)
 		stoptime()
 		setTimeout( () => {
-			setQuestionState(finalAnswer(route.params.cats))
+			navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
 			setAnswerState("000000")
-			nicetimer()
-			setStop(false)
+			//nicetimer()
+			//setStop(false)
+			setInit(true)
+			navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
+			setQuestionState(finalAnswer(route.params.cats))
 		}, 3000)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
@@ -127,7 +134,12 @@ if (init) {
 	<Button
 		
 		title = "Back"
-		onPress={() => navigation.navigate("TabThreeScreen")}
+		onPress={() => {
+			navigation.navigate("TabThreeScreen")
+			setStop(true)
+			stoptime()
+		}}
+		color = {palette.attention}
 		/>
 
    <View style={styles.container}>
@@ -142,10 +154,11 @@ if (init) {
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
 			if (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit) {
 				setTimer(0)
+				stoptime()
 				nextQuestion()
 			}
 		}}
-			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.TranslitOptions[1]}
@@ -153,10 +166,11 @@ if (init) {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
 				if (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit) {
 					setTimer(0)
+					stoptime()
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.TranslitOptions[2]}
@@ -164,10 +178,12 @@ if (init) {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
 				if (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit) {
 					setTimer(0)
+					stoptime()
 					nextQuestion()
+					
 				}
 			}}
-			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.TranslitOptions[3]}
@@ -175,20 +191,22 @@ if (init) {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
 				if (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit) {
 					setTimer(0)
+					stoptime()
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.TranslitOptions[4]}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
 			if (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit) {
 				setTimer(0)
+				stoptime()
 				nextQuestion()
 			}
 		}}
-			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit ? "#00FF00" : "#FF0000") : "#2196F3")}
+			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>

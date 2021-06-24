@@ -1,0 +1,6 @@
+{
+    "interactable" : "#8D58DA",
+    "attention" : "#F4E556",
+    "correct" : "#00DB1F",
+    "incorrect" : "#DE2A1E"
+}

@@ -38,7 +38,12 @@ export default {
       },
       WordGameLit: {
         screens: {
-          VowelGame: 'WordGameLit',
+          WordGameLit: 'WordGameLit',
+        },
+      },
+      WordGameLate: {
+        screens: {
+          WordGameLate: 'WordGameLate',
         },
       },
         },
