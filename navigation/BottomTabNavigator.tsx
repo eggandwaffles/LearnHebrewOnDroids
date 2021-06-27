@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-
+import { StyleSheet, Alert, Image } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
@@ -24,14 +24,14 @@ export default function BottomTabNavigator() {
         name="Letters"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-git-commit" color={color} />,
+          tabBarIcon: ({ color }) => <Image source={require("../assets/images/NavSquare.png")} style={{ width: 15, height: 15}}/>,
         }}
       />
       <BottomTab.Screen
         name="Letters & Vowels"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-git-pull-request" color={color} />,
+          tabBarIcon: ({ color }) => <Image source={require("../assets/images/NavTwoSquare.png")} style={{ width: 15, height: 16}}/>,
         }}
       />
 	        <BottomTab.Screen

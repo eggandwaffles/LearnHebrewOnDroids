@@ -6,11 +6,19 @@ var palette = require("../assets/globalColorScheme.json")
 
 
 export default function TabThreeScreen( { navigation } ) {
-  Alert.alert("! WARNING !","DO NOT PROCEED. APP FAILURE MAY RESULT.")
+  Alert.alert("! WARNING !","DO NOT PROCEED. APP FAILURE MAY RESULT.",[
+    {
+      text: "Return",
+      onPress: () => navigation.goBack()
+    },
+    {
+      text: "Press on"
+    }
+  ])
   return (
     <View style={styles.container}>
       <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
-      <Text style={styles.title}>BUGS with words</Text>
+      <Text style={styles.title}>Fun with words</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>DO NOT Tap any button to continue</Text>
 	  <View style={styles.buttonRow}>
@@ -21,8 +29,8 @@ export default function TabThreeScreen( { navigation } ) {
 		/>
 		<Button
 			title = "Choose Categories"
-			onPress={() => Alert.alert('COMING SOON',"")}
-      color = {palette.interactable}
+			onPress={() => navigation.navigate('WordGameSelectionScreen')}
+      color = {palette.failed}
 		/>
 		</View>
 	</View>

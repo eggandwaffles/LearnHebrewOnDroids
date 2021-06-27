@@ -5,7 +5,7 @@ import { Text, View, Button} from '../components/Themed';
 import { HebrewText } from '../components/StyledText';
 var { finalAnswer } = require("../components/wordAnswerGen.js")
 export default function TabFourScreen() {
-  Alert.alert("Warning!","This content is not functional!")
+  //Alert.alert("Warning!","This content is not functional!")
   return (
 	<View style={styles.container}>
     <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />

@@ -46,6 +46,11 @@ export default {
           WordGameLate: 'WordGameLate',
         },
       },
+      Selectors: {
+        screens: {
+          WordGameSelectionScreen: 'WordGameSelectionScreen',
+        },
+      },
         },
       },
       NotFound: '*',
