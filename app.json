@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "LearnHebrewNow - Semi-Public Test Build",
-    "slug": "Smart Hebrew Flashcards",
+    "slug": "SmartHebrewFlashcards",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
