@@ -22,7 +22,8 @@ export default function WordGameLit( { route, navigation } ) {
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
 	const [ init, setInit ] = React.useState(true)
-	const [stopTimer, setStop] = React.useState(false)
+	//const [stopTimer, setStop] = React.useState(false)
+	var stopTimer = false
 	const [ timerIDs, setIDs] = React.useState([])
 	const [hinted, setHint] = React.useState(false)
 
@@ -36,7 +37,8 @@ function nicetimer() {
 	setIDs([])
 	setInit(false)
 	setTimer(12)
-	setStop(false)
+	//setStop(false)
+	stopTimer = false
 	var cache = []
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
@@ -103,7 +105,8 @@ function nicetimer() {
 	setIDs(cache)
 }
 if (init) {
-	setStop(false)
+	//setStop(false)
+	stopTimer = false
 	nicetimer()
 }
 
@@ -111,18 +114,19 @@ if (init) {
 	function nextQuestion () {
 		
 		setAnswerState("111111")
-		setStop(true)
-		setTimer(12)
+		//setStop(true)
+		stopTimer = true
 		stoptime()
+		setTimer(12)
 		setTimeout( () => {
 			navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
 			setAnswerState("000000")
 			//nicetimer()
 			//setStop(false)
 			setInit(true)
-			navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
+			//navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
 			setQuestionState(finalAnswer(route.params.cats))
-		}, 3000)
+		}, 1200)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
 	
@@ -136,7 +140,8 @@ if (init) {
 		title = "Back"
 		onPress={() => {
 			navigation.navigate("TabThreeScreen")
-			setStop(true)
+			//setStop(true)
+			stopTimer = true
 			stoptime()
 		}}
 		color = {palette.attention}

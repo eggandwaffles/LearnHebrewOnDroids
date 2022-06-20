@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { StyleSheet, Alert, Image } from 'react-native';
+import { StyleSheet, Alert, Image, Pressable } from 'react-native';
 import { ImageFetch } from '../components/LetterLookup';
-import { Text, View, Button} from '../components/Themed';
+import {Text, View, Button} from '../components/Themed';
 import { HebrewText } from '../components/StyledText';
 var { finalAnswer } = require("../components/wordAnswerGen.js")
-export default function TabFourScreen() {
+var palette = require("../assets/globalColorScheme.json")
+export default function TabFourScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
+  
   return (
 	<View style={styles.container}>
     <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
-
-    <HebrewText style={{fontSize: 50}}>{finalAnswer("all").letters}</HebrewText>
+    <Pressable onLongPress={()=>{
+      navigation.navigate('devWorks')
+    }}><HebrewText style={{fontSize: 50}}>{finalAnswer("all").letters}</HebrewText></Pressable>
+    
       <Text style={styles.title}>Progress</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>COMING SOON</Text>
