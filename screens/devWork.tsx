@@ -1,13 +1,15 @@
 import { FontAwesome } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Alert, Modal, Pressable } from 'react-native';
+import { StyleSheet, Alert, Modal, Pressable, ToastAndroid } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
 var palette = require("../assets/globalColorScheme.json")
 var { finalAnswer } = require("../components/wordAnswerGen.js")
-var globalTimer = require("../components/timers.js")
+const { globalTimer } = require("../components/timers.js")
 import { loadAsync } from 'expo-font';
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react"
 //https://docs.expo.io/versions/latest/sdk/font/
 async function loadfonts () {
 	await loadAsync({
@@ -18,16 +20,40 @@ async function loadfonts () {
 		
 }
 loadfonts()
-export default function devWorks ( { route, navigation }) {
-
+var myTimer = globalTimer.new()
+makeAutoObservable(myTimer)
+const devWorks = observer(( { route, navigation }) => {
+//  export default function devWorks( { route, navigation }) {
+  
     return (
         <View style={styles.container}>
             <Pressable><Text style={styles.title}>DEVELOPMENT PAGE</Text></Pressable>
             <Text>Today's project: timers.</Text>
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <Button styles={styles.button}
+                title = {"Start Timer"}
+                onPress = {()=>{
+                    ToastAndroid.show("Timer STARTED!", ToastAndroid.SHORT)
+                    myTimer.startTimer(5, ()=>{
+                        ToastAndroid.show("YEAH TOAST!", ToastAndroid.SHORT)
+                    })
+                }}
+                color = { palette.correct }
+            />
+            <Button styles={styles.button}
+                title = {"Stop Timer"}
+                onPress = {()=>{
+                    ToastAndroid.show("Timer STOPPED!", ToastAndroid.SHORT)
+                    myTimer.stopTimer()
+                }}
+                color = { palette.incorrect }
+            />
+            <Text>{myTimer.time}</Text>
         </View>
     )
-}
-
+})
+//module.exports = { devWorks }
+export default devWorks
 const styles = StyleSheet.create({
     largeContainer: {
       color: "#FFFFFF",
