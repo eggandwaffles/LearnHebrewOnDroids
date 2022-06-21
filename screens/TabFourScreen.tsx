@@ -7,11 +7,13 @@ var { finalAnswer } = require("../components/wordAnswerGen.js")
 var palette = require("../assets/globalColorScheme.json")
 export default function TabFourScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
-  
+
   return (
 	<View style={styles.container}>
     <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
-    <Pressable onLongPress={()=>{
+    <Pressable 
+    delayLongPress={1000}
+    onLongPress={()=>{
       navigation.navigate('devWorks')
     }}><HebrewText style={{fontSize: 50}}>{finalAnswer("all").letters}</HebrewText></Pressable>
     

@@ -29,7 +29,18 @@ const devWorks = observer(( { route, navigation }) => {
         <View style={styles.container}>
             <Pressable><Text style={styles.title}>DEVELOPMENT PAGE</Text></Pressable>
             <Text>Today's project: MobX Word Games.</Text>
+            
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <Text>Debug Tools</Text>
+            <Button
+            title={"Request Console Message"}
+            onPress = {()=>{
+              ToastAndroid.show("Message logged to console.", ToastAndroid.SHORT)
+              console.log("test test test 1 2 3")
+            }}
+            />
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <Text>Timers</Text>
             <Button styles={styles.button}
                 title = {"Start Timer"}
                 onPress = {()=>{
@@ -50,10 +61,11 @@ const devWorks = observer(( { route, navigation }) => {
             />
             <Text>{myTimer.time}</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <Text>Unit Testing</Text>
             <Button styles={styles.button}
             title = {"MobX Word Game"}
             onPress = {()=>{
-              navigation.navigate('MobXWordGameLit', {"cats" : "all", "init" : true} )
+              navigation.navigate('MobxWordGameLit', {"cats" : "all", "init" : true} )
             }}
             />
         </View>
