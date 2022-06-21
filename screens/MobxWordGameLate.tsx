@@ -20,8 +20,8 @@ async function loadfonts () {
 		
 }
 loadfonts()
-export default function WordGameLit( { route, navigation } ) {
-	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
+export default function MobxWordGameLate( { route, navigation } ) {
+	const [currentQuestionSet, setQuestionState ] = React.useState(route.params.qData)
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
 	const [ init, setInit ] = React.useState(true)
@@ -30,9 +30,9 @@ export default function WordGameLit( { route, navigation } ) {
 	const [ timerIDs, setIDs] = React.useState([])
 	const [hinted, setHint] = React.useState(false)
 
-function stoptime() {
+function stoptime () {
 	for(let i = 0; i < timerIDs.length; i++) {
-		var current = timerIDs[i]
+		var current = timerIDs.pop()
 		clearTimeout(current)
 	}
 }
@@ -40,8 +40,6 @@ function nicetimer() {
 	setIDs([])
 	setInit(false)
 	setTimer(12)
-	//setStop(false)
-	stopTimer = false
 	var cache = []
 	cache.push(setTimeout(() => {
 		if (!stopTimer) {
@@ -108,27 +106,23 @@ function nicetimer() {
 	setIDs(cache)
 }
 if (init) {
-	//setStop(false)
-	stopTimer = false
 	nicetimer()
 }
-
 	
 	function nextQuestion () {
 		
 		setAnswerState("111111")
 		//setStop(true)
 		stopTimer = true
-		stoptime()
 		setTimer(12)
+		stoptime()
 		setTimeout( () => {
-			navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
+			navigation.navigate('MobxWordGameLit', { 'cats': route.params.cats, "init": true})
 			setAnswerState("000000")
+			setInit(true)
 			//nicetimer()
 			//setStop(false)
-			setInit(true)
-			//navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
-			setQuestionState(finalAnswer(route.params.cats))
+			//setQuestionState(finalAnswer(route.params.cats))
 		}, 1200)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
@@ -144,7 +138,7 @@ if (init) {
 		onPress={() => {
 			navigation.navigate("TabThreeScreen")
 			//setStop(true)
-			stopTimer = true
+			stopTimer = false
 			stoptime()
 		}}
 		color = {palette.attention}
@@ -152,69 +146,69 @@ if (init) {
 
    <View style={styles.container}>
 
-      <Text style={styles.title}>Transliterate</Text>
+      <Text style={styles.title}>Translate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	<HebrewText style={{fontSize: 50}}>{currentQuestionSet.letters}</HebrewText>
 
 	  <View style={styles.buttonRow}>
 		<Button
-			title = {currentQuestionSet.TranslitOptions[0]}
+			title = {currentQuestionSet.TranslateOptions[0]}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
-			if (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit) {
+			if (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate) {
 				setTimer(0)
 				stoptime()
 				nextQuestion()
 			}
+			
 		}}
-			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.TranslitOptions[1]}
+			title = {currentQuestionSet.TranslateOptions[1]}
 			onPress = {() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
-				if (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit) {
+				if (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate) {
 					setTimer(0)
 					stoptime()
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.TranslitOptions[2]}
+			title = {currentQuestionSet.TranslateOptions[2]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
-				if (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit) {
+				if (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate) {
 					setTimer(0)
 					stoptime()
 					nextQuestion()
-					
 				}
 			}}
-			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.TranslitOptions[3]}
+			title = {currentQuestionSet.TranslateOptions[3]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
-				if (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit) {
+				if (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate) {
 					setTimer(0)
 					stoptime()
 					nextQuestion()
 				}
 			}}
-			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
-			title = {currentQuestionSet.TranslitOptions[4]}
+			title = {currentQuestionSet.TranslateOptions[4]}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
-			if (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit) {
+			if (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate) {
 				setTimer(0)
 				stoptime()
 				nextQuestion()
 			}
 		}}
-			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
+			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>

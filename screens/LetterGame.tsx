@@ -6,6 +6,9 @@ import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
 import { loadAsync } from 'expo-font';
 //https://docs.expo.io/versions/latest/sdk/font/
+const { globalTimer } = require("../components/timers.js")
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react"
 var palette = require("../assets/globalColorScheme.json") 
 var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
 async function loadfonts () {

@@ -7,6 +7,8 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import VowelGame from '../screens/VowelGame';
 import WordGameLit from '../screens/WordGameLit';
 import WordGameLate from '../screens/WordGameLate';
+import MobxWordGameLit from '../screens/MobxWordGameLit';
+import MobxWordGameLate from '../screens/MobxWordGameLate';
 import WordGameSelectionScreen from '../screens/WordGameSelectionScreen';
 import devWorks from '../screens/devWork';
 import { RootStackParamList } from '../types';
@@ -37,6 +39,8 @@ function RootNavigator() {
     <Stack.Screen name="VowelGame" component={VowelGame} />
     <Stack.Screen name="WordGameLit" component={WordGameLit} />
     <Stack.Screen name="WordGameLate" component={WordGameLate} />
+    <Stack.Screen name="MobxWordGameLit" component={MobxWordGameLit} />
+    <Stack.Screen name="MobxWordGameLate" component={MobxWordGameLate} />
     <Stack.Screen name="WordGameSelectionScreen" component={WordGameSelectionScreen} />
     <Stack.Screen name="devWorks" component={devWorks} options={{ title: 'Nothing to see here...'}}/>
     <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />

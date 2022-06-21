@@ -7,6 +7,9 @@ import * as Font from 'expo-font';
 var palette = require("../assets/globalColorScheme.json")
 var { finalAnswer } = require("../components/wordAnswerGen.js")
 import { loadAsync } from 'expo-font';
+const { globalTimer } = require("../components/timers.js")
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react"
 //https://docs.expo.io/versions/latest/sdk/font/
 async function loadfonts () {
 	await loadAsync({
@@ -105,7 +108,6 @@ function nicetimer() {
 if (init) {
 	nicetimer()
 }
-
 	
 	function nextQuestion () {
 		

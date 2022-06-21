@@ -28,7 +28,7 @@ const devWorks = observer(( { route, navigation }) => {
     return (
         <View style={styles.container}>
             <Pressable><Text style={styles.title}>DEVELOPMENT PAGE</Text></Pressable>
-            <Text>Today's project: timers.</Text>
+            <Text>Today's project: MobX Word Games.</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <Button styles={styles.button}
                 title = {"Start Timer"}
@@ -49,6 +49,13 @@ const devWorks = observer(( { route, navigation }) => {
                 color = { palette.incorrect }
             />
             <Text>{myTimer.time}</Text>
+            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+            <Button styles={styles.button}
+            title = {"MobX Word Game"}
+            onPress = {()=>{
+              navigation.navigate('MobXWordGameLit', {"cats" : "all", "init" : true} )
+            }}
+            />
         </View>
     )
 })

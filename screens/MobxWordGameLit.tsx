@@ -20,7 +20,9 @@ async function loadfonts () {
 		
 }
 loadfonts()
-export default function WordGameLit( { route, navigation } ) {
+var litTimer = globalTimer.new()
+//makeAutoObservable(litTimer)
+export default function MobxWordGameLit( { route, navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
@@ -30,87 +32,10 @@ export default function WordGameLit( { route, navigation } ) {
 	const [ timerIDs, setIDs] = React.useState([])
 	const [hinted, setHint] = React.useState(false)
 
-function stoptime() {
-	for(let i = 0; i < timerIDs.length; i++) {
-		var current = timerIDs[i]
-		clearTimeout(current)
-	}
-}
-function nicetimer() {
-	setIDs([])
-	setInit(false)
-	setTimer(12)
-	//setStop(false)
-	stopTimer = false
-	var cache = []
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(11)
-		}
-	}, 1000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(10)
-		}
-	}, 2000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(9)
-		}
-	}, 3000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(8)
-		}
-	}, 4000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(7)
-		}
-	}, 5000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(6)
-		}
-	}, 6000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(5)
-		}
-	}, 7000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(4)
-		}
-	}, 8000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(3)
-		}
-	}, 9000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(2)
-		}
-	}, 10000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(1)
-		}
-	}, 11000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			stoptime()
-			setTimer(0)
-			nextQuestion()
-		}
-	}, 12000))
-	setIDs(cache)
-}
+
 if (init) {
 	//setStop(false)
-	stopTimer = false
-	nicetimer()
+	litTimer.startTimer(12, nextQuestion())
 }
 
 	
@@ -118,16 +43,10 @@ if (init) {
 		
 		setAnswerState("111111")
 		//setStop(true)
-		stopTimer = true
-		stoptime()
-		setTimer(12)
+		litTimer.stopTimer()
 		setTimeout( () => {
-			navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
+			navigation.navigate('MobxWordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
 			setAnswerState("000000")
-			//nicetimer()
-			//setStop(false)
-			setInit(true)
-			//navigation.navigate('WordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
 			setQuestionState(finalAnswer(route.params.cats))
 		}, 1200)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
@@ -142,10 +61,9 @@ if (init) {
 		
 		title = "Back"
 		onPress={() => {
+            litTimer.stopTimer()
 			navigation.navigate("TabThreeScreen")
-			//setStop(true)
-			stopTimer = true
-			stoptime()
+
 		}}
 		color = {palette.attention}
 		/>
@@ -161,8 +79,7 @@ if (init) {
 			title = {currentQuestionSet.TranslitOptions[0]}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
 			if (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit) {
-				setTimer(0)
-				stoptime()
+				litTimer.stopTimer()
 				nextQuestion()
 			}
 		}}
@@ -173,8 +90,7 @@ if (init) {
 			onPress = {() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
 				if (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit) {
-					setTimer(0)
-					stoptime()
+					litTimer.stopTimer()
 					nextQuestion()
 				}
 			}}
@@ -185,8 +101,7 @@ if (init) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
 				if (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit) {
-					setTimer(0)
-					stoptime()
+                    litTimer.stopTimer()
 					nextQuestion()
 					
 				}
@@ -198,8 +113,7 @@ if (init) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
 				if (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit) {
-					setTimer(0)
-					stoptime()
+					litTimer.stopTimer()
 					nextQuestion()
 				}
 			}}
@@ -209,8 +123,7 @@ if (init) {
 			title = {currentQuestionSet.TranslitOptions[4]}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
 			if (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit) {
-				setTimer(0)
-				stoptime()
+				litTimer.stopTimer()
 				nextQuestion()
 			}
 		}}
