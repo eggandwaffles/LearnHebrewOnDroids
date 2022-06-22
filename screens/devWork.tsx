@@ -6,7 +6,7 @@ import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
 var palette = require("../assets/globalColorScheme.json")
 var { finalAnswer } = require("../components/wordAnswerGen.js")
-const { globalTimer } = require("../components/timers.js")
+const { globalTimer, Timer } = require("../components/timers.js")
 import { loadAsync } from 'expo-font';
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
@@ -20,7 +20,7 @@ async function loadfonts () {
 		
 }
 loadfonts()
-var myTimer = globalTimer.new()
+var myTimer = new Timer()
 makeAutoObservable(myTimer)
 const devWorks = observer(( { route, navigation }) => {
 //  export default function devWorks( { route, navigation }) {
@@ -47,6 +47,7 @@ const devWorks = observer(( { route, navigation }) => {
                     ToastAndroid.show("Timer STARTED!", ToastAndroid.SHORT)
                     myTimer.startTimer(5, ()=>{
                         ToastAndroid.show("YEAH TOAST!", ToastAndroid.SHORT)
+                        console.log("Toasted!")
                     })
                 }}
                 color = { palette.correct }

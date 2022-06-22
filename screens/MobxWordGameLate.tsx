@@ -126,7 +126,7 @@ if (init) {
 		}, 1200)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
-	
+	console.log("MobxWordGameLate called!")
 	return (
 		
    <View style={styles.largeContainer}>

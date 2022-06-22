@@ -9,15 +9,19 @@ const globalTimer = {
     startTimer: function(setTime, callback) {
         this.time = setTime
         this.active = true
+        console.log(`Alert! Timer started with ${this.time} seconds.`)
         this.loopIterator(callback)
     },
     stopTimer : function() {
+        console.log(`Alert! Timer stopped with ${this.time} seconds.`)
         clearTimeout(this.activeCallback)
         this.activeCallback = null
         this.active = false
         return "done"
     },
     new : function() {
+        //Deprecate, replace with constructor
+        console.error("globalTimer.new is deprecated; please use the constructor instead")
         return new Object(this)
     },
     loopIterator : function(callback) {
@@ -33,36 +37,38 @@ const globalTimer = {
         },1000)
     }
 }
-const stateTimer = {
-    "time" : 0,
-    "active" : false,
-    "activeCallback" : null,
-    startTimer: function(setTime, callback) {
+function Timer () {
+    this.time = 0
+    this.active = false
+    this.activeCallback = null
+    this.startTimer = (setTime, callback) => {
         this.time = setTime
         this.active = true
+        console.log(`Alert! Timer started with ${this.time} seconds.`)
         this.loopIterator(callback)
-    },
-    stopTimer : function() {
+    }
+    this.stopTimer = () => {
+        console.log(`Alert! Timer stopped with ${this.time} seconds.`)
         clearTimeout(this.activeCallback)
         this.activeCallback = null
         this.active = false
         return "done"
-    },
-    new : function() {
-        return new Object(this)
-    },
-    loopIterator : function(callback) {
+    }
+    this.loopIterator = (callback) => {
         this.activeCallback = setTimeout( () => {
             if (this.time>1) {
                 this.time--
                 this.loopIterator(callback)
             } else {
+                this.time = 0
+                this.active = false
                 callback()
             }
         },1000)
     }
+
 }
-module.exports = { globalTimer, stateTimer }
+module.exports = { globalTimer, Timer }
 
 //test
 /*

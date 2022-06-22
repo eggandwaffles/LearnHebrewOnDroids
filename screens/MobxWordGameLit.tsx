@@ -7,9 +7,14 @@ import * as Font from 'expo-font';
 var palette = require("../assets/globalColorScheme.json")
 var { finalAnswer } = require("../components/wordAnswerGen.js")
 import { loadAsync } from 'expo-font';
-const { globalTimer } = require("../components/timers.js")
+const { globalTimer, Timer } = require("../components/timers.js")
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
+import { configure } from "mobx"
+
+configure({
+    enforceActions: "never",
+})
 //https://docs.expo.io/versions/latest/sdk/font/
 async function loadfonts () {
 	await loadAsync({
@@ -20,7 +25,7 @@ async function loadfonts () {
 		
 }
 loadfonts()
-var litTimer = globalTimer.new()
+var litTimer = new Timer()
 //makeAutoObservable(litTimer)
 export default function MobxWordGameLit( { route, navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
@@ -35,12 +40,16 @@ export default function MobxWordGameLit( { route, navigation } ) {
 
 if (init) {
 	//setStop(false)
-	litTimer.startTimer(12, nextQuestion())
+	setInit(false)
+	litTimer.startTimer(12, () => {
+		console.log("Timer expired!")
+		nextQuestion()
+	})
 }
 
 	
 	function nextQuestion () {
-		
+		console.log("nextQuestion invoked!")
 		setAnswerState("111111")
 		//setStop(true)
 		litTimer.stopTimer()
@@ -48,12 +57,14 @@ if (init) {
 			navigation.navigate('MobxWordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
 			setAnswerState("000000")
 			setQuestionState(finalAnswer(route.params.cats))
+			setInit(true)
 		}, 1200)
+		
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
-	
+	console.log("MobxWordGameLit called!")
+	console.log(litTimer.active)
 	return (
-		
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
@@ -62,7 +73,7 @@ if (init) {
 		title = "Back"
 		onPress={() => {
             litTimer.stopTimer()
-			navigation.navigate("TabThreeScreen")
+			navigation.navigate("devWorks")
 
 		}}
 		color = {palette.attention}
@@ -130,7 +141,7 @@ if (init) {
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
-	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>
+	<Text style={styles.body}>{"\nTime Remaining: " + litTimer.time}</Text>
 	</View>
 	</View>
 	)
