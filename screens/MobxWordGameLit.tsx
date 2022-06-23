@@ -26,9 +26,10 @@ async function loadfonts () {
 		
 }
 loadfonts()
-var litTimer = new Timer()
+var litTimer = new Timer("litTimer")
+console.log("Timer created on lit!")
 makeAutoObservable(litTimer)
-export default function MobxWordGameLit( { route, navigation } ) {
+const MobxWordGameLit = observer(( { route, navigation } ) => {
 	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
@@ -45,10 +46,13 @@ if (route.params.init) {
 		init : false
 	})
 	//setInit(false)
-	litTimer.startTimer(12, () => {
-		console.log("Timer expired!")
-		nextQuestion()
-	})
+	console.log("Init code called on lit. Params are " + JSON.stringify(route.params))
+	setTimeout(() => {
+		litTimer.startTimer(12, () => {
+			nextQuestion()
+		})
+	},100)
+
 }
 
 	
@@ -59,15 +63,17 @@ if (route.params.init) {
 		litTimer.stopTimer()
 		setTimeout( () => {
 			navigation.navigate('MobxWordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet, "init" : true})
-			setAnswerState("000000")
-			setQuestionState(finalAnswer(route.params.cats))
+			setTimeout(() => {
+				setAnswerState("000000")
+				setQuestionState(finalAnswer(route.params.cats))
+			},200)
+			
 			//setInit(true)
 		}, 1200)
 		
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
 	console.log("MobxWordGameLit called!")
-	console.log(litTimer.active)
 	return (
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
@@ -149,7 +155,9 @@ if (route.params.init) {
 	</View>
 	</View>
 	)
-}
+})
+
+export default MobxWordGameLit
 
 const styles = StyleSheet.create({
   largeContainer: {

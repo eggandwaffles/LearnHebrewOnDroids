@@ -24,10 +24,11 @@ async function loadfonts () {
 		});
 		
 }
-var lateTimer = new Timer()
-makeAutoObservable(litTimer)
+var lateTimer = new Timer("lateTimer")
+console.log("Timer created on late!")
+makeAutoObservable(lateTimer)
 loadfonts()
-export default function MobxWordGameLate( { route, navigation } ) {
+const MobxWordGameLate = observer(( { route, navigation } ) => {
 	const [currentQuestionSet, setQuestionState ] = React.useState(route.params.qData)
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
@@ -44,7 +45,6 @@ export default function MobxWordGameLate( { route, navigation } ) {
 		})
 		//setInit(false)
 		lateTimer.startTimer(12, () => {
-			console.log("Timer expired!")
 			nextQuestion()
 		})
 	}
@@ -54,6 +54,7 @@ export default function MobxWordGameLate( { route, navigation } ) {
 		//setStop(true)
 		lateTimer.stopTimer()
 		setTimeout( () => {
+			console.log("Issued command to navigate to lit")
 			navigation.navigate('MobxWordGameLit', { 'cats': route.params.cats, "init": true})
 			setAnswerState("000000")
 			//nicetimer()
@@ -72,10 +73,11 @@ export default function MobxWordGameLate( { route, navigation } ) {
 		
 		title = "Back"
 		onPress={() => {
+			lateTimer.stopTimer()
 			navigation.navigate("devWorks")
 			//setStop(true)
-			stopTimer = false
-			stoptime()
+			
+			
 		}}
 		color = {palette.attention}
 		/>
@@ -141,8 +143,9 @@ export default function MobxWordGameLate( { route, navigation } ) {
 	</View>
 	</View>
 	)
-}
+})
 
+export default MobxWordGameLate
 const styles = StyleSheet.create({
   largeContainer: {
 	color: "#FFFFFF",

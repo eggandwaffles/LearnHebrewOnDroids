@@ -37,18 +37,19 @@ const globalTimer = {
         },1000)
     }
 }
-function Timer () {
+function Timer (name) {
+    this.name = name
     this.time = 0
     this.active = false
     this.activeCallback = null
     this.startTimer = (setTime, callback) => {
         this.time = setTime
         this.active = true
-        console.log(`Alert! Timer started with ${this.time} seconds.`)
+        console.log(`Alert! ${this.name} started with ${this.time} seconds.`)
         this.loopIterator(callback)
     }
     this.stopTimer = () => {
-        console.log(`Alert! Timer stopped with ${this.time} seconds.`)
+        console.log(`Alert! ${this.name} stopped with ${this.time} seconds.`)
         clearTimeout(this.activeCallback)
         this.activeCallback = null
         this.active = false
@@ -60,7 +61,7 @@ function Timer () {
                 this.time--
                 this.loopIterator(callback)
             } else {
-                console.log("Alert! Timer expired!")
+                console.log(`${this.name} expired!`)
                 this.time = 0
                 this.active = false
                 callback()
