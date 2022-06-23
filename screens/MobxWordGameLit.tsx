@@ -11,6 +11,7 @@ const { globalTimer, Timer } = require("../components/timers.js")
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 import { configure } from "mobx"
+import { NavigationContainer } from '@react-navigation/native';
 
 configure({
     enforceActions: "never",
@@ -26,7 +27,7 @@ async function loadfonts () {
 }
 loadfonts()
 var litTimer = new Timer()
-//makeAutoObservable(litTimer)
+makeAutoObservable(litTimer)
 export default function MobxWordGameLit( { route, navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
 	const [ answerState, setAnswerState] = React.useState("000000")
@@ -38,9 +39,12 @@ export default function MobxWordGameLit( { route, navigation } ) {
 	const [hinted, setHint] = React.useState(false)
 
 
-if (init) {
+if (route.params.init) {
 	//setStop(false)
-	setInit(false)
+	navigation.setParams({
+		init : false
+	})
+	//setInit(false)
 	litTimer.startTimer(12, () => {
 		console.log("Timer expired!")
 		nextQuestion()
@@ -54,10 +58,10 @@ if (init) {
 		//setStop(true)
 		litTimer.stopTimer()
 		setTimeout( () => {
-			navigation.navigate('MobxWordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet})
+			navigation.navigate('MobxWordGameLate', {"cats": route.params.cats, "qData": currentQuestionSet, "init" : true})
 			setAnswerState("000000")
 			setQuestionState(finalAnswer(route.params.cats))
-			setInit(true)
+			//setInit(true)
 		}, 1200)
 		
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/

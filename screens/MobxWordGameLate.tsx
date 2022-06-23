@@ -7,9 +7,14 @@ import * as Font from 'expo-font';
 var palette = require("../assets/globalColorScheme.json")
 var { finalAnswer } = require("../components/wordAnswerGen.js")
 import { loadAsync } from 'expo-font';
-const { globalTimer } = require("../components/timers.js")
+const { globalTimer, Timer } = require("../components/timers.js")
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
+import { configure } from "mobx"
+import { NavigationContainer } from '@react-navigation/native';
+configure({
+    enforceActions: "never",
+})
 //https://docs.expo.io/versions/latest/sdk/font/
 async function loadfonts () {
 	await loadAsync({
@@ -19,6 +24,8 @@ async function loadfonts () {
 		});
 		
 }
+var lateTimer = new Timer()
+makeAutoObservable(litTimer)
 loadfonts()
 export default function MobxWordGameLate( { route, navigation } ) {
 	const [currentQuestionSet, setQuestionState ] = React.useState(route.params.qData)
@@ -30,96 +37,25 @@ export default function MobxWordGameLate( { route, navigation } ) {
 	const [ timerIDs, setIDs] = React.useState([])
 	const [hinted, setHint] = React.useState(false)
 
-function stoptime () {
-	for(let i = 0; i < timerIDs.length; i++) {
-		var current = timerIDs.pop()
-		clearTimeout(current)
-	}
-}
-function nicetimer() {
-	setIDs([])
-	setInit(false)
-	setTimer(12)
-	var cache = []
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(11)
-		}
-	}, 1000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(10)
-		}
-	}, 2000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(9)
-		}
-	}, 3000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(8)
-		}
-	}, 4000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(7)
-		}
-	}, 5000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(6)
-		}
-	}, 6000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(5)
-		}
-	}, 7000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(4)
-		}
-	}, 8000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(3)
-		}
-	}, 9000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(2)
-		}
-	}, 10000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(1)
-		}
-	}, 11000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			stoptime()
-			setTimer(0)
+	if (route.params.init) {
+		//setStop(false)
+		navigation.setParams({
+			init : false
+		})
+		//setInit(false)
+		lateTimer.startTimer(12, () => {
+			console.log("Timer expired!")
 			nextQuestion()
-		}
-	}, 12000))
-	setIDs(cache)
-}
-if (init) {
-	nicetimer()
-}
-	
+		})
+	}
 	function nextQuestion () {
 		
 		setAnswerState("111111")
 		//setStop(true)
-		stopTimer = true
-		setTimer(12)
-		stoptime()
+		lateTimer.stopTimer()
 		setTimeout( () => {
 			navigation.navigate('MobxWordGameLit', { 'cats': route.params.cats, "init": true})
 			setAnswerState("000000")
-			setInit(true)
 			//nicetimer()
 			//setStop(false)
 			//setQuestionState(finalAnswer(route.params.cats))
@@ -136,7 +72,7 @@ if (init) {
 		
 		title = "Back"
 		onPress={() => {
-			navigation.navigate("TabThreeScreen")
+			navigation.navigate("devWorks")
 			//setStop(true)
 			stopTimer = false
 			stoptime()
@@ -155,8 +91,6 @@ if (init) {
 			title = {currentQuestionSet.TranslateOptions[0]}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
 			if (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate) {
-				setTimer(0)
-				stoptime()
 				nextQuestion()
 			}
 			
@@ -168,8 +102,6 @@ if (init) {
 			onPress = {() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
 				if (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate) {
-					setTimer(0)
-					stoptime()
 					nextQuestion()
 				}
 			}}
@@ -180,8 +112,6 @@ if (init) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
 				if (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate) {
-					setTimer(0)
-					stoptime()
 					nextQuestion()
 				}
 			}}
@@ -192,8 +122,6 @@ if (init) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
 				if (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate) {
-					setTimer(0)
-					stoptime()
 					nextQuestion()
 				}
 			}}
@@ -203,15 +131,13 @@ if (init) {
 			title = {currentQuestionSet.TranslateOptions[4]}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
 			if (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate) {
-				setTimer(0)
-				stoptime()
 				nextQuestion()
 			}
 		}}
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
-	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>
+	<Text style={styles.body}>{"\nTime Remaining: " + lateTimer.time}</Text>
 	</View>
 	</View>
 	)

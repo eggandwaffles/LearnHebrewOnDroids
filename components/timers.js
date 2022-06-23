@@ -60,6 +60,7 @@ function Timer () {
                 this.time--
                 this.loopIterator(callback)
             } else {
+                console.log("Alert! Timer expired!")
                 this.time = 0
                 this.active = false
                 callback()
