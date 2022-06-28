@@ -1,5 +1,5 @@
 //import { FontAwesome } from '@expo/vector-icons';
-import * as React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, FlatList, Switch, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 //import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
@@ -7,11 +7,13 @@ import { Text, View, Button} from '../components/Themed';
 import { loadAsync } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
 import { observer } from 'mobx-react';
-import { makeAutoObservable, makeObservable } from "mobx"
+import { makeAutoObservable, makeObservable, observable } from "mobx"
+import { couldStartTrivia } from 'typescript';
 //https://docs.expo.io/versions/latest/sdk/font/
 //import { TabRouter } from '@react-navigation/native';
 var palette = require("../assets/globalColorScheme.json") 
 var wordData = require("../assets/wordData.json")
+import { catWords } from '../components/wordAnswerGen'
 async function loadfonts () {
 	await loadAsync({
 		'TaameyAshkenaz': {
@@ -21,20 +23,24 @@ async function loadfonts () {
 		
 }
 loadfonts()
-var california = []
+
+var california = {arg: []}
 
 
 
 for (let i = 0; i<wordData.length;i++) {
     for (let j=0;j<wordData[i].categories.length;j++) {
-        if (california.some((thing) => {
-            return ((wordData[i].categories[j]) == thing.name)
+        if (california.arg.some((thing) => {
+            return ((wordData[i].categories[j]) == thing.meID)
         })) {
 
         } else {
-            california.push({
-                "name" : wordData[i].categories[j],
-                "active" : true
+            california.arg.push({
+                "meID" : wordData[i].categories[j],
+                "isWork" : true,
+                "initState" : function () {
+                    [this.getter, this.setter] = useState(false)
+                }
             })
         }
     }
@@ -42,25 +48,24 @@ for (let i = 0; i<wordData.length;i++) {
 
 makeAutoObservable(california)
 
+
 const protoSelector = observer(({ route, navigation }) => {
-    console.log('protoSelector called!')
-    function toggleState (arg) {
-        arg = !arg
-        console.log("state toggled on something or other: " + arg)
+
+    for (let k=0;k<california.arg.length;k++) {
+        california.arg[k].initState()
     }
-    
+
     const renderItem = ({ item }) => (
         <View>
             <View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <View style={styles.listItem}>
             
-            <Text style={styles.body}>{item.name.toUpperCase()}</Text>
+            <Text style={styles.body}>{item.meID.toUpperCase()}</Text>
             <Switch
-            onValueChange={() => {
-                //item.active = !item.active
-
+            onValueChange={(upd) => {
+                item.setter(upd)
             }}
-            value={item.active}
+            value={item.getter}
             />
             
             </View>
@@ -75,15 +80,28 @@ const protoSelector = observer(({ route, navigation }) => {
             <StatusBar hidden={true}></StatusBar>
             <Text style = {styles.title}>You must choose...</Text>
             <FlatList
-                data={california}
+                data={california.arg}
                 renderItem={renderItem}
                 
             />
-            <Button title={"GO!"} style={styles.buttonRow}></Button>
+            <Button title={"GO!"} style={styles.buttonRow} onPress={() => {
+                let navCats = []
+                for (let l = 0;l<california.arg.length;l++) {
+                   if (california.arg[l].getter) {navCats.push(california.arg[l].meID)}
+                }
+                console.log(catWords(navCats))
+                navigation.navigate('MobxWordGameLit', {"cats" : navCats, "init" : true} )
+            }
+                
+            }
+            disabled={!(california.arg.some((whatever) => {
+                return whatever.getter
+            }))}/>
         </View>
     )
 });
 export default protoSelector
+
 const styles = StyleSheet.create({
     listItem: {
         flexDirection: 'row',

@@ -45,6 +45,7 @@ function RootNavigator() {
     <Stack.Screen name="WordGameSelectionScreen" component={WordGameSelectionScreen} />
     <Stack.Screen name="devWorks" component={devWorks} options={{ title: 'Nothing to see here...'}}/>
     <Stack.Screen name="protoSelector" component={protoSelector} options={{ title: 'Nothing to see here...'}}/>
+
     <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

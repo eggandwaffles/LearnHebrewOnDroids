@@ -27,7 +27,7 @@ function catWords (categories) {
 //Function 2: pick a word, any word
 function wheelOfMisfortune (categories) {
     var pieSlices = catWords(categories)
-    return pieSlices[RandInt(0, pieSlices.length-1)]
+    return pieSlices[RandInt(0, pieSlices.length)]
 }
 //Function 3: shuffle an array
 function shuffleArr (unshuffledArr, length) {
@@ -117,4 +117,4 @@ function finalAnswer (categories) {
     //return!!!!
     return exportableAnswer
 }
-module.exports = { finalAnswer }
+module.exports = { finalAnswer, catWords }
