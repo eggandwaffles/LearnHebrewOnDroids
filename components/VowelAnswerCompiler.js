@@ -132,4 +132,4 @@ function VowelPolisher () {
     return polish
 }
 module.exports = { VowelPolisher }
-console.log(VowelPolisher())
+//console.log(VowelPolisher())
