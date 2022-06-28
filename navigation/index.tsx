@@ -10,6 +10,7 @@ import WordGameLate from '../screens/WordGameLate';
 import MobxWordGameLit from '../screens/MobxWordGameLit';
 import MobxWordGameLate from '../screens/MobxWordGameLate';
 import WordGameSelectionScreen from '../screens/WordGameSelectionScreen';
+import protoSelector from '../screens/protoSelector';
 import devWorks from '../screens/devWork';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
@@ -43,6 +44,7 @@ function RootNavigator() {
     <Stack.Screen name="MobxWordGameLate" component={MobxWordGameLate} />
     <Stack.Screen name="WordGameSelectionScreen" component={WordGameSelectionScreen} />
     <Stack.Screen name="devWorks" component={devWorks} options={{ title: 'Nothing to see here...'}}/>
+    <Stack.Screen name="protoSelector" component={protoSelector} options={{ title: 'Nothing to see here...'}}/>
     <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

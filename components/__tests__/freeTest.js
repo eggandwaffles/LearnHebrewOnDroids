@@ -90,3 +90,16 @@ function Delay (milliseconds) {
 
 Delay(1)
 console.log(arr[0])
+function checkr (element, index, array) {
+
+    if (element === this) {
+        console.log(true)
+        return (true)
+        
+    } else {
+        console.log(false)
+        return (false)
+    }
+}
+var array = ["ooh", "eee", "ooh","ah","ah"]
+console.log(array.every(checkr, "ooh"))

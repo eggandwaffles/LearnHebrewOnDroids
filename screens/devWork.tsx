@@ -8,7 +8,7 @@ var palette = require("../assets/globalColorScheme.json")
 var { finalAnswer } = require("../components/wordAnswerGen.js")
 const { globalTimer, Timer } = require("../components/timers.js")
 import { loadAsync } from 'expo-font';
-import { makeAutoObservable } from "mobx"
+import { makeAutoObservable, makeObservable} from "mobx"
 import { observer } from "mobx-react"
 //https://docs.expo.io/versions/latest/sdk/font/
 async function loadfonts () {
@@ -22,13 +22,14 @@ async function loadfonts () {
 loadfonts()
 var myTimer = new Timer()
 makeAutoObservable(myTimer)
+
 const devWorks = observer(( { route, navigation }) => {
 //  export default function devWorks( { route, navigation }) {
   
     return (
         <View style={styles.container}>
             <Pressable><Text style={styles.title}>DEVELOPMENT PAGE</Text></Pressable>
-            <Text>Today's project: MobX Word Games.</Text>
+            <Text>Today's project: FlatList with buttons.</Text>
             
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <Text>Debug Tools</Text>
@@ -67,6 +68,12 @@ const devWorks = observer(( { route, navigation }) => {
             title = {"MobX Word Game"}
             onPress = {()=>{
               navigation.navigate('MobxWordGameLit', {"cats" : "all", "init" : true} )
+            }}
+            />
+            <Button styles={styles.button}
+            title = {"Prototype Selection"}
+            onPress = {()=>{
+              navigation.navigate('protoSelector')
             }}
             />
         </View>
