@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Alert, Modal } from 'react-native';
+import { StyleSheet, Alert, Modal, StatusBar } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
@@ -27,7 +27,7 @@ async function loadfonts () {
 }
 loadfonts()
 var litTimer = new Timer("litTimer")
-console.log("Timer created on lit!")
+//console.log("Timer created on lit!")
 makeAutoObservable(litTimer)
 const MobxWordGameLit = observer(( { route, navigation } ) => {
 	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
@@ -46,7 +46,7 @@ if (route.params.init) {
 		init : false
 	})
 	//setInit(false)
-	console.log("Init code called on lit. Params are " + JSON.stringify(route.params))
+	//console.log("Init code called on lit. Params are " + JSON.stringify(route.params))
 	setTimeout(() => {
 		litTimer.startTimer(12, () => {
 			nextQuestion()
@@ -57,7 +57,7 @@ if (route.params.init) {
 
 	
 	function nextQuestion () {
-		console.log("nextQuestion invoked!")
+		//console.log("nextQuestion invoked!")
 		setAnswerState("111111")
 		//setStop(true)
 		litTimer.stopTimer()
@@ -73,24 +73,25 @@ if (route.params.init) {
 		
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
-	console.log("MobxWordGameLit called!")
+	//console.log("MobxWordGameLit called!")
 	return (
    <View style={styles.largeContainer}>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <StatusBar hidden={true}></StatusBar>
 
-	<Button
+	
+
+   <View style={styles.container}>
+   <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+<Button
 		
 		title = "Back"
 		onPress={() => {
             litTimer.stopTimer()
-			navigation.navigate("devWorks")
+			navigation.navigate("TabThreeScreen")
 
 		}}
 		color = {palette.attention}
 		/>
-
-   <View style={styles.container}>
-
       <Text style={styles.title}>Transliterate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	<HebrewText style={{fontSize: 50}}>{currentQuestionSet.letters}</HebrewText>

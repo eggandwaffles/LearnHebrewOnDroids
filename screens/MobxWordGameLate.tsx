@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Alert, Modal } from 'react-native';
+import { StyleSheet, Alert, Modal, StatusBar } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
@@ -25,7 +25,7 @@ async function loadfonts () {
 		
 }
 var lateTimer = new Timer("lateTimer")
-console.log("Timer created on late!")
+//console.log("Timer created on late!")
 makeAutoObservable(lateTimer)
 loadfonts()
 const MobxWordGameLate = observer(( { route, navigation } ) => {
@@ -54,7 +54,7 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 		//setStop(true)
 		lateTimer.stopTimer()
 		setTimeout( () => {
-			console.log("Issued command to navigate to lit")
+			//console.log("Issued command to navigate to lit")
 			navigation.navigate('MobxWordGameLit', { 'cats': route.params.cats, "init": true})
 			setAnswerState("000000")
 			//nicetimer()
@@ -63,26 +63,26 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 		}, 1200)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
-	console.log("MobxWordGameLate called!")
+	//console.log("MobxWordGameLate called!")
 	return (
 		
    <View style={styles.largeContainer}>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+<StatusBar hidden={true}></StatusBar>
 
-	<Button
+   <View style={styles.container}>
+   <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+   <Button
 		
 		title = "Back"
 		onPress={() => {
 			lateTimer.stopTimer()
-			navigation.navigate("devWorks")
+			navigation.navigate("TabThreeScreen")
 			//setStop(true)
 			
 			
 		}}
 		color = {palette.attention}
 		/>
-
-   <View style={styles.container}>
 
       <Text style={styles.title}>Translate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />

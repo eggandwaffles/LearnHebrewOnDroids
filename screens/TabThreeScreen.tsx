@@ -6,31 +6,23 @@ var palette = require("../assets/globalColorScheme.json")
 
 
 export default function TabThreeScreen( { navigation } ) {
-  Alert.alert("! WARNING !","DO NOT PROCEED. APP FAILURE MAY RESULT.",[
-    {
-      text: "Return",
-      onPress: () => navigation.goBack()
-    },
-    {
-      text: "Press on"
-    }
-  ])
+
   return (
     <View style={styles.container}>
       <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
       <Text style={styles.title}>Fun with words</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	  <Text style={styles.body}>DO NOT Tap any button to continue</Text>
+	  <Text style={styles.body}>Tap any button to continue</Text>
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Practice All Words"
-			onPress={() => navigation.navigate('WordGameLit', {"cats" : "all", "init" : true} )}
-			color = {palette.failed}
+			onPress={() => navigation.navigate('MobxWordGameLit', {"cats" : "all", "init" : true} )}
+			color = {palette.attention}
 		/>
 		<Button
 			title = "Choose Categories"
-			onPress={() => navigation.navigate('WordGameSelectionScreen')}
-      color = {palette.failed}
+			onPress={() => navigation.navigate('protoSelector')}
+      color = {palette.interactable}
 		/>
 		</View>
 	</View>

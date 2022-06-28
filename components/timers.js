@@ -9,11 +9,11 @@ const globalTimer = {
     startTimer: function(setTime, callback) {
         this.time = setTime
         this.active = true
-        console.log(`Alert! Timer started with ${this.time} seconds.`)
+        //console.log(`Alert! Timer started with ${this.time} seconds.`)
         this.loopIterator(callback)
     },
     stopTimer : function() {
-        console.log(`Alert! Timer stopped with ${this.time} seconds.`)
+        //console.log(`Alert! Timer stopped with ${this.time} seconds.`)
         clearTimeout(this.activeCallback)
         this.activeCallback = null
         this.active = false
@@ -45,11 +45,11 @@ function Timer (name) {
     this.startTimer = (setTime, callback) => {
         this.time = setTime
         this.active = true
-        console.log(`Alert! ${this.name} started with ${this.time} seconds.`)
+        //console.log(`Alert! ${this.name} started with ${this.time} seconds.`)
         this.loopIterator(callback)
     }
     this.stopTimer = () => {
-        console.log(`Alert! ${this.name} stopped with ${this.time} seconds.`)
+        //console.log(`Alert! ${this.name} stopped with ${this.time} seconds.`)
         clearTimeout(this.activeCallback)
         this.activeCallback = null
         this.active = false
@@ -61,7 +61,7 @@ function Timer (name) {
                 this.time--
                 this.loopIterator(callback)
             } else {
-                console.log(`${this.name} expired!`)
+                //console.log(`${this.name} expired!`)
                 this.time = 0
                 this.active = false
                 callback()
@@ -79,6 +79,6 @@ var setPoint = 12
 var initTime = Date.now()
 myTimer.startTimer(setPoint, ()=>{
     const diff = (Date.now() - initTime)
-    console.log("Timer done @ " + diff + "ms. Deviation is " + (diff - 1000 * setPoint) + "ms.")
+    //console.log("Timer done @ " + diff + "ms. Deviation is " + (diff - 1000 * setPoint) + "ms.")
 })
 */
