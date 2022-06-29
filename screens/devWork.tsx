@@ -29,7 +29,7 @@ const devWorks = observer(( { route, navigation }) => {
     return (
         <View style={styles.container}>
             <Pressable><Text style={styles.title}>DEVELOPMENT PAGE</Text></Pressable>
-            <Text>Today's project: Info displays</Text>
+            <Text>Today's project: Build Back (Button) Better</Text>
             
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <Text>Debug Tools</Text>
