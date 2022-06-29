@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Alert, Image } from 'react-native';
 import { Text, View, Button } from '../components/Themed';
+import LetterNameView from './LetterNameView';
 var palette = require("../assets/globalColorScheme.json")
 
 export default function TabOneScreen( { navigation } ) {
@@ -19,13 +20,8 @@ export default function TabOneScreen( { navigation } ) {
 			color = {palette.attention}
 		/>
 		<Button
-			title = "Letter Names"
-			onPress={() => Alert.alert('COMING SOON', "To a theater near you.")}
-			color = {palette.interactable}
-		/>
-		<Button
-			title = "Letter Sounds"
-			onPress={() => Alert.alert('COMING SOON',"Wherever books are sold.")}
+			title = "Letter Names and Sounds"
+			onPress={() => navigation.navigate(LetterNameView)}
 			color = {palette.interactable}
 		/>
 		</View>

@@ -24,7 +24,10 @@
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
-    "description": "An app for learning Hebrew - under construction.",
-    "githubUrl": "https://github.com/eggandwaffles/LearnHebrewOnDroids"
+    "description": "An app for learning Hebrew - under construction. All the games are functional.",
+    "githubUrl": "https://github.com/eggandwaffles/LearnHebrewOnDroids",
+    "android": {
+      "package": "com.sparkie65.SmartHebrewFlashcards"
+    }
   }
 }

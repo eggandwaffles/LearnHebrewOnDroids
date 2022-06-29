@@ -20,7 +20,7 @@ export default function TabTwoScreen( { navigation } ) {
 		/>
 		<Button
 			title = "Show Letters"
-			onPress={() => Alert.alert('COMING SOON',"")}
+			onPress={() => navigation.navigate("LetterNameView")}
       color = {palette.interactable}
 		/>
 		<Button

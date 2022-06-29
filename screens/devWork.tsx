@@ -76,6 +76,12 @@ const devWorks = observer(( { route, navigation }) => {
               navigation.navigate('protoSelector')
             }}
             />
+            <Button styles={styles.button}
+            title = {"Letter Name View"}
+            onPress = {()=>{
+              navigation.navigate('LetterNameView')
+            }}
+            />
         </View>
     )
 })

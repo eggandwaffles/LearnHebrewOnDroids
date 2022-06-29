@@ -3,6 +3,7 @@ import { createStackNavigator, createAppContainer } from '@react-navigation/stac
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
 import LetterGame from '../screens/LetterGame';
+import LetterNameView from '../screens/LetterNameView';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import VowelGame from '../screens/VowelGame';
 import WordGameLit from '../screens/WordGameLit';
@@ -37,6 +38,7 @@ function RootNavigator() {
     <Stack.Navigator initialRouteName="Root" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
 	  <Stack.Screen name="LetterGame" component={LetterGame} />
+    <Stack.Screen name="LetterNameView" component={LetterNameView} />
     <Stack.Screen name="VowelGame" component={VowelGame} />
     <Stack.Screen name="WordGameLit" component={WordGameLit} />
     <Stack.Screen name="WordGameLate" component={WordGameLate} />
