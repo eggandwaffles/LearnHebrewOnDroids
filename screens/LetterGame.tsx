@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
-import * as React from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import React, {useEffect} from 'react';
+import { StyleSheet, Alert, BackHandler } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
@@ -34,6 +34,17 @@ function stoptime () {
 		clearTimeout(current)
 	}
 }
+
+const backAction = () => {
+	navigation.navigate("TabOneScreen")
+}
+useEffect(() => {
+	BackHandler.addEventListener("hardwareBackPress", backAction);
+
+	return () =>
+	  BackHandler.removeEventListener("hardwareBackPress", backAction);
+  }, []);
+
 function nicetimer() {
 	setIDs([])
 	setInit(false)
@@ -102,12 +113,6 @@ if (init) {
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
-	<Button
-		
-		title = "Back"
-		onPress={() => navigation.navigate("TabOneScreen")}
-		color={palette.attention}
-		/>
 
    <View style={styles.container}>
 

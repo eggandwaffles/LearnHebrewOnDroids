@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
-import * as React from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Alert, BackHandler } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
@@ -25,6 +25,15 @@ export default function VowelGame( { navigation } ) {
 	const [stopTimer, setStop] = React.useState(false)
 	const [ timerIDs, setIDs] = React.useState([])
 
+	const backAction = () => {
+		() => navigation.navigate("TabTwoScreen")
+	}
+	useEffect(() => {
+		BackHandler.addEventListener("hardwareBackPress", backAction);
+	
+		return () =>
+		  BackHandler.removeEventListener("hardwareBackPress", backAction);
+	  }, []);
 function stoptime () {
 	for(let i = 0; i < timerIDs.length; i++) {
 		var current = timerIDs.pop()
@@ -99,12 +108,6 @@ if (init) {
    <View style={styles.largeContainer}>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 
-	<Button
-		
-		title = "Back"
-		onPress={() => navigation.navigate("TabTwoScreen")}
-		color = {palette.attention}
-		/>
 
    <View style={styles.container}>
 

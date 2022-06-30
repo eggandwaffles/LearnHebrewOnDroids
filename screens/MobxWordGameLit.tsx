@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
-import * as React from 'react';
-import { StyleSheet, Alert, Modal, StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet, Alert, Modal, StatusBar, BackHandler } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
@@ -38,7 +38,16 @@ const MobxWordGameLit = observer(( { route, navigation } ) => {
 	var stopTimer = false
 	const [ timerIDs, setIDs] = React.useState([])
 	const [hinted, setHint] = React.useState(false)
-
+	const backAction = () => {
+		litTimer.stopTimer()
+		navigation.navigate("TabThreeScreen")
+	}
+	useEffect(() => {
+		BackHandler.addEventListener("hardwareBackPress", backAction);
+	
+		return () =>
+		  BackHandler.removeEventListener("hardwareBackPress", backAction);
+	  }, []);
 
 if (route.params.init) {
 	//setStop(false)
@@ -82,16 +91,7 @@ if (route.params.init) {
 
    <View style={styles.container}>
    <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-<Button
-		
-		title = "Back"
-		onPress={() => {
-            litTimer.stopTimer()
-			navigation.navigate("TabThreeScreen")
 
-		}}
-		color = {palette.attention}
-		/>
       <Text style={styles.title}>Transliterate</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	<HebrewText style={{fontSize: 50}}>{currentQuestionSet.letters}</HebrewText>
