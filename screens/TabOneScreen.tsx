@@ -7,7 +7,7 @@ var palette = require("../assets/globalColorScheme.json")
 export default function TabOneScreen( { navigation } ) {
   return (
     <View style={styles.container}>
-	<Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
+
       <Text style={styles.title}>Fun with Letters</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Tap any button to continue</Text>
