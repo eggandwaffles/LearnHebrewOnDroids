@@ -5,7 +5,6 @@ var palette = require("../assets/globalColorScheme.json")
 
 
 export default function TabTwoScreen( { navigation } ) {
-  Alert.alert("Warning!","Some content here is not fully tested. Proceed with caution.")
   return (
     <View style={styles.container}>
       	<Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
