@@ -15,7 +15,7 @@ export default function TabTwoScreen( { navigation } ) {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Start Game"
-			onPress={() => navigation.navigate('VowelGame')}
+			onPress={() => navigation.navigate('VowelGame', { "init" : true})}
 			color = {palette.attention}
 		/>
 		<Button

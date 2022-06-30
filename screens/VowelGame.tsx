@@ -6,6 +6,10 @@ import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
 import { loadAsync } from 'expo-font';
 //https://docs.expo.io/versions/latest/sdk/font/
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react"
+import { configure } from "mobx"
+const { globalTimer, Timer } = require("../components/timers.js")
 var palette = require("../assets/globalColorScheme.json")
 var { VowelPolisher } = require("../components/VowelAnswerCompiler.js")
 async function loadfonts () {
@@ -17,7 +21,9 @@ async function loadfonts () {
 		
 }
 loadfonts()
-export default function VowelGame( { navigation } ) {
+var vowTimer = new Timer("vowTimer")
+makeAutoObservable(vowTimer)
+const VowelGame = observer(( { route, navigation } ) => {
 	const [currentQuestionSet, setQuestionState ] = React.useState(VowelPolisher())
 	const [ answerState, setAnswerState] = React.useState("000000")
 	const [ timer, setTimer] = React.useState(0)
@@ -26,7 +32,8 @@ export default function VowelGame( { navigation } ) {
 	const [ timerIDs, setIDs] = React.useState([])
 
 	const backAction = () => {
-		() => navigation.navigate("TabTwoScreen")
+		vowTimer.stopTimer()
+		navigation.navigate("TabTwoScreen")
 	}
 	useEffect(() => {
 		BackHandler.addEventListener("hardwareBackPress", backAction);
@@ -34,72 +41,38 @@ export default function VowelGame( { navigation } ) {
 		return () =>
 		  BackHandler.removeEventListener("hardwareBackPress", backAction);
 	  }, []);
-function stoptime () {
-	for(let i = 0; i < timerIDs.length; i++) {
-		var current = timerIDs.pop()
-		clearTimeout(current)
+
+
+	  if (route.params.init) {
+		//setStop(false)
+		navigation.setParams({
+			init : false
+		})
+		//setInit(false)
+		//console.log("Init code called on lit. Params are " + JSON.stringify(route.params))
+		setTimeout(() => {
+			vowTimer.startTimer(7, () => {
+				nextQuestion()
+			})
+		},100)
+	
 	}
-}
-function nicetimer() {
-	setIDs([])
-	setInit(false)
-	setTimer(7)
-	var cache = []
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(6)
-		}
-	}, 1000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(5)
-		}
-	}, 2000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(4)
-		}
-	}, 3000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(3)
-		}
-	}, 4000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(2)
-		}
-	}, 5000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			setTimer(1)
-		}
-	}, 6000))
-	cache.push(setTimeout(() => {
-		if (!stopTimer) {
-			stoptime()
-			setTimer(0)
-			nextQuestion()
-		}
-	}, 7000))
-	setIDs(cache)
-}
-if (init) {
-	nicetimer()
-}
+		
 
 	
 	function nextQuestion () {
 		
 		setAnswerState("111111")
 		setStop(true)
-		stoptime()
+		vowTimer.stopTimer()
 		setTimeout( () => {
 			setQuestionState(VowelPolisher())
 			setAnswerState("000000")
-			nicetimer()
-			setStop(false)
-		}, 3000)
+			navigation.setParams({
+				init : true
+			})
+			
+		}, 1200)
 		//must cite https://www.sitepoint.com/delay-sleep-pause-wait/
 	}
 	
@@ -120,7 +93,7 @@ if (init) {
 			title = {currentQuestionSet.buttons[0].sound}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
 			if (currentQuestionSet.buttons[0].isRight) {
-				setTimer(0)
+				vowTimer.stopTimer()
 				nextQuestion()
 			}
 		}}
@@ -131,7 +104,7 @@ if (init) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
 				if (currentQuestionSet.buttons[1].isRight) {
-					setTimer(0)
+					vowTimer.stopTimer()
 					nextQuestion()
 				}
 			}}
@@ -142,7 +115,7 @@ if (init) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
 				if (currentQuestionSet.buttons[2].isRight) {
-					setTimer(0)
+					vowTimer.stopTimer()
 					nextQuestion()
 				}
 			}}
@@ -153,7 +126,7 @@ if (init) {
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
 				if (currentQuestionSet.buttons[3].isRight) {
-					setTimer(0)
+					vowTimer.stopTimer()
 					nextQuestion()
 				}
 			}}
@@ -163,18 +136,19 @@ if (init) {
 			title = {currentQuestionSet.buttons[4].sound}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
 			if (currentQuestionSet.buttons[4].isRight) {
-				setTimer(0)
+				vowTimer.stopTimer()
 				nextQuestion()
 			}
 		}}
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
-	<Text style={styles.body}>{"\nTime Remaining: " + timer}</Text>
+	<Text style={styles.body}>{"\nTime Remaining: " + vowTimer.time}</Text>
 	</View>
 	</View>
 	)
-}
+})
+export default VowelGame
 
 const styles = StyleSheet.create({
   largeContainer: {

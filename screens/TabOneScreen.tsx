@@ -15,7 +15,7 @@ export default function TabOneScreen( { navigation } ) {
 		<Button
 			title = "Start Game"
 			onPress={() => {
-				navigation.navigate('LetterGame')
+				navigation.navigate('LetterGame', { "init" : true})
 			}}
 			color = {palette.attention}
 		/>
