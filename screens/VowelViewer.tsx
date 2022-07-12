@@ -6,6 +6,7 @@ import { loadAsync } from 'expo-font';
 import { couldStartTrivia } from 'typescript';
 import { convArr } from "../components/wordArrayToUnicode"
 import { Dropdown } from 'react-native-element-dropdown';
+//https://github.com/hoaphantn7604/react-native-element-dropdown
 var wordData = require('../assets/wordData.json')
 var tempVowelData = require('../assets/hebrewVowels.json')
 var letters = require('../assets/hebrewLetters.json');
