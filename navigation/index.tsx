@@ -13,6 +13,7 @@ import MobxWordGameLate from '../screens/MobxWordGameLate';
 import WordGameSelectionScreen from '../screens/WordGameSelectionScreen';
 import protoSelector from '../screens/protoSelector';
 import devWorks from '../screens/devWork';
+import VowelViewer from '../screens/VowelViewer';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -47,7 +48,7 @@ function RootNavigator() {
     <Stack.Screen name="WordGameSelectionScreen" component={WordGameSelectionScreen} />
     <Stack.Screen name="devWorks" component={devWorks} options={{ title: 'Nothing to see here...'}}/>
     <Stack.Screen name="protoSelector" component={protoSelector} options={{ title: 'Nothing to see here...'}}/>
-
+    <Stack.Screen name="VowelViewer" component={VowelViewer} />
     <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
