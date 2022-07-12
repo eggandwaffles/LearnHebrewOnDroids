@@ -68,6 +68,7 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 			//console.log("Issued command to navigate to lit")
 			navigation.navigate('MobxWordGameLit', { 'cats': route.params.cats, "init": true})
 			setAnswerState("000000")
+			setHint(false)
 			//nicetimer()
 			//setStop(false)
 			//setQuestionState(finalAnswer(route.params.cats))
@@ -140,6 +141,13 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + lateTimer.time}</Text>
+	<Button
+		title = { hinted ? currentQuestionSet.hint : "Get a Hint"}
+		onPress = {()=>{
+			setHint(true)
+		}}
+		color = {palette.hint}
+	/>
 	</View>
 	</View>
 	)
