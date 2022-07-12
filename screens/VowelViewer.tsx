@@ -51,13 +51,13 @@ for (let k=0;k<tempVowelData.length;k++) {
 
 
 export default function VowelViewer( { navigation } ) {
-    const [value, setValue] = React.useState({"name" : "aleph", "unicode" : null, "sound" : " "})
+    const [value, setValue] = React.useState({"name" : "aleph", "unicode" : "א", "sound" : " "})
 	const renderItem = ( {item} ) => (
 		<View styles={styles.largeContainer}>
 			<View style={styles}>
 			
 			<HebrewText style={{fontSize: 30}}>{
-				value.sound + item.name + " | " + value.unicode + item.char
+				((value.sound == " ") ? "Silent" : value.sound) +" + " + item.name + " (" + ((value.sound == " ") ? "" : value.sound) + item.name + ") | " + value.unicode + item.char
 			}</HebrewText>
 			<View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 		</View>
@@ -75,7 +75,8 @@ export default function VowelViewer( { navigation } ) {
                 data={letterData}
                 labelField="name"
                 valueField='sound'
-                value={value.name}
+                placeholder='Choose a letter!'
+                
                 onChange={(item)=>{
                     setValue(item)
                 }}
