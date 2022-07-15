@@ -101,15 +101,23 @@
     },
     {
     "name" : "F-Nun",
-    "char" : "ן"
+    "char" : "\u{05DF}"
     },
     {
     "name" : "F-Mem",
-    "char" : "ם"
+    "char" : "\u{05DD}"
     },
     {
     "name" : "F-Kaf",
-    "char" : "ךְ"
+    "char" : "\u{05DA}\u{05B0}"
+    },
+    {
+    "name" : "F-Pe",
+    "char" : "\u{05E3}"
+    },
+    {
+    "name" : "F-Tsadi",
+    "char" : "\u{05E5}"
     },
     {
     "name" : "",
@@ -122,6 +130,16 @@
     {
     "name" : "Vav-Dagesh",
     "char" : "וּ"
+    },
+    {
+        "name" : "Kaf-Dagesh",
+        "char" : "\u{FB3B}"
+    },
+    {
+        "name": "Apostrophe",
+        "char" : "\u{05F3}"
     }
+        
+
     ]
     

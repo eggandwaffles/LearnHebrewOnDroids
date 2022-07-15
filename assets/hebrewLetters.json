@@ -110,5 +110,9 @@
     {
     "name" : "F-Kaf",
     "char" : "K"
+    },
+    {
+    "name" : "Apostrophe",
+    "char" : "'"
     }
 ]

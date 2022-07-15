@@ -88,6 +88,12 @@ const devWorks = observer(( { route, navigation }) => {
               navigation.navigate('VowelViewer')
             }}
             />
+            <Button styles={styles.button}
+            title = {"Dictionary View"}
+            onPress = {()=>{
+              navigation.navigate('DictionaryView')
+            }}
+            />
             
         </View>
     )

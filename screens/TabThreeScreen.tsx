@@ -24,6 +24,11 @@ export default function TabThreeScreen( { navigation } ) {
 			onPress={() => navigation.navigate('protoSelector')}
       color = {palette.interactable}
 		/>
+    <Button
+			title = "View Dictionary"
+			onPress={() => navigation.navigate('DictionaryView')}
+      color = {palette.interactable}
+		/>
 		</View>
 	</View>
 
