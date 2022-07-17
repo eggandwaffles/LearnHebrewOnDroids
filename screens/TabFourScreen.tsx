@@ -15,9 +15,19 @@ export default function TabFourScreen( { navigation } ) {
     delayLongPress={1000}
     onLongPress={()=>{
       navigation.navigate('devWorks')
-    }}><HebrewText style={{fontSize: 50}}>{finalAnswer("all").letters}</HebrewText></Pressable>
+    }}><HebrewText style={{fontSize: 50}}>{()=> {
+    try {
+      return finalAnswer("all").letters
+    } catch (error) {
+      console.error("Failed to fetch answer: " + console.error())
+    }
+    }
+      
+    }
+    </HebrewText>
     
       <Text style={styles.title}>Progress</Text>
+      </Pressable>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>COMING SOON</Text>
 

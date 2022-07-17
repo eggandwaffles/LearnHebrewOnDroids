@@ -1,10 +1,20 @@
 import * as React from 'react';
-import { StyleSheet, Alert, Image } from 'react-native';
+import { StyleSheet, Alert, Image, BackHandler } from 'react-native';
 import { Text, View, Button } from '../components/Themed';
 import LetterNameView from './LetterNameView';
 var palette = require("../assets/globalColorScheme.json")
 
 export default function TabOneScreen( { navigation } ) {
+  const backAction = () => {
+		return true
+	}
+	React.useEffect(() => {
+		BackHandler.addEventListener("hardwareBackPress", backAction);
+	
+		return () =>
+		  BackHandler.removeEventListener("hardwareBackPress", backAction);
+	  }, []);
+
   return (
     <View style={styles.container}>
 

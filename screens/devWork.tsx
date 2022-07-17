@@ -10,6 +10,8 @@ const { globalTimer, Timer } = require("../components/timers.js")
 import { loadAsync } from 'expo-font';
 import { makeAutoObservable, makeObservable} from "mobx"
 import { observer } from "mobx-react"
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 //https://docs.expo.io/versions/latest/sdk/font/
 async function loadfonts () {
 	await loadAsync({
@@ -22,6 +24,15 @@ async function loadfonts () {
 loadfonts()
 var myTimer = new Timer()
 makeAutoObservable(myTimer)
+const clearAll = async () => {
+  try {
+    await AsyncStorage.clear()
+  } catch(e) {
+    // clear error
+  }
+
+  console.log('Done.')
+}
 
 const devWorks = observer(( { route, navigation }) => {
 //  export default function devWorks( { route, navigation }) {
@@ -92,6 +103,12 @@ const devWorks = observer(( { route, navigation }) => {
             title = {"Dictionary View"}
             onPress = {()=>{
               navigation.navigate('DictionaryView')
+            }}
+            />
+            <Button styles={styles.button}
+            title = {"CLEAR LOCAL STORAGE"}
+            onPress = {()=>{
+              clearAll()
             }}
             />
             

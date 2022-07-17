@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { StyleSheet, Alert, Image } from 'react-native';
+import { StyleSheet, Alert, Image, View } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
@@ -68,7 +68,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Letters' }}
+        options={{ headerShown: false }}
       />
     </TabOneStack.Navigator>
   );
@@ -82,7 +82,7 @@ function TabTwoNavigator() {
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Letters & Vowels' }}
+        options={{ headerShown: false }}
       />
     </TabTwoStack.Navigator>
   );
@@ -96,7 +96,7 @@ function TabThreeNavigator() {
       <TabThreeStack.Screen
         name="TabThreeScreen"
         component={TabThreeScreen}
-        options={{ headerTitle: 'Words' }}
+        options={{ headerShown: false }}
       />
     </TabThreeStack.Navigator>
   );
@@ -110,7 +110,7 @@ function TabFourNavigator() {
       <TabFourStack.Screen
         name="TabFourScreen"
         component={TabFourScreen}
-        options={{ headerTitle: 'Progress' }}
+        options={{ headerShown: false }}
       />
     </TabFourStack.Navigator>
   );

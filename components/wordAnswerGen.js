@@ -1,8 +1,22 @@
 //const { resolveUri } = require("expo-asset/build/AssetSources");
 const { resolveTypeReferenceDirective } = require("typescript");
-var wordData = require("../assets/wordData.json");
+import AsyncStorage from '@react-native-async-storage/async-storage';
+//var wordData = require("../assets/wordData.json");
 var { RandInt } = require("./RandInt.js")
 var {convArr} = require("./wordArrayToUnicode.tsx")
+
+const loadWordData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('wordData')
+      return jsonValue != null ? JSON.parse(jsonValue) : null
+    } catch(e) {
+      // read error
+    }
+  
+    console.log('Done.')
+  
+  }
+var wordData = loadWordData()
 //Function 1: produce list of words in selected category
 function catWords (categories) {
     if (categories === "all") {
@@ -102,19 +116,24 @@ function testFuncs (reps) {
 function finalAnswer (categories) { 
     var exportableAnswer = Object.create(AnswerContainer)
     //Select spelling
-    const selection = wheelOfMisfortune(categories)
-    exportableAnswer.letters = convArr(selection.letters, selection.vowels)
-    //Select transliterations
-    exportableAnswer.CorrectTranslit = selection.transliteration
-    exportableAnswer.TranslitOptions = shuffleArr(selection.close_transliterations, 5)
-    exportableAnswer.TranslitOptions[RandInt(0,5)] = exportableAnswer.CorrectTranslit
-    //Select translations
-    exportableAnswer.CorrectTranslate = selection.translation
-    exportableAnswer.TranslateOptions = shuffleArr(selection.close_translations, 5)
-    exportableAnswer.TranslateOptions[RandInt(0,5)] = exportableAnswer.CorrectTranslate
-    //select hint
-    exportableAnswer.hint = selection.hint    
-    //return!!!!
-    return exportableAnswer
+    try {
+        const selection = wheelOfMisfortune(categories)
+        exportableAnswer.letters = convArr(selection.letters, selection.vowels)
+        //Select transliterations
+        exportableAnswer.CorrectTranslit = selection.transliteration
+        exportableAnswer.TranslitOptions = shuffleArr(selection.close_transliterations, 5)
+        exportableAnswer.TranslitOptions[RandInt(0,5)] = exportableAnswer.CorrectTranslit
+        //Select translations
+        exportableAnswer.CorrectTranslate = selection.translation
+        exportableAnswer.TranslateOptions = shuffleArr(selection.close_translations, 5)
+        exportableAnswer.TranslateOptions[RandInt(0,5)] = exportableAnswer.CorrectTranslate
+        //select hint
+        exportableAnswer.hint = selection.hint    
+        //return!!!!
+        return exportableAnswer
+    } catch {
+        console.error("Failed to generate an answer")
+    }
+    
 }
 module.exports = { finalAnswer, catWords }

@@ -1,4 +1,4 @@
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, PrivateValueStore } from '@react-navigation/native';
 import { createStackNavigator, createAppContainer } from '@react-navigation/stack';
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
@@ -18,11 +18,57 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 import DictionaryView from '../screens/DictionaryView';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import WelcomeScreen from '../screens/welcomeScreen';
+import DeltaView from '../screens/DeltaScreen';
+
+const storeData = async (key, value) => {
+  try {
+    await AsyncStorage.setItem(key, value)
+
+  } catch (e) {
+    console.error(e)
+    // saving error
+  }
+}
+
+
+const getAllKeys = async () => {
+  let keys = []
+  try {
+    keys = await AsyncStorage.getAllKeys()
+  } catch(e) {
+    // read key error
+  }
+
+  console.log(keys)
+  // example console.log result:
+  // ['@MyApp_user', '@MyApp_key']
+}
+
+const getData = async (key) => {
+  console.log("GetData called")
+  try {
+    const value = await AsyncStorage.getItem(key)
+    console.log("Got value of " + value)
+    if(value !== null) {
+      return value
+      // value previously stored
+    } else if (key == "newUser" && value == null) {
+      console.log("value collapsed to true")
+      return "true"
+    }
+  } catch(e) {
+    // error reading value
+  }
+}
+
+
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
-  console.log("RootNavigator Called!")
+  
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
@@ -37,10 +83,13 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  console.log("RootNavigator Called!")
+
   return (
-    <Stack.Navigator initialRouteName="Root" screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
+    <Stack.Navigator initialRouteName="DeltaView" screenOptions={{ headerShown: false }}>
+
+    <Stack.Screen name="Root" component={BottomTabNavigator} />
+    <Stack.Screen name="DeltaView" component={DeltaView} />
+    <Stack.Screen name="Welcome" component={WelcomeScreen} />
 	  <Stack.Screen name="LetterGame" component={LetterGame} />
     <Stack.Screen name="LetterNameView" component={LetterNameView} />
     <Stack.Screen name="VowelGame" component={VowelGame} />
