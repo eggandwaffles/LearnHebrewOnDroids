@@ -22,6 +22,7 @@ import DictionaryView from '../screens/DictionaryView';
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+  console.log("RootNavigator Called!")
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
@@ -36,6 +37,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  console.log("RootNavigator Called!")
   return (
     <Stack.Navigator initialRouteName="Root" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
