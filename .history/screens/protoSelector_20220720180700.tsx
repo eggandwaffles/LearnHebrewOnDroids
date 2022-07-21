@@ -1,6 +1,6 @@
 //import { FontAwesome } from '@expo/vector-icons';
 import React, {useState} from 'react';
-import { StyleSheet, FlatList, Switch, KeyboardAvoidingView, SafeAreaView, BackHandler } from 'react-native';
+import { StyleSheet, FlatList, Switch, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 //import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 //import * as Font from 'expo-font';
@@ -9,13 +9,10 @@ import { StatusBar } from 'expo-status-bar';
 import { observer } from 'mobx-react';
 import { makeAutoObservable, makeObservable, observable } from "mobx"
 import { couldStartTrivia } from 'typescript';
-import { getWordDataGlobal, setWordDataGlobal } from '../components/wordDataManager.js';
-
 //https://docs.expo.io/versions/latest/sdk/font/
 //import { TabRouter } from '@react-navigation/native';
 var palette = require("../assets/globalColorScheme.json") 
-//var wordData = require("../assets/wordData.json")
-
+var wordData = require("../assets/wordData.json")
 import { catWords } from '../components/wordAnswerGen'
 async function loadfonts () {
 	await loadAsync({
@@ -31,43 +28,32 @@ var california = {arg: []}
 
 
 
+for (let i = 0; i<wordData.length;i++) {
+    for (let j=0;j<wordData[i].categories.length;j++) {
+        if (california.arg.some((thing) => {
+            return ((wordData[i].categories[j]) == thing.meID)
+        })) {
+
+        } else {
+            california.arg.push({
+                "meID" : wordData[i].categories[j],
+                "isWork" : true,
+                "initState" : function () {
+                    [this.getter, this.setter] = useState(false)
+                }
+            })
+        }
+    }
+}
 
 makeAutoObservable(california)
 
 
 const protoSelector = observer(({ route, navigation }) => {
-    var wordData = getWordDataGlobal()
-    for (let i = 0; i<wordData.length;i++) {
-        for (let j=0;j<wordData[i].categories.length;j++) {
-            if (california.arg.some((thing) => {
-                return ((wordData[i].categories[j]) == thing.meID)
-            })) {
-    
-            } else {
-                california.arg.push({
-                    "meID" : wordData[i].categories[j],
-                    "isWork" : true,
-                    "initState" : function () {
-                        [this.getter, this.setter] = useState(false)
-                    }
-                })
-            }
-        }
-    }
-    
+
     for (let k=0;k<california.arg.length;k++) {
         california.arg[k].initState()
     }
-    const backAction = () => {
-		navigation.navigate("TabThreeScreen")
-	}
-	React.useEffect(() => {
-		BackHandler.addEventListener("hardwareBackPress", backAction);
-	
-		return () =>
-		  BackHandler.removeEventListener("hardwareBackPress", backAction);
-	  }, []);
-
 
     const renderItem = ({ item }) => (
         <View>

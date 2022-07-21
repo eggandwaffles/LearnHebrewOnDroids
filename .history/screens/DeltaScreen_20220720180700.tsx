@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as React from 'react';
 import { StyleSheet, Alert, Image, ActivityIndicator } from 'react-native';
-import { refreshWordDataGlobal } from '../components/wordDataManager'
+
 import { Text, View, Button} from '../components/Themed';
 import Navigation from '../navigation';
 var palette = require("../assets/globalColorScheme.json")
@@ -33,7 +33,6 @@ const storeData = async (key, value) => {
   
 export default function DeltaView ( { navigation }) {
     console.log("DeltaView called!")
-    refreshWordDataGlobal()
     const newUser = getData("newUser")
     .then((result)=> {
         if (result === "true") {

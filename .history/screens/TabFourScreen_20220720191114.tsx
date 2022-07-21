@@ -18,10 +18,10 @@ export default function TabFourScreen( { navigation } ) {
     }}><HebrewText style={{fontSize: 50}}>{
       finalAnswer("all").letters
     
-
+)
     }
-    
-</HebrewText>
+    }
+ebrewText>
     
       <Text style={styles.title}>Progress</Text>
       </Pressable>

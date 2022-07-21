@@ -3,18 +3,17 @@ import * as React from 'react';
 import { StyleSheet, Alert, Image } from 'react-native';
 import { sanitize } from '../components/JSONSanitizer.js'
 import { Text, View, Button} from '../components/Themed';
-import { wordDataGlobal, setWordDataGlobal } from '../components/wordDataManager.js';
 import Navigation from '../navigation';
 var palette = require("../assets/globalColorScheme.json")
-var localJSON = require('../assets/wordData.json')
+
 
 var setWordData = async (value) => {
     try {
         
-      var jsonValue = JSON.stringify(value)
+      const jsonValue = JSON.stringify(value)
       await AsyncStorage.setItem('wordData', jsonValue)
     } catch(e) {
-        console.error("Error saving JSON!")
+        console.error(e)
       // save error
     }
   
@@ -38,24 +37,21 @@ export default function WelcomeScreen( { navigation } ) {
             </Text>
             <Button
             title='Load from web'
-            disabled={true}
             onPress={()=>{
-              console.log("Fetching from web...")
-                fetch('https://raw.githubusercontent.com/dagr1234/SmartHebrewFlashcards/master/data.json?token=GHSAT0AAAAAABV3OWJR6JTTVC5OUJJZAJBEYWW4CHA')
+                fetch('https://raw.githubusercontent.com/dagr1234/SmartHebrewFlashcards/master/data.json')
                     .then(response => {
-                      console.log("Fetch complete.")
-                      return response.text()
-                    })
+                        console.log("Got response")
+                        response.text()
+                    } )
                     .then(data => setWordData(JSON.parse(sanitize(data))))
-                    .then(() => navigation.navigate("TabOneScreen"))
+                    .then(() => Alert.alert("Fetch complete","Data successfully loaded."))
             }}
             />
             <Button
             title='Load from local'
             onPress={()=>{
-                setWordData(localJSON)
-                setWordDataGlobal(localJSON)
-                navigation.navigate("Root")
+                setWordData(require('../assets/wordData.json'))
+                navigation.navigate("TabOneScreen")
             }}
             />
         </View>

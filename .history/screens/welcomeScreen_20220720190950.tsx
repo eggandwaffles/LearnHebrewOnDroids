@@ -54,7 +54,7 @@ export default function WelcomeScreen( { navigation } ) {
             title='Load from local'
             onPress={()=>{
                 setWordData(localJSON)
-                setWordDataGlobal(localJSON)
+                setWordDataGlobal(local)
                 navigation.navigate("Root")
             }}
             />

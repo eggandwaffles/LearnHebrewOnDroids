@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { Text, View, Button} from '../components/Themed';
-import { StyleSheet, Alert, Modal, Pressable, FlatList, StatusBar, BackHandler } from 'react-native';
+import { StyleSheet, Alert, Modal, Pressable, FlatList, StatusBar } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { loadAsync } from 'expo-font';
 import { couldStartTrivia } from 'typescript';
 import { convArr } from "../components/wordArrayToUnicode"
+import { Dropdown } from 'react-native-element-dropdown';
+//https://github.com/hoaphantn7604/react-native-element-dropdown
 var wordData = require('../assets/wordData.json')
+var tempVowelData = require('../assets/hebrewVowels.json')
 var letters = require('../assets/hebrewLetters.json');
 var unicodes = require('../assets/hebrewUnicode.json');
 
@@ -37,25 +40,24 @@ for (let i = 0; i<letters.length;i++) {
 	iLetter.sound = tempArr.join("")
 	letterData.push(iLetter)
 }
+var vowelData = []
+for (let k=0;k<tempVowelData.length;k++) {
+    if (tempVowelData[k].char.length) {
+        vowelData.push(tempVowelData[k])
+    } else {
+        
+    }
+}
 
 
-
-export default function LetterNameView( { navigation, route } ) {
-  const backAction = () => {
-		navigation.navigate(route.params.invokingScreen)
-	}
-	React.useEffect(() => {
-		BackHandler.addEventListener("hardwareBackPress", backAction);
-	
-		return () =>
-		  BackHandler.removeEventListener("hardwareBackPress", backAction);
-	  }, []);
+export default function VowelViewer( { navigation } ) {
+    const [value, setValue] = React.useState({"name" : "aleph", "unicode" : "א", "sound" : " "})
 	const renderItem = ( {item} ) => (
 		<View styles={styles.largeContainer}>
 			<View style={styles}>
 			
 			<HebrewText style={{fontSize: 30}}>{
-				(item.sound == " ") ? (item.unicode + " | " + item.name + " | Silent" ) : ((item.name.substring(0,2) == "F-") ? item.unicode + " | Final " + item.name.substring(2) + " | " + item.sound : item.unicode + " | " + item.name + " | " + item.sound)
+				((value.sound == " ") ? "Silent" : value.sound) +" + " + item.name + " (" + ((value.sound == " ") ? "" : value.sound) + item.name + ") | " + value.unicode + item.char
 			}</HebrewText>
 			<View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 		</View>
@@ -68,10 +70,21 @@ export default function LetterNameView( { navigation, route } ) {
 			<Text style={styles.title}>Behold!</Text>
 
 			<HebrewText style={{fontSize: 50}}>{convArr(wordData[1].letters,wordData[1].vowels)}</HebrewText>
+            <Dropdown 
+                style={styles.dropdown}
+                data={letterData}
+                labelField="name"
+                valueField='sound'
+                placeholder='Choose a letter!'
+                
+                onChange={(item)=>{
+                    setValue(item)
+                }}
+            />
 			<View style={styles.divider} lightColor="#aaa" darkColor="rgba(255,255,255,0.4)" />
 			
 			<FlatList
-				data={letterData}
+				data={vowelData}
 				renderItem={renderItem}
 				/>
 		</View>
@@ -79,6 +92,23 @@ export default function LetterNameView( { navigation, route } ) {
 }
 
 const styles = StyleSheet.create({
+    dropdown: {
+        margin: 16,
+        height: 50,
+        width: 300,
+        backgroundColor: 'white',
+        borderRadius: 12,
+        padding: 12,
+        shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+  
+        elevation: 2,
+      },
     listItem: {
         flexDirection: 'row',
         alignContent: "center"

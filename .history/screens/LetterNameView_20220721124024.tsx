@@ -40,9 +40,9 @@ for (let i = 0; i<letters.length;i++) {
 
 
 
-export default function LetterNameView( { navigation, route } ) {
+export default function LetterNameView( { navigation } ) {
   const backAction = () => {
-		navigation.navigate(route.params.invokingScreen)
+		navigation.navigate("TabTwoScreen")
 	}
 	React.useEffect(() => {
 		BackHandler.addEventListener("hardwareBackPress", backAction);

@@ -4,7 +4,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //var wordData = require("../assets/wordData.json");
 var { RandInt } = require("./RandInt.js")
 var {convArr} = require("./wordArrayToUnicode.tsx")
-import { getWordDataGlobal, setWordDataGlobal } from '../components/wordDataManager.js';
  
 const loadWordData = async () => {
     try {

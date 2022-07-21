@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Text, View, Button} from '../components/Themed';
-import { StyleSheet, Alert, Modal, Pressable, FlatList, StatusBar, SectionList, BackHandler } from 'react-native';
+import { StyleSheet, Alert, Modal, Pressable, FlatList, StatusBar, SectionList } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { loadAsync } from 'expo-font';
 import { couldStartTrivia, parseConfigFileTextToJson } from 'typescript';
 import { convArr } from "../components/wordArrayToUnicode"
 import { catWords } from '../components/wordAnswerGen';
 import { TextInput } from 'react-native-gesture-handler';
-import { getWordDataGlobal, setWordDataGlobal } from '../components/wordDataManager.js';
-//var wordData = require("../assets/wordData.json")
+var wordData = require("../assets/wordData.json")
 var letters = require('../assets/hebrewLetters.json');
 var unicodes = require('../assets/hebrewUnicode.json');
 var palette = require("../assets/globalColorScheme.json")
@@ -29,16 +28,6 @@ loadfonts()
 
 export default function DictionaryView( { navigation } ) {
     const [text, onChangeText] = React.useState("");
-    const backAction = () => {
-		navigation.navigate('TabThreeScreen')
-	}
-	React.useEffect(() => {
-		BackHandler.addEventListener("hardwareBackPress", backAction);
-	
-		return () =>
-		  BackHandler.removeEventListener("hardwareBackPress", backAction);
-	  }, []);
-    var wordData = getWordDataGlobal()
     var cats = []
 for (let i = 0; i<wordData.length;i++) {
     for (let j=0;j<wordData[i].categories.length;j++) {

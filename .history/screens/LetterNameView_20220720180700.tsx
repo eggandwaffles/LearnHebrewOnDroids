@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View, Button} from '../components/Themed';
-import { StyleSheet, Alert, Modal, Pressable, FlatList, StatusBar, BackHandler } from 'react-native';
+import { StyleSheet, Alert, Modal, Pressable, FlatList, StatusBar } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { loadAsync } from 'expo-font';
 import { couldStartTrivia } from 'typescript';
@@ -40,16 +40,8 @@ for (let i = 0; i<letters.length;i++) {
 
 
 
-export default function LetterNameView( { navigation, route } ) {
-  const backAction = () => {
-		navigation.navigate(route.params.invokingScreen)
-	}
-	React.useEffect(() => {
-		BackHandler.addEventListener("hardwareBackPress", backAction);
-	
-		return () =>
-		  BackHandler.removeEventListener("hardwareBackPress", backAction);
-	  }, []);
+export default function LetterNameView( { navigation } ) {
+
 	const renderItem = ( {item} ) => (
 		<View styles={styles.largeContainer}>
 			<View style={styles}>

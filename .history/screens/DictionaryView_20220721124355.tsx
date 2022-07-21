@@ -7,8 +7,7 @@ import { couldStartTrivia, parseConfigFileTextToJson } from 'typescript';
 import { convArr } from "../components/wordArrayToUnicode"
 import { catWords } from '../components/wordAnswerGen';
 import { TextInput } from 'react-native-gesture-handler';
-import { getWordDataGlobal, setWordDataGlobal } from '../components/wordDataManager.js';
-//var wordData = require("../assets/wordData.json")
+var wordData = require("../assets/wordData.json")
 var letters = require('../assets/hebrewLetters.json');
 var unicodes = require('../assets/hebrewUnicode.json');
 var palette = require("../assets/globalColorScheme.json")
@@ -38,7 +37,6 @@ export default function DictionaryView( { navigation } ) {
 		return () =>
 		  BackHandler.removeEventListener("hardwareBackPress", backAction);
 	  }, []);
-    var wordData = getWordDataGlobal()
     var cats = []
 for (let i = 0; i<wordData.length;i++) {
     for (let j=0;j<wordData[i].categories.length;j++) {

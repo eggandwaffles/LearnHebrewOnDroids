@@ -1,35 +1,45 @@
 import * as React from 'react';
-import { StyleSheet, Alert, Image } from 'react-native';
+import { StyleSheet, Alert, Image, BackHandler } from 'react-native';
 import { Text, View, Button } from '../components/Themed';
+import LetterNameView from './LetterNameView';
 var palette = require("../assets/globalColorScheme.json")
 
+export default function TabOneScreen( { navigation } ) {
+  const backAction = () => {
+		return true
+	}
+	React.useEffect(() => {
+		BackHandler.addEventListener("hardwareBackPress", backAction);
+	
+		return () =>
+		  BackHandler.removeEventListener("hardwareBackPress", backAction);
+	  }, []);
 
-export default function TabTwoScreen( { navigation } ) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Fun with Letters & Vowels</Text>
+
+      <Text style={styles.title}>Fun with Letters</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Tap any button to continue</Text>
 	  <View style={styles.buttonRow}>
 		<Button
 			title = "Start Game"
-			onPress={() => navigation.navigate('VowelGame', { "init" : true})}
+			onPress={() => {
+				navigation.navigate('LetterGame', { "init" : true})
+			}}
 			color = {palette.attention}
 		/>
 		<Button
-			title = "Show Letters"
-			onPress={() => navigation.navigate("LetterNameView", {'invokingScreen' : "TabTwoScreen"})}
-      color = {palette.interactable}
-		/>
-		<Button
-			title = "Show Vowels"
-			onPress={() => navigation.navigate("VowelViewer")}
-      color = {palette.interactable}
+			title = "Letter Names and Sounds"
+			onPress={() => navigation.navigate(LetterNameView)}
+			color = {palette.interactable}
 		/>
 		</View>
     </View>
   );
+
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -38,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
   },
   separator: {

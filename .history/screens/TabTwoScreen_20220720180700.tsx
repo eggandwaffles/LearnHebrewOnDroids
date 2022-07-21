@@ -18,7 +18,7 @@ export default function TabTwoScreen( { navigation } ) {
 		/>
 		<Button
 			title = "Show Letters"
-			onPress={() => navigation.navigate("LetterNameView", {'invokingScreen' : "TabTwoScreen"})}
+			onPress={() => navigation.navigate("LetterNameView")}
       color = {palette.interactable}
 		/>
 		<Button

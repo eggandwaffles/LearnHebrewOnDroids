@@ -4,12 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 //var wordData = require("../assets/wordData.json");
 var { RandInt } = require("./RandInt.js")
 var {convArr} = require("./wordArrayToUnicode.tsx")
-import { getWordDataGlobal, setWordDataGlobal } from '../components/wordDataManager.js';
- 
+
 const loadWordData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('wordData')
-      console.log("Loaded wordData. First 100 chars are: " + jsonValue.substring(0,100) + " Timestamp: " + Date.now())
       return jsonValue != null ? JSON.parse(jsonValue) : null
     } catch(e) {
       // read error
@@ -18,24 +16,12 @@ const loadWordData = async () => {
     console.log('Done.')
   
   }
- 
-
+var wordData = loadWordData()
 //Function 1: produce list of words in selected category
 function catWords (categories) {
-    /*
-    try {
-        console.log("attempting wordData collection...")
-        var wordData = loadWordData()
-        
-      } catch (error) {
-        console.error(error)
-      }*/
-      var wordData = getWordDataGlobal()
     if (categories === "all") {
         return wordData
     }
-    
-    //var wordData = global.wordData
     var WordsInCat = []
     for (let i = 0; i < wordData.length; i++) {
         var doesFit = false
@@ -146,15 +132,7 @@ function finalAnswer (categories) {
         //return!!!!
         return exportableAnswer
     } catch {
-        console.error("Failed to generate an answer. Timestamps: " + Date.now())
-        var errorSelection = Object.create(AnswerContainer)
-        errorSelection.letters = convArr(['Aleph','Resh','Resh'], ['eh','uh',''])
-        errorSelection.CorrectTranslit = 'ERROR'
-        errorSelection.TranslateOptions = ['ERROR','ERROR','ERROR','ERROR','ERROR']
-        errorSelection.CorrectTranslate = 'ERROR'
-        errorSelection.TranslitOptions = ['ERROR','ERROR','ERROR','ERROR','ERROR']
-        errorSelection.hint = 'Sorry!'
-        return errorSelection
+        console.error("Failed to generate an answer")
     }
     
 }
