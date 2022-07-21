@@ -8,14 +8,14 @@ function LogProgress (correct, answerString, time, hebrewData, type) {
     pushable.correctAnswer = correct
     var sum = 0
         for (let i = 0; i<answerString.length;i++) {
-            sum = sum + Number.parseFloat(answerString[i])
+            sum += Number.parseFloat(answerString[i])
         }
-    
-    pushable.guesses = sum + 1
+    pushable.guesses = sum
     pushable.timeRemaining = time
     pushable.depiction = hebrewData
     pushable.questionType = type
     progressData.push(pushable)
+    console.log("Added log. Length is now at " + progressData.length)
 }
 
 function LogScore (deltaScore) {
@@ -61,6 +61,7 @@ const overrideSetScore = async (set) => {
 }
 
 function getProgressData () {
+    console.log("got progress data: " + progressData.length)
     return progressData
 }
 module.exports = { LogProgress, LogScore, overrideSetScore, getCurrentScore, getSessionScore, refreshHighScore, getProgressData }

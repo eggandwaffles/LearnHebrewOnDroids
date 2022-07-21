@@ -2,20 +2,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var progressData = []
 var currentScore = 0
-var sessionScore = 0
 function LogProgress (correct, answerString, time, hebrewData, type) {
-    var pushable = {}
-    pushable.correctAnswer = correct
-    var sum = 0
+    this.correctAnswer = correct
+    this.guesses = () => {
+        var sum = 0
         for (let i = 0; i<answerString.length;i++) {
-            sum = sum + Number.parseFloat(answerString[i])
+            sum += Number.parseFloat(answerString[i])
         }
-    
-    pushable.guesses = sum + 1
-    pushable.timeRemaining = time
-    pushable.depiction = hebrewData
-    pushable.questionType = type
-    progressData.push(pushable)
+        return sum
+    }
+    this.timeRemaining = time
+    this.depiction = hebrewData
+    this.questionType = type
+    progressData.push(this)
 }
 
 function LogScore (deltaScore) {
@@ -27,21 +26,6 @@ function getCurrentScore () {
     return currentScore
 }
 
-function getSessionScore () {
-    return sessionScore
-}
-
-
-const refreshHighScore = async () => {
-    try {
-      var stringScore = await AsyncStorage.getItem('highScore')
-      sessionScore = Number.parseFloat(stringScore)
-
-    } catch(e) {
-      // read error
-    }
-}
-
 const crossCheckHighScore = async (comparable) => {
     try {
       var stringScore = await AsyncStorage.getItem('highScore')
@@ -51,7 +35,6 @@ const crossCheckHighScore = async (comparable) => {
         await AsyncStorage.setItem('highScore', comparable.toString())
         console.log("Set high score to " + comparable)
       } 
-      refreshHighScore()
     } catch(e) {
       // read error
     }
@@ -59,8 +42,4 @@ const crossCheckHighScore = async (comparable) => {
 const overrideSetScore = async (set) => {
     await AsyncStorage.setItem('highScore', set.toString())
 }
-
-function getProgressData () {
-    return progressData
-}
-module.exports = { LogProgress, LogScore, overrideSetScore, getCurrentScore, getSessionScore, refreshHighScore, getProgressData }
+module.exports = { LogProgress, LogScore, overrideSetScore, getCurrentScore }

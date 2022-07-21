@@ -61,6 +61,7 @@ const overrideSetScore = async (set) => {
 }
 
 function getProgressData () {
+    console.log("got progress data: " + progressData.length)
     return progressData
 }
 module.exports = { LogProgress, LogScore, overrideSetScore, getCurrentScore, getSessionScore, refreshHighScore, getProgressData }

@@ -12,7 +12,7 @@ import { configure } from "mobx"
 const { globalTimer, Timer } = require("../components/timers.js")
 var palette = require("../assets/globalColorScheme.json") 
 var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
-import { LogProgress, LogScore, getCurrentScore } from '../components/progressDataManager'
+import { LogProgress, LogScore, currentScore } from '../components/progressDataManager'
 async function loadfonts () {
 	await loadAsync({
 		'TaameyAshkenaz': {
@@ -63,7 +63,7 @@ useEffect(() => {
 }
 	
 	function nextQuestion (timeNotExpired) {
-		LogProgress(timeNotExpired, answerState, letTimer.time, currentQuestionSet.prompt, "translit")
+		LogProgress(timeNotExpired, answerState,letTimer.time,currentQuestionSet.prompt, "translit")
 		setAnswerState("111111")
 		letTimer.stopTimer()
 		
@@ -92,7 +92,7 @@ useEffect(() => {
 	  <View style={styles.buttonRow}>
 		<Button
 			title = {currentQuestionSet.buttons[0].sound}
-			onPress={() => { 
+			onPress={() => { setAnswerState("1" + answerState.substring(1))
 			if (currentQuestionSet.buttons[0].isRight) {
 				LogScore(letterGamePointValue)
 				letTimer.stopTimer()
@@ -100,14 +100,13 @@ useEffect(() => {
 			} else {
 				LogScore(-letterGamePointValue)
 			}
-			setAnswerState("1" + answerState.substring(1))
 		}}
 			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.buttons[0].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[1].sound}
 			onPress={() => {
-				
+				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
 				if (currentQuestionSet.buttons[1].isRight) {
 					LogScore(letterGamePointValue)
 					letTimer.stopTimer()
@@ -115,14 +114,13 @@ useEffect(() => {
 				} else {
 					LogScore(-letterGamePointValue)
 				}
-				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
 			}}
 			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.buttons[1].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[2].sound}
 			onPress={() => {
-				
+				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
 				if (currentQuestionSet.buttons[2].isRight) {
 					LogScore(letterGamePointValue)
 					letTimer.stopTimer()
@@ -130,14 +128,13 @@ useEffect(() => {
 				} else {
 					LogScore(-letterGamePointValue)
 				}
-				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
 			}}
 			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.buttons[2].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[3].sound}
 			onPress={() => {
-				
+				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
 				if (currentQuestionSet.buttons[3].isRight) {
 					LogScore(letterGamePointValue)
 					letTimer.stopTimer()
@@ -145,13 +142,12 @@ useEffect(() => {
 				} else {
 					LogScore(-letterGamePointValue)
 				}
-				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
 			}}
 			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.buttons[3].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		<Button
 			title = {currentQuestionSet.buttons[4].sound}
-			onPress={() => {
+			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
 			if (currentQuestionSet.buttons[4].isRight) {
 				LogScore(letterGamePointValue)
 				letTimer.stopTimer()
@@ -159,13 +155,12 @@ useEffect(() => {
 			} else {
 				LogScore(-letterGamePointValue)
 			}
-			setAnswerState(answerState.substring(0,4) + "1")
 		}}
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.buttons[4].isRight ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + letTimer.time}</Text>
-	<Text style={styles.body}>{"\nScore: " + getCurrentScore()}</Text>
+	<Text style={styles.body}>{"\nScore: " + currentScore}</Text>
 	</View>
 	</View>
 	)

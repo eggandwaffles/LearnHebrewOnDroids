@@ -63,7 +63,7 @@ useEffect(() => {
 }
 	
 	function nextQuestion (timeNotExpired) {
-		LogProgress(timeNotExpired, answerState, letTimer.time, currentQuestionSet.prompt, "translit")
+		LogProgress(timeNotExpired, answerState,letTimer.time,currentQuestionSet.prompt, "translit")
 		setAnswerState("111111")
 		letTimer.stopTimer()
 		
@@ -165,7 +165,7 @@ useEffect(() => {
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + letTimer.time}</Text>
-	<Text style={styles.body}>{"\nScore: " + getCurrentScore()}</Text>
+	<Text style={styles.body}>{"\nScore: " + getCurrentScore}</Text>
 	</View>
 	</View>
 	)

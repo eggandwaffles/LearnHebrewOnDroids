@@ -63,7 +63,7 @@ useEffect(() => {
 }
 	
 	function nextQuestion (timeNotExpired) {
-		LogProgress(timeNotExpired, answerState, letTimer.time, currentQuestionSet.prompt, "translit")
+		LogProgress(timeNotExpired, answerState,letTimer.time,currentQuestionSet.prompt, "translit")
 		setAnswerState("111111")
 		letTimer.stopTimer()
 		

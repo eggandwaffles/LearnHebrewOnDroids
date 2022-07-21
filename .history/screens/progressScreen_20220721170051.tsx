@@ -13,13 +13,13 @@ export default function ProgressScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
     var DATA = getProgressData()
 
-    const renderItemTranslit = ({item}) => {
-        
+    const renderItemTranslit = (item) => {
+        console.log(item.questionType)
         if (item.questionType == "translit") {
             console.log("Rendering a translit item")
             return (
                 <View style={styles.listItem}>
-                    <HebrewText>{item.depiction + " | " + item.timeRemaining + "s | " + (item.correctAnswer ? `\u{1F44D}` : `\u{1F44E}`) + " | " + item.guesses}</HebrewText>
+                    <HebrewText>{item.depiction + " | " + item.timeRemaining + "s | " + (item.correctAnswer ? "\{u1F44D}" : "\u{1F44E}") + " | " + item.guesses}</HebrewText>
                 </View>
             )
         } else {

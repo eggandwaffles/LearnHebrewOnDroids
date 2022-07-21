@@ -20,7 +20,14 @@ const clearAll = async () => {
 }
 export default function TabFourScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
-
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabLongPress', (e) => {
+      // Do something
+      navigation.navigate('devWorks')
+    });
+  
+    return unsubscribe;
+  }, [navigation]);
   return (
 	<View style={styles.container}>
     <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
@@ -43,7 +50,7 @@ export default function TabFourScreen( { navigation } ) {
     <Button styles={styles.button}
             title = {"Clear High Score"}
             onPress = {()=>{
-              Alert.alert("Reset score?", "Sibling/parent/friend/spouse beat your score? Just delete the record. Just keep in mind the onus is on you to regain your former glory.", [
+              Alert.alert("Reset score?", "Sibling/parent/friend/spouse beat your score? Just delete the records. Just keep in mind the onus is on you to regain your former glory.", [
                 {
                   text : "Cancel",
                   onPress: () => {

@@ -4,18 +4,16 @@ var progressData = []
 var currentScore = 0
 var sessionScore = 0
 function LogProgress (correct, answerString, time, hebrewData, type) {
-    var pushable = {}
-    pushable.correctAnswer = correct
+    this.correctAnswer = correct
     var sum = 0
         for (let i = 0; i<answerString.length;i++) {
-            sum = sum + Number.parseFloat(answerString[i])
+            sum += Number.parseFloat(answerString[i])
         }
-    
-    pushable.guesses = sum + 1
-    pushable.timeRemaining = time
-    pushable.depiction = hebrewData
-    pushable.questionType = type
-    progressData.push(pushable)
+    this.guesses = sum
+    this.timeRemaining = time
+    this.depiction = hebrewData
+    this.questionType = type
+    progressData.push(this)
 }
 
 function LogScore (deltaScore) {

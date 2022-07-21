@@ -15,9 +15,15 @@ import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
-export default function BottomTabNavigator( { navigation } ) {
+export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
- 
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabLongPress', (e) => {
+      // Do something
+    });
+  
+    return unsubscribe;
+  }, [navigation]);
   return (
     <BottomTab.Navigator
       initialRouteName="Letters"

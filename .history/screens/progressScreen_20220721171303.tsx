@@ -19,7 +19,7 @@ export default function ProgressScreen( { navigation } ) {
             console.log("Rendering a translit item")
             return (
                 <View style={styles.listItem}>
-                    <HebrewText>{item.depiction + " | " + item.timeRemaining + "s | " + (item.correctAnswer ? `\u{1F44D}` : `\u{1F44E}`) + " | " + item.guesses}</HebrewText>
+                    <HebrewText>{+ item.timeRemaining + "s | " + (item.correctAnswer ? `\u{1F44D}` : `\u{1F44E}`) + " | " + item.guesses + item.depiction + " | " }</HebrewText>
                 </View>
             )
         } else {

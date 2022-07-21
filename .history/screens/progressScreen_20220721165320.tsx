@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, Alert, Image, Pressable } from 'react-native';
+import { StyleSheet, Alert, Image, Pressable, FlatList } from 'react-native';
 import { ImageFetch } from '../components/LetterLookup';
 import {Text, View, Button} from '../components/Themed';
 import { HebrewText } from '../components/StyledText';
@@ -13,23 +13,20 @@ export default function ProgressScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
     var DATA = getProgressData()
 
-    const renderItemTranslit = ({item}) => {
-        
+    const renderItemTranslit = (item) => {
         if (item.questionType == "translit") {
-            console.log("Rendering a translit item")
             return (
                 <View style={styles.listItem}>
-                    <HebrewText>{item.depiction + " | " + item.timeRemaining + "s | " + (item.correctAnswer ? `\u{1F44D}` : `\u{1F44E}`) + " | " + item.guesses}</HebrewText>
+                    <HebrewText>{item.depiction + " | " + item.timeRemaining + "s | " + (item.correctAnswer ? "\u1F44D" : "\u1F44E") + " | " + item.guesses}</HebrewText>
                 </View>
             )
         } else {
-            console.log("Rendering a translate item")
             return <View />
         }
     }
   return (
     <View style={styles.container}>
-
+	<View style={{flex : 1}}>
     <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
     <HebrewText style={{fontSize: 50}}>{
       finalAnswer("all").letters
@@ -43,17 +40,19 @@ export default function ProgressScreen( { navigation } ) {
 	  <Text style={styles.body}>{"YOUR SCORE: " + getCurrentScore()}</Text>
       <Text style={styles.body}>{"HIGH SCORE: " + getSessionScore()}</Text>
 
-
-        
-           
+	</View>
+        <View style={{flex: 2}}>
+            <View>
                 <FlatList 
                     data={DATA}
                     renderItem={renderItemTranslit}
                     
                 />
-            
-         
-        
+            </View>
+            <View>
+
+            </View>
+        </View>
     </View>
 
 

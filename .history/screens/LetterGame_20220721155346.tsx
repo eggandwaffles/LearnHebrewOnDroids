@@ -12,7 +12,7 @@ import { configure } from "mobx"
 const { globalTimer, Timer } = require("../components/timers.js")
 var palette = require("../assets/globalColorScheme.json") 
 var { RockPolisher } = require("../components/LetterAnswerCompiler.js")
-import { LogProgress, LogScore, getCurrentScore } from '../components/progressDataManager'
+import { LogProgress, LogScore, currentScore } from '../components/progressDataManager'
 async function loadfonts () {
 	await loadAsync({
 		'TaameyAshkenaz': {
@@ -63,7 +63,7 @@ useEffect(() => {
 }
 	
 	function nextQuestion (timeNotExpired) {
-		LogProgress(timeNotExpired, answerState, letTimer.time, currentQuestionSet.prompt, "translit")
+		LogProgress(timeNotExpired, answerState,letTimer.time,currentQuestionSet.prompt, "translit")
 		setAnswerState("111111")
 		letTimer.stopTimer()
 		
@@ -165,7 +165,7 @@ useEffect(() => {
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + letTimer.time}</Text>
-	<Text style={styles.body}>{"\nScore: " + getCurrentScore()}</Text>
+	<Text style={styles.body}>{"\nScore: " + currentScore}</Text>
 	</View>
 	</View>
 	)

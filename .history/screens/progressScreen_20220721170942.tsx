@@ -12,7 +12,9 @@ var palette = require("../assets/globalColorScheme.json")
 export default function ProgressScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
     var DATA = getProgressData()
-
+    console.log(DATA.forEach((thing)=>{
+        console.log(thing.timeRemaining)
+    }))
     const renderItemTranslit = ({item}) => {
         
         if (item.questionType == "translit") {

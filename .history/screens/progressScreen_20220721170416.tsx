@@ -14,12 +14,12 @@ export default function ProgressScreen( { navigation } ) {
     var DATA = getProgressData()
 
     const renderItemTranslit = ({item}) => {
-        
+        console.log(JSON.stringify(item))
         if (item.questionType == "translit") {
             console.log("Rendering a translit item")
             return (
                 <View style={styles.listItem}>
-                    <HebrewText>{item.depiction + " | " + item.timeRemaining + "s | " + (item.correctAnswer ? `\u{1F44D}` : `\u{1F44E}`) + " | " + item.guesses}</HebrewText>
+                    <HebrewText>{item.depiction + " | " + item.timeRemaining + "s | " + (item.correctAnswer ? "\{u1F44D}" : "\u{1F44E}") + " | " + item.guesses}</HebrewText>
                 </View>
             )
         } else {

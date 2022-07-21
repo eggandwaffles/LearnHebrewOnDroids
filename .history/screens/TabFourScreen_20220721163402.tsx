@@ -43,7 +43,7 @@ export default function TabFourScreen( { navigation } ) {
     <Button styles={styles.button}
             title = {"Clear High Score"}
             onPress = {()=>{
-              Alert.alert("Reset score?", "Sibling/parent/friend/spouse beat your score? Just delete the record. Just keep in mind the onus is on you to regain your former glory.", [
+              Alert.alert("Reset score?", "Sibling/parent/friend/spouse beat your score? Just delete the records. Just keep in mind the onus is on you to regain your former glory.", [
                 {
                   text : "Cancel",
                   onPress: () => {
