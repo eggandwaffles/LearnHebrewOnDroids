@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var progressData = []
-var currentScore = 0
+var currentScore = "0"
 function LogProgress (correct, answerString, time, hebrewData, type) {
     this.correctAnswer = correct
     this.guesses = () => {

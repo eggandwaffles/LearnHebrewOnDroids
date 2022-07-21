@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Alert, Modal, Pressable, ToastAndroid, BackHandler } from 'react-native';
+import { StyleSheet, Alert, Modal, Pressable, ToastAndroid } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
@@ -11,7 +11,7 @@ import { loadAsync } from 'expo-font';
 import { makeAutoObservable, makeObservable} from "mobx"
 import { observer } from "mobx-react"
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { LogProgress, LogScore, overrideSetScore } from '../components/progressDataManager'
+
 //https://docs.expo.io/versions/latest/sdk/font/
 async function loadfonts () {
 	await loadAsync({
@@ -36,16 +36,7 @@ const clearAll = async () => {
 
 const devWorks = observer(( { route, navigation }) => {
 //  export default function devWorks( { route, navigation }) {
-  const backAction = () => {
-		navigation.navigate("TabFourScreen")
-	}
-	React.useEffect(() => {
-		BackHandler.addEventListener("hardwareBackPress", backAction);
-	
-		return () =>
-		  BackHandler.removeEventListener("hardwareBackPress", backAction);
-	  }, []);
-
+  
     return (
         <View style={styles.container}>
             <Pressable><Text style={styles.title}>DEVELOPMENT PAGE</Text></Pressable>
@@ -84,31 +75,43 @@ const devWorks = observer(( { route, navigation }) => {
             <Text>{myTimer.time}</Text>
             <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <Text>Unit Testing</Text>
-            
+            <Button styles={styles.button}
+            title = {"MobX Word Game"}
+            onPress = {()=>{
+              navigation.navigate('MobxWordGameLit', {"cats" : "all", "init" : true} )
+            }}
+            />
+            <Button styles={styles.button}
+            title = {"Prototype Selection"}
+            onPress = {()=>{
+              navigation.navigate('protoSelector')
+            }}
+            />
+            <Button styles={styles.button}
+            title = {"Letter View"}
+            onPress = {()=>{
+              navigation.navigate('LetterNameView')
+            }}
+            />
+            <Button styles={styles.button}
+            title = {"Vowel View"}
+            onPress = {()=>{
+              navigation.navigate('VowelViewer')
+            }}
+            />
+            <Button styles={styles.button}
+            title = {"Dictionary View"}
+            onPress = {()=>{
+              navigation.navigate('DictionaryView')
+            }}
+            />
             <Button styles={styles.button}
             title = {"CLEAR LOCAL STORAGE"}
             onPress = {()=>{
               clearAll()
             }}
             />
-            <Button styles={styles.button}
-            title = {"Increment score +"}
-            onPress = {()=>{
-              LogScore(1)
-            }}
-            />
-          <Button styles={styles.button}
-            title = {"Increment score -"}
-            onPress = {()=>{
-              LogScore(-1)
-            }}
-            />
-            <Button styles={styles.button}
-            title = {"CLEAR HIGH SCORE"}
-            onPress = {()=>{
-              overrideSetScore(0)
-            }}
-            />            
+            
         </View>
     )
 })

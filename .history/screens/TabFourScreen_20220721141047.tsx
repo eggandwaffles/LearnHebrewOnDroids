@@ -7,7 +7,6 @@ var { finalAnswer } = require("../components/wordAnswerGen.js")
 var palette = require("../assets/globalColorScheme.json")
 import { LogProgress, LogScore, overrideSetScore } from '../components/progressDataManager'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import RNExitApp from 'react-native-exit-app';
 
 const clearAll = async () => {
   try {
@@ -74,7 +73,7 @@ export default function TabFourScreen( { navigation } ) {
                     text : "Delete",
                     onPress: () => {
                     clearAll()
-                    RNExitApp.exitApp()                      
+                    BackHandler.exitApp()                      
                   }
                 }
               ])

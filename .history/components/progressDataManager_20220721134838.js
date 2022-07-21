@@ -24,17 +24,15 @@ function LogScore (deltaScore) {
 
 const crossCheckHighScore = async (comparable) => {
     try {
-      var currentScore = Number.parseFloat(await AsyncStorage.getItem('highScore'))
-      console.log("Current high score: " + currentScore + " Current score: " + comparable)
+      var currentScore = await AsyncStorage.getItem('highScore')
+      console.log("Current high score: " + currentScore)
       if (comparable > currentScore) {
-        await AsyncStorage.setItem('highScore', comparable.toString())
+        await AsyncStorage.setItem('highScore', comparable)
         console.log("Set high score to " + comparable)
       }
     } catch(e) {
       // read error
     }
 }
-const overrideSetScore = async (set) => {
-    await AsyncStorage.setItem('highScore', set.toString())
-}
-module.exports = { LogProgress, LogScore, overrideSetScore }
+
+module.exports = { LogProgress, LogScore }

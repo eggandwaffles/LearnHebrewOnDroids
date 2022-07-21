@@ -1,6 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import * as React from 'react';
-import { StyleSheet, Alert, Modal, Pressable, ToastAndroid, BackHandler } from 'react-native';
+import { StyleSheet, Alert, Modal, Pressable, ToastAndroid } from 'react-native';
 import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
 import * as Font from 'expo-font';
@@ -36,16 +36,7 @@ const clearAll = async () => {
 
 const devWorks = observer(( { route, navigation }) => {
 //  export default function devWorks( { route, navigation }) {
-  const backAction = () => {
-		navigation.navigate("TabFourScreen")
-	}
-	React.useEffect(() => {
-		BackHandler.addEventListener("hardwareBackPress", backAction);
-	
-		return () =>
-		  BackHandler.removeEventListener("hardwareBackPress", backAction);
-	  }, []);
-
+  
     return (
         <View style={styles.container}>
             <Pressable><Text style={styles.title}>DEVELOPMENT PAGE</Text></Pressable>

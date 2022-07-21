@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 var progressData = []
-var currentScore = 0
+var currentScore = "0"
 function LogProgress (correct, answerString, time, hebrewData, type) {
     this.correctAnswer = correct
     this.guesses = () => {
@@ -25,7 +25,7 @@ function LogScore (deltaScore) {
 const crossCheckHighScore = async (comparable) => {
     try {
       var currentScore = Number.parseFloat(await AsyncStorage.getItem('highScore'))
-      console.log("Current high score: " + currentScore + " Current score: " + comparable)
+      console.log("Current high score: " + currentScore)
       if (comparable > currentScore) {
         await AsyncStorage.setItem('highScore', comparable.toString())
         console.log("Set high score to " + comparable)
