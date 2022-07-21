@@ -27,7 +27,3 @@ export type TabFourParamList = {
 export type LetterGameParamList = {
   LetterGame: undefined;
 };
-
-export type ProgressScreenParamList = {
-  ProgressScreen: undefined;
-};

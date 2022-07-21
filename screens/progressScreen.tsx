@@ -5,28 +5,22 @@ import {Text, View, Button} from '../components/Themed';
 import { HebrewText } from '../components/StyledText';
 var { finalAnswer } = require("../components/wordAnswerGen.js")
 var palette = require("../assets/globalColorScheme.json")
-export default function TabFourScreen( { navigation } ) {
+export default function ProgressScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
 
   return (
 	<View style={styles.container}>
     <Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
-    <Pressable 
-    delayLongPress={1000}
-    onLongPress={()=>{
-      navigation.navigate('devWorks')
-    }}><HebrewText style={{fontSize: 50}}>{
+    <HebrewText style={{fontSize: 50}}>{
       finalAnswer("all").letters
     
 
     }
-    
 </HebrewText>
     
-      <Text style={styles.title}>Settings</Text>
-      </Pressable>
+      <Text style={styles.title}>Progress</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-	  <Text style={styles.body}>Long-press title for development tools</Text>
+	  <Text style={styles.body}>Coming soon</Text>
 
 	</View>
 

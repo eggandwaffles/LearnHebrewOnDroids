@@ -9,8 +9,7 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
 import TabFourScreen from '../screens/TabFourScreen';
-import ProgressScreen from '../screens/progressScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList, ProgressScreenParamList } from '../types';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -25,26 +24,26 @@ export default function BottomTabNavigator() {
         name="Letters"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-git-commit" color={color} />,
+          tabBarIcon: ({ color }) => <Image source={require("../assets/images/NavSquare.png")} style={{ width: 15, height: 15}}/>,
         }}
       />
       <BottomTab.Screen
         name="Letters & Vowels"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-git-pull-request" color={color} />,
+          tabBarIcon: ({ color }) => <Image source={require("../assets/images/NavTwoSquare.png")} style={{ width: 15, height: 16}}/>,
         }}
       />
 	        <BottomTab.Screen
         name="Words"
         component={TabThreeNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="md-git-network" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="md-git-branch" color={color} />,
         }}
       />
       	        <BottomTab.Screen
         name="Progress"
-        component={ProgressScreenNavigator}
+        component={TabFourNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-git-compare" color={color} />,
         }}
@@ -124,16 +123,3 @@ function TabFourNavigator() {
   );
 }
 
-const ProgressScreenStack = createStackNavigator<ProgressScreenParamList>();
-
-function ProgressScreenNavigator() {
-  return (
-    <ProgressScreenStack.Navigator>
-      <ProgressScreenStack.Screen
-        name="ProgressScreen"
-        component={ProgressScreen}
-        options={{ headerShown: false }}
-      />
-    </ProgressScreenStack.Navigator>
-  );
-}

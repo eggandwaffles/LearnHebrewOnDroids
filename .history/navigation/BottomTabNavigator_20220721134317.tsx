@@ -44,7 +44,7 @@ export default function BottomTabNavigator() {
       />
       	        <BottomTab.Screen
         name="Progress"
-        component={ProgressScreenNavigator}
+        component={TabFourNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="md-git-compare" color={color} />,
         }}
