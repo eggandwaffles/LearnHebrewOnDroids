@@ -70,7 +70,7 @@ if (route.params.init) {
 	
 	function nextQuestion (timeNotExpired) {
 		//console.log("nextQuestion invoked!")
-		LogProgress(timeNotExpired, answerState, litTimer.time, currentQuestionSet.letters, "translit")
+		LogProgress(timeNotExpired, answerState, litTimer.time, currentQuestionSet.prompt, "translit")
 		setAnswerState("111111")
 		//setStop(true)
 		litTimer.stopTimer()

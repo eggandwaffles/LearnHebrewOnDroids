@@ -48,22 +48,18 @@ export default function ProgressScreen( { navigation } ) {
     <View style={styles.largeContainer}>
 <View style={styles.container}>
 
+<Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
 
-  <View style={{flex: 1, marginTop: 20}}>
+
   <Text style={styles.title}>Progress</Text>
-  </View>
-  <View style={styles.blueContainer}>
+  <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
   <Text style={styles.body}>{"YOUR SCORE: " + getCurrentScore()}</Text>
   <Text style={styles.body}>{"HIGH SCORE: " + getSessionScore()}</Text>
-  
-  </View>
   
   </View>
   <View style={{flexDirection: 'column', flex: 2, alignContent: 'center', justifyContent: 'center'}}>
     <View style={styles.blueContainer}>
     <Text style={styles.body}>Transliterations:</Text>
-    <View style={styles.listHeader}><View style={styles.blueListItem}><HebrewText style={styles.smallListText}>Hebrew</HebrewText><HebrewText style={styles.smallListText}>Time Remaining</HebrewText><HebrewText style={styles.smallListText}>Correct?</HebrewText><HebrewText style={styles.smallListText}>Guesses</HebrewText></View></View>
-
             <FlatList 
                 
                 data={DATA}
@@ -75,8 +71,6 @@ export default function ProgressScreen( { navigation } ) {
       
     <View style={styles.blueContainer}>
     <Text style={styles.body}>Translations:</Text>
-    <View style={styles.listHeader}><View style={styles.blueListItem}><HebrewText style={styles.smallListText}>Hebrew</HebrewText><HebrewText style={styles.smallListText}>Time Remaining</HebrewText><HebrewText style={styles.smallListText}>Correct?</HebrewText><HebrewText style={styles.smallListText}>Guesses</HebrewText></View></View>
-
             <FlatList
                 data={DATA}
                 renderItem={renderItemTranslate}
@@ -122,16 +116,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         margin: 5
     },
-    listHeader: {
-      width: "80%",
-      backgroundColor: palette.interactable,
-      marginBottom: 10
-    },
-    smallListText: {
-      fontSize: 10,
-      justifyContent: "flex-start",
-      margin: 5
-  },
     listSwitch: {
         justifyContent: "flex-end"
     },

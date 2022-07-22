@@ -49,9 +49,8 @@ export default function ProgressScreen( { navigation } ) {
 <View style={styles.container}>
 
 
-  <View style={{flex: 1, marginTop: 20}}>
+
   <Text style={styles.title}>Progress</Text>
-  </View>
   <View style={styles.blueContainer}>
   <Text style={styles.body}>{"YOUR SCORE: " + getCurrentScore()}</Text>
   <Text style={styles.body}>{"HIGH SCORE: " + getSessionScore()}</Text>

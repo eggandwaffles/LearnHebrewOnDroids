@@ -70,7 +70,7 @@ if (route.params.init) {
 	
 	function nextQuestion (timeNotExpired) {
 		//console.log("nextQuestion invoked!")
-		LogProgress(timeNotExpired, answerState, litTimer.time, currentQuestionSet.letters, "translit")
+		LogProgress(timeNotExpired, answerState, litTimer.time, currentQuestionSet.prompt, "translit")
 		setAnswerState("111111")
 		//setStop(true)
 		litTimer.stopTimer()
@@ -172,7 +172,6 @@ if (route.params.init) {
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + litTimer.time}</Text>
-	<Text style={styles.body}>{"\nScore: " + getCurrentScore()}</Text>
 	</View>
 	</View>
 	)

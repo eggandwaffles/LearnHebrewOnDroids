@@ -12,8 +12,6 @@ import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 import { configure } from "mobx"
 import { NavigationContainer } from '@react-navigation/native';
-import { LogProgress, LogScore, getCurrentScore } from '../components/progressDataManager'
-
 configure({
     enforceActions: "never",
 })
@@ -29,8 +27,6 @@ async function loadfonts () {
 var lateTimer = new Timer("lateTimer")
 //console.log("Timer created on late!")
 makeAutoObservable(lateTimer)
-var wordGamePointValue = 3
-
 loadfonts()
 const MobxWordGameLate = observer(( { route, navigation } ) => {
 	const [currentQuestionSet, setQuestionState ] = React.useState(route.params.qData)
@@ -60,12 +56,11 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 		})
 		//setInit(false)
 		lateTimer.startTimer(12, () => {
-			nextQuestion(false)
+			nextQuestion()
 		})
 	}
-	function nextQuestion (timeNotExpired) {
-		LogProgress(timeNotExpired, answerState, lateTimer.time, currentQuestionSet.letters, "translate")
-
+	function nextQuestion () {
+		
 		setAnswerState("111111")
 		//setStop(true)
 		lateTimer.stopTimer()
@@ -95,16 +90,13 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 	<HebrewText style={{fontSize: 50}}>{currentQuestionSet.letters}</HebrewText>
 
 	  <View style={styles.buttonRow}>
-	  <Button
+		<Button
 			title = {currentQuestionSet.TranslateOptions[0]}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
-			if (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate && !parseFloat(answerState[0])) {
-				LogScore(wordGamePointValue)
-				lateTimer.stopTimer()
-				nextQuestion(true)
-			} else {
-				LogScore(-wordGamePointValue)
+			if (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate) {
+				nextQuestion()
 			}
+			
 		}}
 			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.TranslateOptions[0] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
@@ -112,12 +104,8 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 			title = {currentQuestionSet.TranslateOptions[1]}
 			onPress = {() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
-				if (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate && !parseFloat(answerState[1])) {
-					LogScore(wordGamePointValue)
-					lateTimer.stopTimer()
-					nextQuestion(true)
-				} else {
-					LogScore(-wordGamePointValue)
+				if (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate) {
+					nextQuestion()
 				}
 			}}
 			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.TranslateOptions[1] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
@@ -126,13 +114,8 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 			title = {currentQuestionSet.TranslateOptions[2]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
-				if (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate && !parseFloat(answerState[2])) {
-					LogScore(wordGamePointValue)
-                    lateTimer.stopTimer()
-					nextQuestion(true)
-					
-				} else {
-					LogScore(-wordGamePointValue)
+				if (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate) {
+					nextQuestion()
 				}
 			}}
 			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.TranslateOptions[2] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
@@ -141,12 +124,8 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 			title = {currentQuestionSet.TranslateOptions[3]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
-				if (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate && !parseFloat(answerState[3])) {
-					LogScore(wordGamePointValue)
-					lateTimer.stopTimer()
-					nextQuestion(true)
-				} else {
-					LogScore(-wordGamePointValue)
+				if (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate) {
+					nextQuestion()
 				}
 			}}
 			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.TranslateOptions[3] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
@@ -154,19 +133,14 @@ const MobxWordGameLate = observer(( { route, navigation } ) => {
 		<Button
 			title = {currentQuestionSet.TranslateOptions[4]}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
-			if (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate && !parseFloat(answerState[4])) {
-				LogScore(wordGamePointValue)
-				lateTimer.stopTimer()
-				nextQuestion(true)
-			} else {
-				LogScore(-wordGamePointValue)
+			if (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate) {
+				nextQuestion()
 			}
 		}}
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslateOptions[4] === currentQuestionSet.CorrectTranslate ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + lateTimer.time}</Text>
-	<Text style={styles.body}>{"\nScore: " + getCurrentScore()}</Text>
 	<Button
 		title = { hinted ? currentQuestionSet.hint : "Get a Hint"}
 		onPress = {()=>{

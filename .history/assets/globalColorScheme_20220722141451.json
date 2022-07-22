@@ -4,5 +4,5 @@
     "correct" : "#00DB1F",
     "incorrect" : "#DE2A1E",
     "failed" : "#909090",
-    "hint" : "gold"
+    "hint" : "#e6e235"
 }

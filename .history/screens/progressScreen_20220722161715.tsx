@@ -49,7 +49,7 @@ export default function ProgressScreen( { navigation } ) {
 <View style={styles.container}>
 
 
-  <View style={{flex: 1, marginTop: 20}}>
+  <View style={{flex: 1}}>
   <Text style={styles.title}>Progress</Text>
   </View>
   <View style={styles.blueContainer}>

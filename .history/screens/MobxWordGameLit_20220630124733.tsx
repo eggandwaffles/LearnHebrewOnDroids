@@ -12,8 +12,6 @@ import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 import { configure } from "mobx"
 import { NavigationContainer } from '@react-navigation/native';
-import { LogProgress, LogScore, getCurrentScore } from '../components/progressDataManager'
-
 
 configure({
     enforceActions: "never",
@@ -31,7 +29,6 @@ loadfonts()
 var litTimer = new Timer("litTimer")
 //console.log("Timer created on lit!")
 makeAutoObservable(litTimer)
-var wordGamePointValue = 3
 const MobxWordGameLit = observer(( { route, navigation } ) => {
 	const [currentQuestionSet, setQuestionState ] = React.useState(finalAnswer(route.params.cats))
 	const [ answerState, setAnswerState] = React.useState("000000")
@@ -61,16 +58,15 @@ if (route.params.init) {
 	//console.log("Init code called on lit. Params are " + JSON.stringify(route.params))
 	setTimeout(() => {
 		litTimer.startTimer(12, () => {
-			nextQuestion(false)
+			nextQuestion()
 		})
 	},100)
 
 }
 
 	
-	function nextQuestion (timeNotExpired) {
+	function nextQuestion () {
 		//console.log("nextQuestion invoked!")
-		LogProgress(timeNotExpired, answerState, litTimer.time, currentQuestionSet.letters, "translit")
 		setAnswerState("111111")
 		//setStop(true)
 		litTimer.stopTimer()
@@ -104,12 +100,9 @@ if (route.params.init) {
 		<Button
 			title = {currentQuestionSet.TranslitOptions[0]}
 			onPress={() => { setAnswerState("1" + answerState.substring(1))
-			if (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit && !parseFloat(answerState[0])) {
-				LogScore(wordGamePointValue)
+			if (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit) {
 				litTimer.stopTimer()
-				nextQuestion(true)
-			} else {
-				LogScore(-wordGamePointValue)
+				nextQuestion()
 			}
 		}}
 			color = {(parseFloat(answerState[0]) ? (currentQuestionSet.TranslitOptions[0] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
@@ -118,12 +111,9 @@ if (route.params.init) {
 			title = {currentQuestionSet.TranslitOptions[1]}
 			onPress = {() => {
 				setAnswerState(answerState.substring(0,1) + "1" + answerState.substring(2))
-				if (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit && !parseFloat(answerState[1])) {
-					LogScore(wordGamePointValue)
+				if (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit) {
 					litTimer.stopTimer()
-					nextQuestion(true)
-				} else {
-					LogScore(-wordGamePointValue)
+					nextQuestion()
 				}
 			}}
 			color = {(parseFloat(answerState[1]) ? (currentQuestionSet.TranslitOptions[1] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
@@ -132,13 +122,10 @@ if (route.params.init) {
 			title = {currentQuestionSet.TranslitOptions[2]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,2) + "1" + answerState.substring(3))
-				if (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit && !parseFloat(answerState[2])) {
-					LogScore(wordGamePointValue)
+				if (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit) {
                     litTimer.stopTimer()
-					nextQuestion(true)
+					nextQuestion()
 					
-				} else {
-					LogScore(-wordGamePointValue)
 				}
 			}}
 			color = {(parseFloat(answerState[2]) ? (currentQuestionSet.TranslitOptions[2] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
@@ -147,12 +134,9 @@ if (route.params.init) {
 			title = {currentQuestionSet.TranslitOptions[3]}
 			onPress={() => {
 				setAnswerState(answerState.substring(0,3) + "1" + answerState.substring(4))
-				if (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit && !parseFloat(answerState[3])) {
-					LogScore(wordGamePointValue)
+				if (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit) {
 					litTimer.stopTimer()
-					nextQuestion(true)
-				} else {
-					LogScore(-wordGamePointValue)
+					nextQuestion()
 				}
 			}}
 			color = {(parseFloat(answerState[3]) ? (currentQuestionSet.TranslitOptions[3] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
@@ -160,19 +144,15 @@ if (route.params.init) {
 		<Button
 			title = {currentQuestionSet.TranslitOptions[4]}
 			onPress={() => {setAnswerState(answerState.substring(0,4) + "1")
-			if (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit && !parseFloat(answerState[4])) {
-				LogScore(wordGamePointValue)
+			if (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit) {
 				litTimer.stopTimer()
-				nextQuestion(true)
-			} else {
-				LogScore(-wordGamePointValue)
+				nextQuestion()
 			}
 		}}
 			color = {(parseFloat(answerState[4]) ? (currentQuestionSet.TranslitOptions[4] === currentQuestionSet.CorrectTranslit ? (palette.correct) : (palette.incorrect)) : (palette.interactable))}
 		/>
 		</View>
 	<Text style={styles.body}>{"\nTime Remaining: " + litTimer.time}</Text>
-	<Text style={styles.body}>{"\nScore: " + getCurrentScore()}</Text>
 	</View>
 	</View>
 	)

@@ -19,9 +19,8 @@ export default function ProgressScreen( { navigation } ) {
         if (item.questionType == "translit") {
             console.log("Rendering a translit item")
             return (
-                <View style={{backgroundColor: palette.interactable, marginBottom: 10}}>
-                    <View style={styles.blueListItem}><HebrewText style={styles.listText}>{item.depiction}</HebrewText><HebrewText style={styles.listText}>{item.timeRemaining + "s"}</HebrewText><HebrewText style={styles.listText}>{(item.correctAnswer ? `\u{1F44D}` : `\u{1F44E}`)}</HebrewText><HebrewText style={styles.listText}>{item.guesses}</HebrewText></View>
-
+                <View style={{backgroundColor: palette.interactable, marginBottom: 10, width: "80%"}}>
+                    <View style={styles.blueListItem}><HebrewText style={styles.body} adjustsFontSizeToFit={true}>{item.depiction + "|" + item.timeRemaining + "s|" + (item.correctAnswer ? `\u{1F44D}` : `\u{1F44E}`) + "|" + item.guesses}</HebrewText></View>
                 </View>
             )
         } else {
@@ -48,39 +47,37 @@ export default function ProgressScreen( { navigation } ) {
     <View style={styles.largeContainer}>
 <View style={styles.container}>
 
+<Image source={require("../assets/images/UnderConstructionBanner.png")} style={{ width: 250, height: 25}} />
+<HebrewText style={{fontSize: 50}}>{
+  finalAnswer("all").letters
 
-  <View style={{flex: 1, marginTop: 20}}>
+
+}
+</HebrewText>
+
   <Text style={styles.title}>Progress</Text>
-  </View>
-  <View style={styles.blueContainer}>
+  <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
   <Text style={styles.body}>{"YOUR SCORE: " + getCurrentScore()}</Text>
   <Text style={styles.body}>{"HIGH SCORE: " + getSessionScore()}</Text>
   
   </View>
-  
-  </View>
-  <View style={{flexDirection: 'column', flex: 2, alignContent: 'center', justifyContent: 'center'}}>
+  <View style={{flexDirection: 'column', flex: 1, alignContent: 'center', justifyContent: 'center'}}>
     <View style={styles.blueContainer}>
     <Text style={styles.body}>Transliterations:</Text>
-    <View style={styles.listHeader}><View style={styles.blueListItem}><HebrewText style={styles.smallListText}>Hebrew</HebrewText><HebrewText style={styles.smallListText}>Time Remaining</HebrewText><HebrewText style={styles.smallListText}>Correct?</HebrewText><HebrewText style={styles.smallListText}>Guesses</HebrewText></View></View>
-
             <FlatList 
                 
                 data={DATA}
                 renderItem={renderItemTranslit}
-                style={{width: "80%"}}
                 
             />
     </View>
       
     <View style={styles.blueContainer}>
     <Text style={styles.body}>Translations:</Text>
-    <View style={styles.listHeader}><View style={styles.blueListItem}><HebrewText style={styles.smallListText}>Hebrew</HebrewText><HebrewText style={styles.smallListText}>Time Remaining</HebrewText><HebrewText style={styles.smallListText}>Correct?</HebrewText><HebrewText style={styles.smallListText}>Guesses</HebrewText></View></View>
-
             <FlatList
                 data={DATA}
                 renderItem={renderItemTranslate}
-                style={{width: "80%"}}
+                
             />
      
     </View>
@@ -122,16 +119,6 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         margin: 5
     },
-    listHeader: {
-      width: "80%",
-      backgroundColor: palette.interactable,
-      marginBottom: 10
-    },
-    smallListText: {
-      fontSize: 10,
-      justifyContent: "flex-start",
-      margin: 5
-  },
     listSwitch: {
         justifyContent: "flex-end"
     },
@@ -160,8 +147,8 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       borderRadius: 5,
       backgroundColor: palette.attention,
-      alignItems: 'center',
-      justifyContent: 'space-around',
+      alignItems: 'stretch',
+      justifyContent: 'center',
       padding: 5
     },
     title: {
