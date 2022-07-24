@@ -1,8 +1,10 @@
+//All this stuff is copied from protoSelector, so some of the names and whatnot might be a tad odd.
 //import { FontAwesome } from '@expo/vector-icons';
 import React, {useState} from 'react';
 import { StyleSheet, FlatList, Switch, KeyboardAvoidingView, SafeAreaView, BackHandler } from 'react-native';
-//import { HebrewText } from '../components/StyledText';
+import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
+import { TextInput } from 'react-native-gesture-handler';
 //import * as Font from 'expo-font';
 import { loadAsync } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
@@ -33,30 +35,31 @@ var california = {arg: []}
 
 
 makeAutoObservable(california)
-
-
-const protoSelector = observer(({ route, navigation }) => {
-    var wordData = getWordDataGlobal()
-    for (let i = 0; i<wordData.length;i++) {
-        for (let j=0;j<wordData[i].categories.length;j++) {
-            if (california.arg.some((thing) => {
-                return ((wordData[i].categories[j]) == thing.meID)
-            })) {
-    
-            } else {
-                california.arg.push({
+/*
+california.arg.push({
                     "meID" : wordData[i].categories[j],
-                    "isWork" : true,
                     "initState" : function () {
                         [this.getter, this.setter] = useState(false)
                     }
                 })
-            }
+*/
+
+const wordForCatSelector = observer(({ route, navigation }) => {
+    const [text, onChangeText] = React.useState("");
+    var wordData = getWordDataGlobal()
+    for (let i = 0; i<wordData.length;i++) {
+        if ((wordData[i].transliteration.includes(text.toLowerCase()) || wordData[i].translation.includes(text.toLowerCase()))) {
+            california.arg.push({
+                "data" : wordData[i],
+                "initState" : function (initialValue) {
+                    [this.getter, this.setter] = useState(initialValue)
+                }
+            })
         }
     }
     
     for (let k=0;k<california.arg.length;k++) {
-        california.arg[k].initState()
+        california.arg[k].initState(true)
     }
     const backAction = () => {
 		navigation.navigate("TabThreeScreen")
@@ -74,8 +77,9 @@ const protoSelector = observer(({ route, navigation }) => {
             <View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <View style={styles.listItem}>
             
-            <Text style={styles.body}>{item.meID.toUpperCase()}</Text>
+            <Text style={styles.body}>{item.data.translation}</Text>
             <Switch
+
             onValueChange={(upd) => {
                 item.setter(upd)
             }}
@@ -114,12 +118,13 @@ const protoSelector = observer(({ route, navigation }) => {
         </View>
     )
 });
-export default protoSelector
+export default wordForCatSelector
 
 const styles = StyleSheet.create({
     listItem: {
         flexDirection: 'row',
-        alignContent: "center"
+        alignContent: "center",
+        justifyContent: "space-between"
     },
     listText: {
         justifyContent: "flex-start"

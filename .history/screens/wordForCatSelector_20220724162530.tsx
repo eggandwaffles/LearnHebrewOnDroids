@@ -1,8 +1,10 @@
+//All this stuff is copied from protoSelector, so some of the names and whatnot might be a tad odd.
 //import { FontAwesome } from '@expo/vector-icons';
 import React, {useState} from 'react';
 import { StyleSheet, FlatList, Switch, KeyboardAvoidingView, SafeAreaView, BackHandler } from 'react-native';
-//import { HebrewText } from '../components/StyledText';
+import { HebrewText } from '../components/StyledText';
 import { Text, View, Button} from '../components/Themed';
+import { TextInput } from 'react-native-gesture-handler';
 //import * as Font from 'expo-font';
 import { loadAsync } from 'expo-font';
 import { StatusBar } from 'expo-status-bar';
@@ -10,7 +12,7 @@ import { observer } from 'mobx-react';
 import { makeAutoObservable, makeObservable, observable } from "mobx"
 import { couldStartTrivia } from 'typescript';
 import { getWordDataGlobal, setWordDataGlobal } from '../components/wordDataManager.js';
-
+import { convArr } from "../components/wordArrayToUnicode"
 //https://docs.expo.io/versions/latest/sdk/font/
 //import { TabRouter } from '@react-navigation/native';
 var palette = require("../assets/globalColorScheme.json") 
@@ -33,30 +35,38 @@ var california = {arg: []}
 
 
 makeAutoObservable(california)
-
-
-const protoSelector = observer(({ route, navigation }) => {
-    var wordData = getWordDataGlobal()
-    for (let i = 0; i<wordData.length;i++) {
-        for (let j=0;j<wordData[i].categories.length;j++) {
-            if (california.arg.some((thing) => {
-                return ((wordData[i].categories[j]) == thing.meID)
-            })) {
-    
-            } else {
-                california.arg.push({
+/*
+california.arg.push({
                     "meID" : wordData[i].categories[j],
-                    "isWork" : true,
                     "initState" : function () {
                         [this.getter, this.setter] = useState(false)
                     }
                 })
-            }
-        }
+*/
+
+const wordForCatSelector = observer(({ route, navigation }) => {
+    const [text, onChangeText] = useState("");
+    var wordData = getWordDataGlobal()
+    california = {arg: []}
+    for (let i = 0; i<wordData.length;i++) {
+        california.arg.push({
+                "data" : wordData[i],
+                "initState" : function (initialValue) {
+                    [this.getter, this.setter] = useState(initialValue)
+                }
+            })
     }
-    
-    for (let k=0;k<california.arg.length;k++) {
-        california.arg[k].initState()
+    if (california.arg.length>wordData.length) {
+        console.error(`Too much California: California is ${california.arg.length}`)
+    }
+
+    try {
+        for (let k=0;k<california.arg.length;k++) {
+            california.arg[k].initState(true)
+            
+        }
+        
+    } catch (error) {
     }
     const backAction = () => {
 		navigation.navigate("TabThreeScreen")
@@ -70,12 +80,16 @@ const protoSelector = observer(({ route, navigation }) => {
 
 
     const renderItem = ({ item }) => (
-        <View>
+        ((item.data.transliteration.includes(text.toLowerCase()) || item.data.translation.includes(text.toLowerCase()))) ?
+            
+            <View>
             <View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
             <View style={styles.listItem}>
             
-            <Text style={styles.body}>{item.meID.toUpperCase()}</Text>
+            <Text style={styles.body}>{item.data.translation}</Text>
+            <HebrewText style={styles.body}>{convArr(item.data.letters, item.data.vowels)}</HebrewText>
             <Switch
+
             onValueChange={(upd) => {
                 item.setter(upd)
             }}
@@ -83,8 +97,10 @@ const protoSelector = observer(({ route, navigation }) => {
             />
             
             </View>
-        </View>
-
+        </View> : <View></View>
+            
+        
+        
       );
       
         
@@ -93,18 +109,52 @@ const protoSelector = observer(({ route, navigation }) => {
         <View style={styles.container}>
             <StatusBar hidden={true}></StatusBar>
             <Text style = {styles.title}>You must choose...</Text>
+            <TextInput
+                placeholder='Search for a word...'
+                onChangeText={onChangeText}
+                value={text}
+            />
+            <View style={styles.listItem}>
+                <Button 
+                title={"Select All"}
+                color={palette.hint}
+                onPress={()=>{
+                    for (let i = 0; i<california.arg.length;i++) {
+                        california.arg[i].setter(true)
+                    }
+                }}
+                />
+                <Button 
+                title={"Deselect All"}
+                color={palette.hint}
+                onPress={()=>{
+                    for (let i = 0; i<california.arg.length;i++) {
+                        california.arg[i].setter(false)
+                    }
+                }}
+                />
+                <Button
+                title={"View Categories"}
+                color={palette.hint}
+                onPress={()=>{
+                    navigation.navigate("DictionaryView")
+                }}
+                />
+            </View>
             <FlatList
                 data={california.arg}
                 renderItem={renderItem}
                 
             />
-            <Button title={"GO!"} style={styles.buttonRow} onPress={() => {
+            <Button title={"Create Category"} style={styles.buttonRow} onPress={() => {
+                /*
                 let navCats = []
                 for (let l = 0;l<california.arg.length;l++) {
                    if (california.arg[l].getter) {navCats.push(california.arg[l].meID)}
                 }
                 console.log(catWords(navCats))
                 navigation.navigate('MobxWordGameLit', {"cats" : navCats, "init" : true} )
+                */
             }
                 
             }
@@ -114,12 +164,13 @@ const protoSelector = observer(({ route, navigation }) => {
         </View>
     )
 });
-export default protoSelector
+export default wordForCatSelector
 
 const styles = StyleSheet.create({
     listItem: {
         flexDirection: 'row',
-        alignContent: "center"
+        alignContent: "center",
+        justifyContent: "space-between"
     },
     listText: {
         justifyContent: "flex-start"

@@ -21,7 +21,6 @@ import DictionaryView from '../screens/DictionaryView';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import WelcomeScreen from '../screens/welcomeScreen';
 import DeltaView from '../screens/DeltaScreen';
-import wordForCatSelector from '../screens/wordForCatSelector';
 
 const storeData = async (key, value) => {
   try {
@@ -103,7 +102,6 @@ function RootNavigator() {
     <Stack.Screen name="protoSelector" component={protoSelector} options={{ title: 'Nothing to see here...'}}/>
     <Stack.Screen name="VowelViewer" component={VowelViewer} />
     <Stack.Screen name="DictionaryView" component={DictionaryView} />
-    <Stack.Screen name="CatSelector" component={wordForCatSelector} />
     <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );

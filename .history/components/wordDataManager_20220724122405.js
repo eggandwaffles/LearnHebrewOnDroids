@@ -10,7 +10,7 @@ const storeWordData = async (data) => {
         // read error
       }
   }
-
+}
 
 const loadWordData = async () => {
     try {
@@ -41,18 +41,5 @@ async function refreshWordDataGlobal () {
     }
 }
 
-function categoricalInjection (name, wordIds) {
-    //A function that adds a category to a array of words (listed by ID).
-    var mutableWordData = getWordDataGlobal()
-    for (let i = 0; i<mutableWordData.length;i++) {
-        if (wordIds.includes(mutableWordData[i].id)) {
-            mutableWordData[i].categories.push(name)
-        }
-    }
-    //Now that mutableWordData has been updated, overwrite the existing wordData with it.
-    setWordDataGlobal(mutableWordData)
-    storeWordData(mutableWordData)
-    //This will be deleted when the app's local data is cleared.
-}
 
-module.exports = { setWordDataGlobal, getWordDataGlobal, refreshWordDataGlobal, categoricalInjection }
+module.exports = { setWordDataGlobal, getWordDataGlobal, refreshWordDataGlobal }

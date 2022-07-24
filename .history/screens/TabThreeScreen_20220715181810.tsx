@@ -26,7 +26,7 @@ export default function TabThreeScreen( { navigation } ) {
 		/>
     <Button
 			title = "View Dictionary"
-			onPress={() => navigation.navigate('DictionaryView', {invokingScreen: "TabThreeScreen"})}
+			onPress={() => navigation.navigate('DictionaryView')}
       color = {palette.interactable}
 		/>
 		</View>
