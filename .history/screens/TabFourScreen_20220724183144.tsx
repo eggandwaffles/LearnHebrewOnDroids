@@ -75,7 +75,7 @@ export default function TabFourScreen( { navigation } ) {
                     text : "Delete",
                     onPress: () => {
                     clearAll()
-                    navigation.navigate("Welcome")
+                    navigation.navigate("Root")
                   }
                 }
               ])

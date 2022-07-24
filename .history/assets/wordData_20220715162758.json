@@ -1906,11 +1906,11 @@
            "letters"  : [ "Yud" ,  "He" ,  "Vav" ,  "He" ],
            "vowels"  : [ " " ,  " " ,  " " ,  " " ],
            "categories"  : ["Torah (top 15)"],
-           "close_translations"  : ["Gary" , "Steve" , "Alan", "David" , "Bob"],
-           "close_transliterations"  : ["*garbled*", "Yeesh", "Adonis" , "Yesh", "Deus"],
+           "close_translations"  : [],
+           "close_transliterations"  : [],
            "transliteration"  : "Adonai",
            "translation"  : "G-d",
-           "hint" : "The man upstairs"
+           "hint" : ""
        },
        {
            "id" : 173,

@@ -80,7 +80,7 @@ const wordForCatSelector = observer(({ route, navigation }) => {
 
 
     const renderItem = ({ item }) => (
-        (item.data.transliteration.includes(text.toLowerCase()) || item.data.translation.includes(text.toLowerCase()) || item.data.transliteration.includes(text) || item.data.translation.includes(text)) ?
+        ((item.data.transliteration.includes(text.toLowerCase()) || item.data.translation.includes(text.toLowerCase() || item.data.transliteration.includes(text) || item.data.translation.includes(text))) ?
             
             <View>
             <View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />

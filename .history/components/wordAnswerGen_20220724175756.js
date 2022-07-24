@@ -62,7 +62,7 @@ function shuffleArr (unshuffledArr, length) {
     var pool = [...unshuffledArr]
     //console.log("Pool initialized as " + pool)
     if (length > unshuffledArr.length) {
-        console.error(`ERROR: requested length exceeds source length. Trace information: \nRequested length: ${length}\nSource length: ${unshuffledArr.length}\nUnshuffled array: ${unshuffledArr}`)
+        console.error(`ERROR: requested length exceeds source length. Trace information: \nRequested length: ${length}\nSource length: ${unshuffledArr.length}\nUnshuffled array: unshuffledArr`)
         return pool
         
     }
