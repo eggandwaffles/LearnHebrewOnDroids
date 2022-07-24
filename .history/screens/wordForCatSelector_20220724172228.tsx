@@ -204,8 +204,9 @@ function CatConfirm ({route, navigation}) {
             <Button 
                 title={"Save Category"}
                 color={palette.hint}
-                onPress={()=>{
-                    if (getName) categoricalInjection(getName,ids)
+                onClick={()=>{
+                    console.log("clicked")
+                    categoricalInjection(getName,ids)
                     navigation.navigate("TabThreeScreen")
                 }}
             />

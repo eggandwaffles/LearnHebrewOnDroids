@@ -176,21 +176,14 @@ function CatConfirm ({route, navigation}) {
                 returnable.push(wordData[i])
             }
         }
-        var dataToRender = returnable
-    console.log(dataToRender.length + " Words in list")
+        var data = returnable
+    console.log(data.length + " Words in list")
 
-    const renderWord = ( { item } ) => {
-        console.log("Rendering an item!" + JSON.stringify(item))
-        return (
-        <View>
-            <View style={styles.listItem}>
-                <Text style={styles.body}>{item.translation}</Text>
-                <HebrewText style={styles.body}>{convArr(item.letters,item.vowels)}</HebrewText>
-            </View>
-            <View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+    function renderWord ( { item } ) {
+        <View style={styles.listItem}>
+            <Text>{item.translation}</Text>
+            <HebrewText>{convArr(item.letters,item.vowels)}</HebrewText>
         </View>
-        
-        )
     } 
     
     return (
@@ -204,19 +197,14 @@ function CatConfirm ({route, navigation}) {
             <Button 
                 title={"Save Category"}
                 color={palette.hint}
-                onPress={()=>{
-                    if (getName) categoricalInjection(getName,ids)
-                    navigation.navigate("TabThreeScreen")
+                onClick={()=>{
+                    if (text) categoricalInjection(text,ids)
                 }}
             />
-            
             <FlatList 
-                style={{width: "80%"}}
-                data={dataToRender}
+                data={data}
                 renderItem={renderWord}
             />
-            
-            
         </View>
     )
 }

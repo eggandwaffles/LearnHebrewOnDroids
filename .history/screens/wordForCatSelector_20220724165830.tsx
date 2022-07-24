@@ -153,7 +153,7 @@ const wordForCatSelector = observer(({ route, navigation }) => {
                    if (california.arg[l].getter) {selectedIDs.push(california.arg[l].data.id)}
                 }
                 console.log(selectedIDs)
-                navigation.navigate('CatConfirm', {ids : selectedIDs} )
+                navigation.navigate('CatConfirm', {"ids" : selectedIDs} )
                 
             }
                 
@@ -167,56 +167,21 @@ const wordForCatSelector = observer(({ route, navigation }) => {
 
 function CatConfirm ({route, navigation}) {
     const [getName, setName] = React.useState("")
-    var ids = route.params.ids
+    var ids = route.param.ids
     var wordData = getWordDataGlobal()
-    
+    var data = () => {
         var returnable = []
         for (let i=0;i<wordData.length;i++) {
             if (ids.includes(wordData[i].id)) {
                 returnable.push(wordData[i])
             }
         }
-        var dataToRender = returnable
-    console.log(dataToRender.length + " Words in list")
+        return returnable
+    }
 
-    const renderWord = ( { item } ) => {
-        console.log("Rendering an item!" + JSON.stringify(item))
-        return (
-        <View>
-            <View style={styles.listItem}>
-                <Text style={styles.body}>{item.translation}</Text>
-                <HebrewText style={styles.body}>{convArr(item.letters,item.vowels)}</HebrewText>
-            </View>
-            <View style={styles.divider} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        </View>
-        
-        )
-    } 
-    
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Create Category</Text>
-            <TextInput
-                placeholder='Enter category name...'
-                onChangeText={setName}
-                value={getName}
-            />
-            <Button 
-                title={"Save Category"}
-                color={palette.hint}
-                onPress={()=>{
-                    if (getName) categoricalInjection(getName,ids)
-                    navigation.navigate("TabThreeScreen")
-                }}
-            />
-            
-            <FlatList 
-                style={{width: "80%"}}
-                data={dataToRender}
-                renderItem={renderWord}
-            />
-            
-            
+        <View style={styles.largeContainer}>
+            <Text>Create Category</Text>
         </View>
     )
 }

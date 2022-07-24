@@ -104,8 +104,6 @@ function RootNavigator() {
     <Stack.Screen name="VowelViewer" component={VowelViewer} />
     <Stack.Screen name="DictionaryView" component={DictionaryView} />
     <Stack.Screen name="CatSelector" component={wordForCatSelector} />
-    <Stack.Screen name="CatConfirm" component={CatConfirm} />
-
     <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
     </Stack.Navigator>
   );
