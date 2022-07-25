@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   largeContainer: {
     flex: 2,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
   container: {
     flex: 1,
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "50%",
+    marginTop: 50,
     position: "relative",
   }
 });

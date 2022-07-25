@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 0.5,
     alignItems: 'flex-start',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
   },
   buttonRow: {
     flex: 1,
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "50%",
+    marginTop: 50,
     position: "relative",
   }
 });

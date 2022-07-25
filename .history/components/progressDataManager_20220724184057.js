@@ -35,13 +35,8 @@ function getSessionScore () {
 const refreshHighScore = async () => {
     try {
       var stringScore = await AsyncStorage.getItem('highScore')
-      console.log(stringScore)
-      if (stringScore == null) {
-        sessionScore = 0
-      } else {
-        sessionScore = Number.parseFloat(stringScore)
-      }
-      
+      sessionScore = Number.parseFloat(stringScore)
+
     } catch(e) {
       console.error(e)
       // read error

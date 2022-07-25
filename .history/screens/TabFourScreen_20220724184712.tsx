@@ -22,7 +22,7 @@ export default function TabFourScreen( { navigation } ) {
   //Alert.alert("Warning!","This content is not functional!")
 
   return (
-	<View style={styles.largeContainer}>
+	<View style={styles.container}>
     <View style={styles.container}>
     <Pressable 
     delayLongPress={1000}
@@ -38,10 +38,9 @@ export default function TabFourScreen( { navigation } ) {
     
       <Text style={styles.title}>Settings</Text>
       </Pressable>
-      
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Be advised: most of these delete stuff.</Text>
     </View>
-    <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     <View style={styles.buttonRow}>
     <Button 
             title = {"Clear High Score"}
@@ -94,11 +93,6 @@ export default function TabFourScreen( { navigation } ) {
 }
 
 const styles = StyleSheet.create({
-  largeContainer: {
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -125,8 +119,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: "space-evenly",
-    alignItems: "center",
+    alignItems: "flex-start",
     width: "50%",
+    marginTop: 50,
     position: "relative",
   }
 });

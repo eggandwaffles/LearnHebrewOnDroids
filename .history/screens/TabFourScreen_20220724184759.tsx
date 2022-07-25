@@ -38,10 +38,9 @@ export default function TabFourScreen( { navigation } ) {
     
       <Text style={styles.title}>Settings</Text>
       </Pressable>
-      
+      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
 	  <Text style={styles.body}>Be advised: most of these delete stuff.</Text>
     </View>
-    <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     <View style={styles.buttonRow}>
     <Button 
             title = {"Clear High Score"}
@@ -122,11 +121,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonRow: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "50%",
+    marginTop: 50,
     position: "relative",
   }
 });

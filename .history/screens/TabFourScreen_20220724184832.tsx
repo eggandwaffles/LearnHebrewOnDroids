@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     width: "50%",
+    marginTop: 50,
     position: "relative",
   }
 });
