@@ -62,10 +62,10 @@ const wordForCatSelector = observer(({ route, navigation }) => {
     california.arg.sort((a, b) => {
         var val = 0
         for (let i = 0; i<a.data.translation.length && i<b.data.translation.length; i++) {
-          if (a.data.translation.toLowerCase().codePointAt(i)>b.data.translation.toLowerCase().codePointAt(i)) {
+          if (a.data.translation.charCodeAt(i)>b.data.translation.charCodeAt(i)) {
             val = 1
             break
-          } else if (a.data.translation.toLowerCase().codePointAt(i)<b.data.translation.toLowerCase().codePointAt(i)) {
+          } else if (a.data.translation.charCodeAt(i)<b.data.translation.charCodeAt(i)) {
             val = -1
             break
           }
